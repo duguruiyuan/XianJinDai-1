@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TopBar">
+        <attr name="title" format="string"/>
+        <attr name="titleTextSize" format="dimension"/>
+        <attr name="titleTextColor" format="color"/>
+        <attr name="leftDrawable" format="reference|color"/>
+        <attr name="rightDrawable" format="reference|color"/>
+    </declare-styleable>
+
+    <declare-styleable name="Crossed">
+        <attr name="dark" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AutoComplete">
+        <attr name="emailOnly" format="boolean" />
+        <attr name="darkness" format="boolean" />
+        <attr name="closeAutoComplete" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleSeekBar">
+        <attr name="wheel_max_process" format="integer" />
+        <attr name="wheel_cur_process" format="integer" />
+        <attr name="wheel_reached_color1" format="color" />
+        <attr name="wheel_reached_color2" format="color" />
+        <attr name="wheel_reached_width" format="dimension" />
+        <attr name="wheel_reached_has_corner_round" format="boolean"/>
+        <attr name="wheel_unreached_color" format="color" />
+        <attr name="wheel_unreached_width" format="dimension" />
+        <attr name="wheel_pointer_color" format="color" />
+        <attr name="wheel_pointer_radius" format="dimension" />
+        <attr name="wheel_has_pointer_shadow" format="boolean" />
+        <attr name="wheel_has_wheel_shadow" format="boolean" />
+        <attr name="wheel_pointer_shadow_radius" format="dimension" />
+        <attr name="wheel_shadow_radius" format="dimension" />
+        <attr name="wheel_has_cache" format="boolean" />
+        <attr name="wheel_can_touch" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="NumberCircleProgressBar">
+        <attr name="progress" format="integer" />
+        <attr name="max" format="integer" />
+        <attr name="progress_unreached_color" format="color" />
+        <attr name="progress_reached_color" format="color" />
+        <attr name="progress_text_size" format="dimension" />
+        <attr name="progress_text_color" format="color" />
+        <attr name="progress_circle_radius" format="dimension" />
+        <attr name="progress_text_visibility" format="enum">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+        </attr>
+        <attr name="progress_fill_mode" format="enum">
+            <enum name="rotate" value="0" />
+            <enum name="rising_water" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="Themes">
+        <attr name="numberProgressBarStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ADTextView">
+        <attr name="mInterval" format="integer|reference"/>
+        <attr name="mAnimDuration" format="integer|reference"/>
+        <attr name="mTextSize" format="dimension|reference"/>
+        <attr name="mTextColor" format="color|reference"/>
+    </declare-styleable>
+</resources>

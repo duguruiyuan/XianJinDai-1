@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.daiqile.xianjindai">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取网络状态 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络通信 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 获取设备信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 获取MAC地址 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读写sdcard，storage等等 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <supports-screensapplication
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <!-- 允许程序录制音频 -->
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".activity.LaunchActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.RegistAvtivity" />
+        <activity android:name=".activity.FindPwdByPhoneActivity" />
+        <activity android:name=".activity.IdentityCardActivity" />
+        <activity android:name=".activity.BankCardActivity" />
+        <activity android:name=".activity.BindCardActivity" />
+        <activity android:name=".activity.PersonalDetailsActivity" />
+        <activity android:name=".activity.ChangePwdActivity" />
+        <activity android:name=".activity.ChangeLoginPwdActivity" />
+        <activity android:name=".activity.EmergencyContactActivity" />
+        <activity android:name=".activity.BorrowActivity" />
+        <activity android:name=".activity.BorrowConfirmActivity" />
+        <activity android:name=".activity.ThirdPartCertificationActivity" />
+        <activity android:name=".activity.LoanActivity"></activity>
+    </application>
+
+</manifest>

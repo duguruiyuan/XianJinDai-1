@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_third_part_certification"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.daiqile.xianjindai.view.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_min_height_56"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        app:leftDrawable="@mipmap/iv_prev"
+        app:title="三方认证"
+        app:titleTextColor="@color/material_lightBlue_A200"
+        app:titleTextSize="@dimen/appbar_text_size_20" />
+
+    <LinearLayout
+        android:id="@+id/ll_mobile_phone_operator_authentication"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="手机运营商认证"
+            android:textSize="15sp" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_right" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_sesame_credit_score_certification"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="芝麻信用分认证"
+            android:textSize="15sp" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_right" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_bank_water_certification"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="银行流水认证"
+            android:textSize="15sp" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_right" />
+
+    </LinearLayout>
+
+</LinearLayout>

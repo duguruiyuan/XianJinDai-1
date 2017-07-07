@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/bg_btn_blue"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@mipmap/icon"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="35dp"
+                android:id="@+id/iv_bank_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="建设银行"
+                android:textColor="@color/material_white"
+                android:layout_alignTop="@+id/iv_bank_icon"
+                android:layout_toRightOf="@+id/iv_bank_icon"
+                android:layout_toEndOf="@+id/iv_bank_icon"
+                android:layout_marginLeft="17dp"
+                android:layout_marginStart="17dp"
+                android:id="@+id/tv_bank_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="****10086"
+                android:textSize="15sp"
+                android:textColor="@color/material_white"
+                android:layout_alignBaseline="@+id/tv_bank_name"
+                android:layout_alignBottom="@+id/tv_bank_name"
+                android:layout_toRightOf="@+id/tv_bank_name"
+                android:layout_toEndOf="@+id/tv_bank_name"
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
+                android:id="@+id/tv_bank_number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="浙江省"
+                android:textSize="15sp"
+                android:textColor="@color/material_white"
+                android:layout_alignBottom="@+id/iv_bank_icon"
+                android:layout_alignLeft="@+id/tv_bank_name"
+                android:layout_alignStart="@+id/tv_bank_name"
+                android:id="@+id/tv_province" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宁波市"
+                android:textSize="15sp"
+                android:textColor="@color/material_white"
+                android:layout_alignBaseline="@+id/tv_province"
+                android:layout_alignBottom="@+id/tv_province"
+                android:layout_toRightOf="@+id/tv_bank_name"
+                android:layout_toEndOf="@+id/tv_bank_name"
+                android:id="@+id/tv_city" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="鄞州区"
+                android:textSize="15sp"
+                android:textColor="@color/material_white"
+                android:layout_alignBaseline="@+id/tv_city"
+                android:layout_alignBottom="@+id/tv_city"
+                android:layout_toRightOf="@+id/tv_city"
+                android:layout_toEndOf="@+id/tv_city"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:id="@+id/tv_area" />
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>
