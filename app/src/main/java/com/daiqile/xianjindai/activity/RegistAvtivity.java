@@ -43,7 +43,7 @@ import rx.schedulers.Schedulers;
 /**
  * 注册页面
  */
-public class RegistAvtivity extends BaseActivity {
+public class RegistAvtivity extends suangrenduobao.daiqile.com.mvlib.mv.BaseActivity {
 
     @BindView(R.id.topbar)
     TopBar topbar;
@@ -66,8 +66,15 @@ public class RegistAvtivity extends BaseActivity {
     private Activity mActivity;
     private MyApplication application;
     private static String Tag = "RegistAvtivity";
+
     @Override
-    public void init() {
+    protected boolean switchToolbar() {
+        return false;
+    }
+
+    @Override
+    protected void initConfig() {
+        super.initConfig();
         mActivity = RegistAvtivity.this;
 
         topbar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
@@ -89,7 +96,7 @@ public class RegistAvtivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tbGetValidateNumber.setMobile(2 , s.toString());
+                tbGetValidateNumber.setMobile(2, s.toString());
             }
 
             @Override
@@ -97,23 +104,56 @@ public class RegistAvtivity extends BaseActivity {
 
             }
         });
-       /* etPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tbGetValidateNumber.setNewpassword(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });*/
     }
+
+//    @Override
+//    public void init() {
+//        mActivity = RegistAvtivity.this;
+//
+//        topbar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
+//            @Override
+//            public void leftClick() {
+//                finish();
+//            }
+//
+//            @Override
+//            public void rightClick() {
+//
+//            }
+//        });
+//        etPhone.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                tbGetValidateNumber.setMobile(2 , s.toString());
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+//       /* etPassword.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                tbGetValidateNumber.setNewpassword(s.toString());
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });*/
+//    }
 
     /**
      * 注册方法
@@ -183,18 +223,18 @@ public class RegistAvtivity extends BaseActivity {
                         }
                     }
                 });*/
-      OkHttpUtils
+        OkHttpUtils
                 .post()//
                 .url(Constants.BASE_URL + "xjd/front/user/regist")//
-                .addParams("phone",phone)
-                .addParams("clientCode",code)
-                .addParams("loginPassword",password)
+                .addParams("phone", phone)
+                .addParams("clientCode", code)
+                .addParams("loginPassword", password)
                 .tag(Tag)
                 .build()//
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e("ll_yh", "登录失败404"+e.toString());
+                        Log.e("ll_yh", "登录失败404" + e.toString());
                     }
 
                     @Override
@@ -203,12 +243,12 @@ public class RegistAvtivity extends BaseActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String isSuccess = jsonObject.getString("success");
-                            Log.e("sss", "onResponse: "+isSuccess );
-                            if (isSuccess.equals("true")){
-                                ToastUtil.showToast(mActivity,"注册成功");
+                            Log.e("sss", "onResponse: " + isSuccess);
+                            if (isSuccess.equals("true")) {
+                                ToastUtil.showToast(mActivity, "注册成功");
                                 finish();
-                            }else{
-                                ToastUtil.showToast(mActivity,"注册失败");
+                            } else {
+                                ToastUtil.showToast(mActivity, "注册失败");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -219,21 +259,22 @@ public class RegistAvtivity extends BaseActivity {
 
     /**
      * 获取验证码
+     *
      * @return
      */
-    private void getCode(){
+    private void getCode() {
         String phone = etPhone.getText().toString().trim();
-        if (phone.isEmpty()){
-            ToastUtil.showToast(mActivity,"请输入手机号");
+        if (phone.isEmpty()) {
+            ToastUtil.showToast(mActivity, "请输入手机号");
             return;
         }
-        if (phone.length()<11||phone.length()>11){
-            ToastUtil.showToast(mActivity , "请输入正确的手机号码");
+        if (phone.length() < 11 || phone.length() > 11) {
+            ToastUtil.showToast(mActivity, "请输入正确的手机号码");
             return;
         }
         OkHttpUtils
                 .post()//
-                .url(Constants.BASE_URL+"xjd/front/user/sendCode")//
+                .url(Constants.BASE_URL + "xjd/front/user/sendCode")//
                 .addParams("phone", phone)
                 .tag(Tag)
                 .build()//
@@ -251,11 +292,11 @@ public class RegistAvtivity extends BaseActivity {
                             boolean isSuccess = jsonObject.getBoolean("success");
                             String code = jsonObject.getString("mobileCode");
                             String msg = jsonObject.getString("msg");
-                            Log.e("sss", "onResponse: "+code );
-                            if (isSuccess==true){
-                                ToastUtil.showToast(mActivity,"验证码发送成功");
-                            }else{
-                                ToastUtil.showToast(mActivity,msg);
+                            Log.e("sss", "onResponse: " + code);
+                            if (isSuccess == true) {
+                                ToastUtil.showToast(mActivity, "验证码发送成功");
+                            } else {
+                                ToastUtil.showToast(mActivity, msg);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -272,13 +313,13 @@ public class RegistAvtivity extends BaseActivity {
     }
 
     @Override
-    public int getLayoutId() {
+    protected int initLayout() {
         return R.layout.activity_regist;
     }
 
     @Override
-    public Activity bindActivity() {
-        return this;
+    protected void loadData() {
+
     }
 
 

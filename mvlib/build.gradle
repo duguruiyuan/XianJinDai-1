@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+    compile 'com.trello:rxlifecycle:0.3.1'
+    compile 'com.trello:rxlifecycle-components:0.3.1'
+    //    compile 'io.reactivex:rxjava:1.0.16'
+    //    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'io.reactivex:rxjava:1.1.0'
+    //注解
+//    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.jakewharton:butterknife:8.6.0'
+
+    //加载成功 失败
+    compile 'com.lai.weavey:loadinglayout:1.3.1'
+    compile 'com.orhanobut:logger:1.3'
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.kymjs.rxvolley:rxvolley:1.1.4'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.hwangjr.rxbus:rxbus:1.0.3'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    //bugtags
+    compile 'com.bugtags.library:bugtags-lib:latest.integration'
+}

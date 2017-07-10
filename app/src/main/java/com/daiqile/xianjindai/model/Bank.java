@@ -2,11 +2,13 @@ package com.daiqile.xianjindai.model;
 
 import java.util.List;
 
+import suangrenduobao.daiqile.com.mvlib.utils.http.BaseBean;
+
 /**
  * Created by G150T on 2017/6/30.
  */
 
-public class Bank {
+public class Bank implements BaseBean{
 
     private List<BankXFsBean> bankXFs;
 
@@ -18,7 +20,7 @@ public class Bank {
         this.bankXFs = bankXFs;
     }
 
-    public static class BankXFsBean {
+    public static class BankXFsBean implements BaseBean{
         /**
          * id : 1
          * page :

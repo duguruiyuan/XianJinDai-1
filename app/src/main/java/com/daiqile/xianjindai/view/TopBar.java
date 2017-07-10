@@ -62,7 +62,8 @@ public class TopBar extends RelativeLayout {
         mTitleView.setEllipsize(TextUtils.TruncateAt.valueOf("END"));
 
         mLeftImage.setImageDrawable(mLeftDrawable);
-        mLeftImage.setPadding(DisplayUtil.dip2px(context, 16), 0, DisplayUtil.dip2px(context, 16), 0);
+//        mLeftImage.setPadding(DisplayUtil.dip2px(context, 16), 0, DisplayUtil.dip2px(context, 16), 0);
+        mLeftImage.setPadding(0, 0, DisplayUtil.dip2px(context, 16), 0);
 
         mRightImage.setImageDrawable(mRightDrawable);
         mRightImage.setPadding(DisplayUtil.dip2px(context, 16), 0, DisplayUtil.dip2px(context, 16), 0);

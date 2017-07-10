@@ -22,7 +22,11 @@ public class Constants {
 
     public static final String PROVINCELIST = "provinceList";
     public static final String AREALIST = "areaList";
-    public static final String CITYLIST = "areaList";
+    public static final String CITYLIST = "cityList";
+    public static final String BANKNAME = "bankName";
 
+
+    public static final String USER = "user";
+    public static final String XIANJINDAI = "xianjindai";
 
 }

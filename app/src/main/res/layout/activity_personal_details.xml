@@ -18,19 +18,14 @@
         app:titleTextColor="@color/material_lightBlue_A200"
         app:titleTextSize="@dimen/appbar_text_size_20" />
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@drawable/divider">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="请填写个人手机号"
-            android:textColor="@color/material_grey_500"
-            android:textSize="16sp" />
-    </LinearLayout>
+        android:background="@drawable/divider"
+        android:gravity="center_vertical"
+        android:text="请填写个人手机号"
+        android:textColor="@color/material_grey_500"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +38,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="手机号码："
-            android:textSize="18sp" />
+            android:textSize="@dimen/tip_text_size_12" />
 
         <EditText
             android:id="@+id/et_phone"
@@ -52,10 +47,10 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="5"
             android:background="@null"
+            android:hint="请输入手机号码"
             android:textColorHint="@color/material_grey_500"
             android:textCursorDrawable="@drawable/divider"
-            android:hint="请输入手机号码"
-            android:textSize="18sp" />
+            android:textSize="@dimen/tip_text_size_12" />
     </LinearLayout>
 
     <LinearLayout
@@ -83,7 +78,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="请选择省市区"
-            android:textSize="18sp" />
+            android:textSize="@dimen/tip_text_size_12" />
 
         <TextView
             android:id="@+id/et_province"
@@ -92,32 +87,36 @@
             android:layout_weight="1"
             android:gravity="center"
             android:paddingLeft="2dp"
+            android:text="选择省"
             android:textColorHint="@color/material_grey_500"
-            android:text="选择省" />
+            android:textSize="@dimen/tip_text_size_12" />
 
         <TextView
             android:id="@+id/et_city"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textColorHint="@color/material_grey_500"
-            android:gravity="center" />
 
-        <TextView
-            android:id="@+id/et_country"
-            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:textColorHint="@color/material_grey_500"
-            android:paddingLeft="2dp" />
+            android:textSize="@dimen/tip_text_size_12" />
+
+        <TextView
+            android:id="@+id/et_country"
+            android:layout_width="0dp"
+
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="2dp"
+            android:textColorHint="@color/material_grey_500"
+            android:textSize="@dimen/tip_text_size_12" />
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="18dp"
             android:layout_gravity="center"
             android:src="@mipmap/icon_right" />
-
     </LinearLayout>
 
     <View
@@ -135,26 +134,22 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:background="@null"
-            android:textCursorDrawable="@drawable/divider"
             android:gravity="start"
-            android:textColorHint="@color/material_grey_500"
             android:hint="请填写更加详细地址"
-            android:textSize="13sp" />
+            android:textColorHint="@color/material_grey_500"
+            android:textCursorDrawable="@drawable/divider"
+            android:textSize="@dimen/tip_text_size_12" />
     </LinearLayout>
 
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@drawable/divider">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="请填写工作单位"
-            android:textColor="@color/material_grey_500"
-            android:textSize="16sp" />
-    </LinearLayout>
+        android:background="@drawable/divider"
+        android:gravity="center_vertical"
+        android:text="请填写工作单位"
+        android:textColor="@color/material_grey_500"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -167,24 +162,26 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="工作单位："
-            android:textSize="18sp" />
+            android:textSize="@dimen/tip_text_size_12" />
 
         <EditText
             android:id="@+id/et_work_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:textCursorDrawable="@drawable/divider"
             android:layout_weight="5"
             android:background="@null"
-            android:textColorHint="@color/material_grey_500"
             android:hint="请输入工作单位"
-            android:textSize="18sp" />
+            android:textColorHint="@color/material_grey_500"
+            android:textCursorDrawable="@drawable/divider"
+            android:textSize="@dimen/tip_text_size_12" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/divider" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -196,19 +193,19 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="工作单位号码："
-            android:textSize="18sp" />
+            android:textSize="@dimen/tip_text_size_12" />
 
         <EditText
             android:id="@+id/et_work_address_phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:textCursorDrawable="@drawable/divider"
             android:layout_weight="5"
             android:background="@null"
-            android:textColorHint="@color/material_grey_500"
             android:hint="请输入工作单位号码"
-            android:textSize="18sp" />
+            android:textColorHint="@color/material_grey_500"
+            android:textCursorDrawable="@drawable/divider"
+            android:textSize="@dimen/tip_text_size_12" />
     </LinearLayout>
 
     <View
@@ -224,11 +221,12 @@
     <Button
         android:id="@+id/btn_bind_card"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="40dp"
         android:background="@drawable/bg_round_blue"
         android:text="提交"
         android:textColor="@color/material_white"
-        android:textSize="16sp" />
+        android:textSize="@dimen/small_title_text_size_16"
+        />
 
 
 </LinearLayout>

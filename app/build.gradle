@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.bugtags.library.plugin'
+
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -23,17 +26,39 @@ android {
         }
     }
 
+//    signingConfigs {
+//        config {
+//            storeFile file(KEY_PATH)  //keystore的位置
+//            storePassword KEY_PASS   //密码
+//            keyAlias ALIAS_NAME  //别名
+//            keyPassword ALIAT_PASS  //别名密码
+//        }
+//    }
+//    configurations.all {
+//        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+//    }
+
+}
+
+bugtags {
+    //自动上传符号表功能配置，如果需要根据 build varint 配置，请参考帮助中心->符号表->Android 符号表->配置自动上传符号表
+    appKey BUGTAGS_APPKEY  //这里是你的 appKey
+    appSecret BUGTAGS_APPSECRET    //这里是你的 appSecret，管理员在设置页可以查看
+    mappingUploadEnabled true
+
+    //网络跟踪功能配置(企业版)
+    trackingNetworkEnabled true
 }
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.0'
-//    compile files('libs/AndBase.jar')
+    //    compile files('libs/AndBase.jar')
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.jude:easyrecyclerview:4.0.6'
@@ -54,4 +79,5 @@ dependencies {
     compile 'com.zhy:okhttputils:2.6.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile project(':mvlib')
 }

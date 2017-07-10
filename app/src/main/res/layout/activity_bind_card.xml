@@ -24,7 +24,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,11 +39,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:textCursorDrawable="@drawable/divider"
             android:hint="请输入银行卡号"
-            android:textColorHint="@color/material_grey_500"
             android:paddingLeft="10dp"
             android:textColor="@color/default_text_color"
+            android:textColorHint="@color/material_grey_500"
+            android:textCursorDrawable="@drawable/divider"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -54,7 +55,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,31 +67,37 @@
 
         <TextView
             android:id="@+id/tv_choose_bank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/material_grey_500"
-            android:text="选择银行" />
-
-        <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="选择银行"
+            android:textColor="@color/material_grey_500" />
+
+        <!--<Space-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1" />-->
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="18dp"
-            android:layout_gravity="center"
-            android:src="@mipmap/icon_right" />
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/icon_right" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/divider" />
+
     <LinearLayout
         android:layout_width="match_parent"
+
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,25 +113,25 @@
             android:layout_weight="1"
             android:gravity="center"
             android:paddingLeft="2dp"
-            android:textColor="@color/material_grey_500"
-            android:text="选择开户地" />
+            android:text="选择开户地"
+            android:textColor="@color/material_grey_500" />
 
         <TextView
             android:id="@+id/et_city"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textColor="@color/material_grey_500"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="@color/material_grey_500" />
 
         <TextView
             android:id="@+id/et_country"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textColor="@color/material_grey_500"
             android:gravity="center"
-            android:paddingLeft="2dp" />
+            android:paddingLeft="2dp"
+            android:textColor="@color/material_grey_500" />
 
         <ImageView
             android:layout_width="20dp"
@@ -131,14 +139,18 @@
             android:layout_gravity="center"
             android:src="@mipmap/icon_right" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/divider" />
+
     <LinearLayout
         android:layout_width="match_parent"
+
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -152,52 +164,59 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:textColorHint="@color/material_grey_500"
-            android:textCursorDrawable="@drawable/divider"
             android:hint="请输入银行预留手机号"
             android:paddingLeft="10dp"
             android:textColor="@color/default_text_color"
+            android:textColorHint="@color/material_grey_500"
+            android:textCursorDrawable="@drawable/divider"
             android:textSize="15sp" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/divider" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:layout_weight="3"
         android:background="@drawable/divider"
-        android:layout_weight="3">
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="9dp"
             android:text="温馨提示"
-            android:textColor="@color/material_orange_400"/>
+            android:textColor="@color/material_orange_400" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="9dp"
-            android:textColor="@color/material_grey_500"
-            android:text="1.保证隐私安全，不会与您所在单位联系"/>
+            android:layout_marginTop="5dp"
+            android:text="1.保证隐私安全，不会与您所在单位联系"
+            android:textColor="@color/material_grey_500" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="9dp"
-            android:textColor="@color/material_grey_500"
-            android:text="2.请根据您实际情况如实填写"/>
+            android:layout_marginTop="5dp"
+            android:text="2.请根据您实际情况如实填写"
+            android:textColor="@color/material_grey_500" />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/btn_bind_card"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/bg_round_blue"
         android:text="提交"
         android:textColor="@color/material_white"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
 </LinearLayout>

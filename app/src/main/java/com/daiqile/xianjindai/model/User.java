@@ -1,10 +1,12 @@
 package com.daiqile.xianjindai.model;
 
+import suangrenduobao.daiqile.com.mvlib.utils.http.BaseBean;
+
 /**
  * Created by G150T on 2017/6/28.
  */
 
-public class User {
+public class User implements BaseBean{
 
 
     /**

@@ -16,7 +16,9 @@
         app:titleTextColor="@color/material_lightBlue_A200"
         app:titleTextSize="@dimen/appbar_text_size_20" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
+
+    <com.daiqile.xianjindai.view.VerticalSwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -54,62 +56,66 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
+                        android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/iv_index_logo"
+                        android:gravity="center"
                         android:orientation="vertical"
                         android:paddingLeft="10dp">
 
-                        <LinearLayout
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<ImageView-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--android:background="@mipmap/icon_person" />-->
+
+                        <TextView
+                            android:id="@+id/textView"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <!--<ImageView-->
-                            <!--android:layout_width="30dp"-->
-                            <!--android:layout_height="30dp"-->
-                            <!--android:background="@mipmap/icon_person" />-->
-
-                            <TextView
-                                android:id="@+id/textView"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginTop="5dp"
-                                android:drawableLeft="@mipmap/icon_person"
-                                android:drawablePadding="5dp"
-                                android:gravity="center_vertical"
-                                android:text="个人现金" />
-                        </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:drawableLeft="@mipmap/icon_person"
+                            android:drawablePadding="5dp"
+                            android:gravity="center_vertical"
+                            android:text="个人现金" />
+                        <!--</LinearLayout>-->
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/divider" />
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:text="最高(元)         2000" />
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:text="期限                7-14天" />
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:text="日息                0.02%-0.05%" />
                     </LinearLayout>
 
                 </RelativeLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/divider" />
                 <RelativeLayout
                     android:id="@+id/rl_home_liren"
                     android:layout_width="match_parent"
@@ -130,57 +136,58 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
+                        android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/iv_index_logo2"
+                        android:gravity="center"
                         android:orientation="vertical"
                         android:paddingLeft="10dp">
 
-                        <LinearLayout
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<ImageView-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--android:background="@mipmap/icon_person" />-->
+
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <!--<ImageView-->
-                            <!--android:layout_width="30dp"-->
-                            <!--android:layout_height="30dp"-->
-                            <!--android:background="@mipmap/icon_person" />-->
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginTop="5dp"
-                                android:drawableLeft="@mipmap/icon_person"
-                                android:drawablePadding="5dp"
-                                android:gravity="center_vertical"
-                                android:text="丽人贷" />
-                        </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:drawableLeft="@mipmap/icon_person"
+                            android:drawablePadding="5dp"
+                            android:gravity="center_vertical"
+                            android:text="丽人贷" />
+                        <!--</LinearLayout>-->
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/divider" />
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:text="最高(元)         2000" />
 
                         <TextView
+                            android:id="@+id/textView4"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:text="期限                7-14天" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="日息                0.02%-0.05%" />
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:text="日息                0.02%-0.05%" />
+                            android:layout_height="wrap_content"
+                            android:text="期限                7-14天" />
+
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -321,7 +328,7 @@
                 <!--</RelativeLayout>-->
             </LinearLayout>
         </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.daiqile.xianjindai.view.VerticalSwipeRefreshLayout>
 
 
 </LinearLayout>

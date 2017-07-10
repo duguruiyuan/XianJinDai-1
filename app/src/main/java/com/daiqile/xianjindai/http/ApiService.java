@@ -1,5 +1,7 @@
 package com.daiqile.xianjindai.http;
 
+import com.daiqile.xianjindai.Result;
+import com.daiqile.xianjindai.activity.bean.BankInfoList;
 import com.daiqile.xianjindai.model.Bank;
 import com.daiqile.xianjindai.model.Banner;
 import com.daiqile.xianjindai.model.City;
@@ -27,6 +29,7 @@ public interface ApiService {
     //获取省市区
     @POST("xjd/front/user/provinceCityArea")
     Observable<ProvinceCityArea> getProvinceList();
+
     //获取市列表
     @FormUrlEncoded
     @POST("xjd/front/user/provinceCityArea")
@@ -36,22 +39,34 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("xjd/front/user/provinceCityArea")
     Observable<ProvinceCityArea> getCountryList(@Field("id") String cityId);
+
     //获取轮播图
     @POST("xjd/front/app/pptList")
     Observable<Banner> getBanner();
 
     //登录
     @POST("xjd/front/user/login")
-    Observable<User> login(@FieldMap Map<String,String> map);
+    Observable<User> login(@FieldMap Map<String, String> map);
+
     //注册
     @POST("xjd/front/user/regist")
-    Observable<ResponseBody> regist(@FieldMap Map<String,String> map);
+    Observable<ResponseBody> regist(@FieldMap Map<String, String> map);
 
     //找回密码
     @POST("xjd/front/user/forgetLoginCode")
-    Observable<ForgetPassword> forgetpassword(@FieldMap Map<String,String> map);
+    Observable<ForgetPassword> forgetpassword(@FieldMap Map<String, String> map);
 
     //所有银行卡
     @POST("xjd/front/user/bankInfo")
-    Observable<Bank> getBankList() ;
+    Observable<Bank> getBankList();
+
+    //添加银行卡
+    @POST("xjd/front/user/collectionMoneyInfo")
+    Observable<Result> addBank(@FieldMap Map<String, String> map);
+
+    //银行卡列表
+    @POST("xjd/front/user/bankList")
+    Observable<BankInfoList> getBankLists(@FieldMap Map<String, String> map);
+
+
 }

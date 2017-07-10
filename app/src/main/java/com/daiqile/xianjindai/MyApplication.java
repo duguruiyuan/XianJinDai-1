@@ -1,13 +1,15 @@
 package com.daiqile.xianjindai;
 
-import android.app.Application;
-import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.StrictMode;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.daiqile.xianjindai.http.ApiService;
 import com.daiqile.xianjindai.http.RetrofitClient;
-import com.daiqile.xianjindai.model.MyInfo;
+
 import com.daiqile.xianjindai.model.User;
-import com.daiqile.xianjindai.utils.SPUtils;
+import com.weavey.loading.lib.LoadingLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
 import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
@@ -17,58 +19,100 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import suangrenduobao.daiqile.com.mvlib.mv.BaseApp;
+import suangrenduobao.daiqile.com.mvlib.utils.GsonUtil;
+import suangrenduobao.daiqile.com.mvlib.utils.SPUtils;
 
 /*
  * Created by G150T on 2017/6/21.
  */
 
-public class MyApplication extends Application {
-    public User mUser = null;
-    public MyInfo.DataBean myInfo = null;
-
-    public boolean mRememberPassword = false;
-    public boolean isFirstStart = true;
-    public SharedPreferences mSharedPreferences = null;
+public class MyApplication extends BaseApp {
     public ApiService apiService;
 
     private static MyApplication mInstance;
 
     public static MyApplication getInstance() {
-
         return mInstance;
     }
 
     @Override
     public void onCreate() {
 
-
         super.onCreate();
         mInstance = this;
-
-        SPUtils.init("xianjindai");
-        mSharedPreferences = getSharedPreferences(AppConfig.SHARED_PATH, MODE_PRIVATE);
-        initLoginParams();
+        SPUtils.init(Constants.XIANJINDAI);
+        initLoginParams(null);
         initOkHttp();
         Retrofit retrofit = RetrofitClient.getInstance();
         apiService = retrofit.create(ApiService.class);
         UserPrefs.init(getApplicationContext());
+
+        LoadingLayout.getConfig()
+//                .setLoadingPageLayout(R.layout.pager_loading)
+                .setErrorText("主人,出错啦~请稍后重试！")
+                .setEmptyText("主人，暂无数据")
+                .setNoNetworkText("主人，网络报错了，刷新试试")
+                .setErrorImage(R.mipmap.ic_launcher)
+                .setEmptyImage(R.mipmap.ic_launcher)
+                .setNoNetworkImage(R.drawable.ic_icon_define_nonetwork)
+                .setAllTipTextColor(R.color.cccccc)
+                .setAllTipTextSize(14)
+                .setReloadButtonText("点我重试哦")
+                .setReloadButtonTextSize(14)
+                .setReloadButtonTextColor(R.color.cccccc)
+                .setReloadButtonWidthAndHeight(150, 40);
+
+        if (Build.VERSION.SDK_INT > 21) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+            builder.detectFileUriExposure();
+        }
     }
 
-    public void initLoginParams() {
-
+    public void initLoginParams(User user) {
+        if (null == user) {
+            String sUser = SPUtils.get(MyApplication.getInstance().getApplicationContext(), Constants.USER, "").toString();
+            if (!TextUtils.isEmpty(sUser)) {
+                user = GsonUtil.GsonToBean(sUser, User.class);
+                uid = user.getUid();
+                flag = true;
+            } else {
+                uid = "";
+                flag = false;
+            }
+        } else {
+            SPUtils.put(MyApplication.getInstance().getApplicationContext(), Constants.USER, GsonUtil.GsonString(user));
+            uid = user.getUid();
+            flag = true;
+        }
+        Log.d("MyApplication", uid + flag);
     }
+
+    private String uid;
+    private boolean flag = false;
 
     /**
      * 更新登陆信息
      */
-    public void updateLoginParams(){
+    public void updateLoginParams() {
     }
 
     /**
      * 清空登录信息
      */
     public void clearLoginParams() {
-        SPUtils.clear(this);
+        SPUtils.clear(MyApplication.getInstance().getApplicationContext());
+        uid = "";
+        flag = false;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public boolean isLogin() {
+        return flag;
     }
 
     private void initOkHttp() {
@@ -84,6 +128,10 @@ public class MyApplication extends Application {
                 .build();
 
         OkHttpUtils.initClient(okHttpClient);
+    }
+
+    @Override
+    public void initConfig() {
 
     }
 }

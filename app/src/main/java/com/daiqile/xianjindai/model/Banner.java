@@ -2,11 +2,13 @@ package com.daiqile.xianjindai.model;
 
 import java.util.List;
 
+import suangrenduobao.daiqile.com.mvlib.utils.http.BaseBean;
+
 /**
  * Created by G150T on 2017/7/3.
  */
 
-public class Banner {
+public class Banner implements BaseBean{
 
     /**
      * ppts : {"list":[{"id":198,"page":"","ip":"","url":"upload/ppt/img/20170703/20170703101759234727.jpg","isDisplay":"1","disOrder":1,"category":1,"addTime":"","pptUrl":"1","explanation":"ss"},{"id":199,"page":"","ip":"","url":"upload/ppt/img/20170703/20170703101819718283.jpg","isDisplay":"1","disOrder":1,"category":1,"addTime":"","pptUrl":"2","explanation":"4"}],"ppt":"","page":"","categoryMap":"","disPlayList":"","categoryList":"","isDisplayMap":""}

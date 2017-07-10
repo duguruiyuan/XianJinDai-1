@@ -40,20 +40,49 @@
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegistAvtivity" />
-        <activity android:name=".activity.FindPwdByPhoneActivity" />
-        <activity android:name=".activity.IdentityCardActivity" />
-        <activity android:name=".activity.BankCardActivity" />
-        <activity android:name=".activity.BindCardActivity" />
-        <activity android:name=".activity.PersonalDetailsActivity" />
-        <activity android:name=".activity.ChangePwdActivity" />
-        <activity android:name=".activity.ChangeLoginPwdActivity" />
-        <activity android:name=".activity.EmergencyContactActivity" />
-        <activity android:name=".activity.BorrowActivity" />
-        <activity android:name=".activity.BorrowConfirmActivity" />
-        <activity android:name=".activity.ThirdPartCertificationActivity" />
-        <activity android:name=".activity.LoanActivity"></activity>
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegistAvtivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FindPwdByPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.IdentityCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BankCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BindCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PersonalDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChangePwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChangeLoginPwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EmergencyContactActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BorrowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BorrowConfirmActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ThirdPartCertificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoanActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

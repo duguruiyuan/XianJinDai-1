@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <com.daiqile.xianjindai.view.TopBar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
@@ -12,36 +13,40 @@
         app:leftDrawable="@mipmap/iv_prev"
         app:title="银行卡绑定"
         app:titleTextColor="@color/material_lightBlue_A200"
-        app:titleTextSize="@dimen/appbar_text_size_20"/>
+        app:titleTextSize="@dimen/appbar_text_size_20" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@drawable/divider"></View>
-    <ScrollView
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
-            <com.jude.easyrecyclerview.EasyRecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <include layout="@layout/item_bank_card"></include>
-            </com.jude.easyrecyclerview.EasyRecyclerView>
-            <ImageView
-                android:id="@+id/iv_bind"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@mipmap/icon_bind"/>
-        </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <include layout="@layout/item_bank_card"></include>
+    </com.jude.easyrecyclerview.EasyRecyclerView>
+
+    <ImageView
+        android:id="@+id/iv_bind"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:src="@mipmap/icon_bind" />
+    <!--</LinearLayout>-->
 
 
-    </ScrollView>
-
-
+    <!--</ScrollView>-->
 
 
 </LinearLayout>
