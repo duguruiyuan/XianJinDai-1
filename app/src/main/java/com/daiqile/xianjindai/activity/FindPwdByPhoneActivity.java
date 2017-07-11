@@ -1,7 +1,6 @@
 package com.daiqile.xianjindai.activity;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,7 +13,7 @@ import android.widget.LinearLayout;
 import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
-import com.daiqile.xianjindai.base.BaseActivity;
+
 import com.daiqile.xianjindai.model.ForgetPassword;
 import com.daiqile.xianjindai.utils.ToastUtil;
 import com.daiqile.xianjindai.view.TimeButton;
@@ -36,6 +35,7 @@ import okhttp3.ResponseBody;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 
 /**
  * 找回密码页面
@@ -59,14 +59,13 @@ public class FindPwdByPhoneActivity extends BaseActivity {
     @BindView(R.id.activity_find_pwd_by_phone)
     LinearLayout activityFindPwdByPhone;
 
-    private Activity mActivity;
-    private MyApplication application;
+//    private Activity mActivity;
+//    private MyApplication application;
 
 
     @Override
-    public void init() {
-        mActivity = FindPwdByPhoneActivity.this;
-        application = (MyApplication) getApplication();
+    protected void initConfig() {
+        super.initConfig();
         topbar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
             @Override
             public void leftClick() {
@@ -94,8 +93,44 @@ public class FindPwdByPhoneActivity extends BaseActivity {
 
             }
         });
+    }
 
+//    @Override
+//    public void init() {
+//        mActivity = FindPwdByPhoneActivity.this;
+//        application = (MyApplication) getApplication();
+//        topbar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
+//            @Override
+//            public void leftClick() {
+//                finish();
+//            }
+//
+//            @Override
+//            public void rightClick() {
+//
+//            }
+//        });
+//        etPhone.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                tbGetValidateNumber.setMobile(2, s.toString());
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+//    }
 
+    @Override
+    protected boolean switchToolbar() {
+        return false;
     }
 
     private void forgetPassword() {
@@ -124,17 +159,18 @@ public class FindPwdByPhoneActivity extends BaseActivity {
             return;
         }
         OkHttpUtils
-                .post()//
+                .post()
                 .url(Constants.BASE_URL + "xjd/front/user/forgetLoginCode")//
-                .addParams("phone",phone)
-                .addParams("mCode",code)
-                .addParams("loginPassword",password)
+                .addParams("phone", phone)
+                .addParams("mCode", code)
+                .addParams("loginPassword", password)
+                .addHeader(Constants.TOKEN, MyApplication.getInstance().getToken())
                 .tag(Tag)
                 .build()//
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e("ll_yh", "登录失败404"+e.toString());
+                        Log.e("ll_yh", "登录失败404" + e.toString());
                     }
 
                     @Override
@@ -144,75 +180,38 @@ public class FindPwdByPhoneActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String isSuccess = jsonObject.getString("success");
                             String msg = jsonObject.getString("msg");
-                            Log.e("sss", "onResponse: "+isSuccess );
-                            if (isSuccess.equals("true")){
-                                ToastUtil.showToast(mActivity,msg);
+                            Log.e("sss", "onResponse: " + isSuccess);
+                            if (isSuccess.equals("true")) {
+                                ToastUtil.showToast(mActivity, msg);
                                 finish();
-                            }else{
-                                ToastUtil.showToast(mActivity,msg);
+                            } else {
+                                ToastUtil.showToast(mActivity, msg);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 });
-        /*Map<String, String> map = new HashMap<>();
-        //map.put("token", SPUtils.get(application, "token", "null").toString());
-        map.put("phone", phone);
-        map.put("mCode", code);
-        map.put("loginPassword", password);
-        application.apiService.forgetpassword(map)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ForgetPassword>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(ForgetPassword forgetPassword) {
-
-                        try {
-                            JSONObject jsonObject = new JSONObject();
-                            Boolean success = jsonObject.getBoolean("success");
-                            Log.e("sss", "onNext: "+forgetPassword.isSuccess() );
-                            if (success.equals("true")) {
-                                ToastUtil.showToast(mActivity, forgetPassword.getMsg());
-                                finish();
-                            } else {
-                                ToastUtil.showToast(mActivity, forgetPassword.getMsg());
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });*/
     }
 
     /**
      * 获取验证码
+     *
      * @return
      */
-    private void getCode(){
+    private void getCode() {
         String phone = etPhone.getText().toString().trim();
-        if (phone.isEmpty()){
-            ToastUtil.showToast(mActivity,"请输入手机号");
+        if (phone.isEmpty()) {
+            ToastUtil.showToast(mActivity, "请输入手机号");
             return;
         }
-        if (phone.length()<11||phone.length()>11){
-            ToastUtil.showToast(mActivity , "请输入正确的手机号码");
+        if (phone.length() < 11 || phone.length() > 11) {
+            ToastUtil.showToast(mActivity, "请输入正确的手机号码");
             return;
         }
         OkHttpUtils
                 .post()//
-                .url(Constants.BASE_URL+"xjd/front/user/sendForgetCode")//
+                .url(Constants.BASE_URL + "xjd/front/user/sendForgetCode")//
                 .addParams("phone", phone)
                 .tag(Tag)
                 .build()//
@@ -228,13 +227,13 @@ public class FindPwdByPhoneActivity extends BaseActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean isSuccess = jsonObject.getBoolean("success");
-                            String code = jsonObject.getString("mobileCode");
+//                            String code = jsonObject.getString("mobileCode");
                             String msg = jsonObject.getString("msg");
-                            Log.e("sss", "onResponse: "+code );
-                            if (isSuccess==true){
-                                ToastUtil.showToast(mActivity,"验证码发送成功");
-                            }else{
-                                ToastUtil.showToast(mActivity,msg);
+//                            Log.e("sss", "onResponse: " + code);
+                            if (isSuccess) {
+                                ToastUtil.showToast(mActivity, "验证码发送成功");
+                            } else {
+                                ToastUtil.showToast(mActivity, msg);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -245,17 +244,15 @@ public class FindPwdByPhoneActivity extends BaseActivity {
     }
 
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_find_pwd_by_phone;
-    }
-
-    @Override
-    public Activity bindActivity() {
-        return this;
-    }
-
-
+//    @Override
+//    public int getLayoutId() {
+//        return R.layout.activity_find_pwd_by_phone;
+//    }
+//
+//    @Override
+//    public Activity bindActivity() {
+//        return this;
+//    }
 
 
     @OnClick({R.id.tb_get_validate_number, R.id.btn_find_password})
@@ -271,9 +268,20 @@ public class FindPwdByPhoneActivity extends BaseActivity {
     }
 
     private static final String Tag = "FindPwdByPhoneActivity";
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         OkHttpUtils.getInstance().cancelTag(Tag);
+    }
+
+    @Override
+    protected int initLayout() {
+        return R.layout.activity_find_pwd_by_phone;
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 }

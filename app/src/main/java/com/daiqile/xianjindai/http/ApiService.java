@@ -1,5 +1,7 @@
 package com.daiqile.xianjindai.http;
 
+import com.daiqile.xianjindai.Constants;
+import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.Result;
 import com.daiqile.xianjindai.activity.bean.BankInfoList;
 import com.daiqile.xianjindai.model.Bank;
@@ -17,6 +19,8 @@ import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -62,11 +66,19 @@ public interface ApiService {
 
     //添加银行卡
     @POST("xjd/front/user/collectionMoneyInfo")
+    @FormUrlEncoded
     Observable<Result> addBank(@FieldMap Map<String, String> map);
 
     //银行卡列表
     @POST("xjd/front/user/bankList")
+    @FormUrlEncoded
     Observable<BankInfoList> getBankLists(@FieldMap Map<String, String> map);
+
+
+    //紧急联系人
+    @POST("xjd/front/user/updateRelative")
+    @FormUrlEncoded
+    Observable<Result> updateRelative(@FieldMap Map<String, String> map);
 
 
 }

@@ -24,4 +24,9 @@
     <string name="platform_dynamic">平台动态</string>
     <string name="hint_password_again">确认密码</string>
 
+    <string name="make_a_mistake">出错了...</string>
+    <string name="there_no_more_data">没有更多数据</string>
+    <string name="to_load_a_life_in">玩命加载中...</string>
+
+
 </resources>

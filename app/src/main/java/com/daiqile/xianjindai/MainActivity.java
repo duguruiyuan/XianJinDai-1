@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar mBottomNavigationBar;
 
-
     private Activity mActivity;
     private long clickTime = 0;
 
@@ -65,7 +64,8 @@ public class MainActivity extends BaseActivity {
        /* topbar.setRightButton(true);
         p = 0;*/
         //设置底部导航栏
-        mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED)
+        mBottomNavigationBar
+                .setMode(BottomNavigationBar.MODE_FIXED)
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
                 .setActiveColor(R.color.def_reached_color1)
                 .setInActiveColor(R.color.black);

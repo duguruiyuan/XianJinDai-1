@@ -21,6 +21,25 @@ public class User implements BaseBean{
     private String token;
     private String uid;
 
+//    private String phone;
+//    private String loginPassword;
+
+//    public String getPhone() {
+//        return phone;
+//    }
+//
+//    public void setPhone(String phone) {
+//        this.phone = phone;
+//    }
+//
+//    public String getLoginPassword() {
+//        return loginPassword;
+//    }
+//
+//    public void setLoginPassword(String loginPassword) {
+//        this.loginPassword = loginPassword;
+//    }
+
     public String getMsg() {
         return msg;
     }

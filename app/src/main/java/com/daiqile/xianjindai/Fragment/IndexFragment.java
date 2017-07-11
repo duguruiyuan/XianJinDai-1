@@ -14,6 +14,7 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 
+import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.activity.BorrowActivity;
@@ -138,16 +139,21 @@ public class IndexFragment extends BaseFragment {
 //    }
 
     /**
-     * 点击事件
+     * 点击事件 1 个人现金 2:法人贷 3:房产贷 4:丽人贷
      */
     @OnClick({R.id.rl_person, R.id.rl_home_liren/*, R.id.rl_legal_person, R.id.rl_house*/})
     public void onClick(View view) {
+        Intent intent = new Intent();
+        intent.setClass(mActivity, BorrowActivity.class);
         switch (view.getId()) {
             case R.id.rl_person:
-                startActivity(new Intent(mActivity, BorrowActivity.class));
+                intent.putExtra(Constants.LOANTYPE, "1");
+//                intent = new Intent(mActivity, BorrowActivity.class);
+//                intent.setClass(mActivity,BorrowActivity.class);
                 break;
             case R.id.rl_home_liren:
-                startActivity(new Intent(mActivity, BorrowActivity.class));
+                intent.putExtra(Constants.LOANTYPE, "4");
+//                startActivity(new Intent(mActivity, BorrowActivity.class));
                 break;
 //            case R.id.rl_legal_person:
 //                startActivity(new Intent(mActivity, BorrowActivity.class));
@@ -157,6 +163,7 @@ public class IndexFragment extends BaseFragment {
 //                break;
 
         }
+        startActivity(intent);
     }
 
     /**

@@ -24,6 +24,7 @@ import butterknife.OnClick;
 import okhttp3.Call;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 import suangrenduobao.daiqile.com.mvlib.utils.GsonUtil;
+import suangrenduobao.daiqile.com.mvlib.utils.SPUtils;
 
 
 /**
@@ -103,6 +104,9 @@ public class LoginActivity extends BaseActivity {
                             UserPrefs.getInstance().setPassword(etPassword.getText().toString());
 
                             MyApplication.getInstance().initLoginParams(user);
+
+                            MyApplication.getInstance().setPhone(phone);
+                            MyApplication.getInstance().setLoginPassword(password);
 
                             finish();
                         }

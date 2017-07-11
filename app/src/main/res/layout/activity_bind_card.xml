@@ -40,6 +40,7 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:hint="请输入银行卡号"
+            android:maxLines="1"
             android:paddingLeft="10dp"
             android:textColor="@color/default_text_color"
             android:textColorHint="@color/material_grey_500"
@@ -81,10 +82,10 @@
         <!--android:layout_weight="1" />-->
 
         <ImageView
-        android:layout_width="20dp"
-        android:layout_height="18dp"
-        android:layout_gravity="center"
-        android:src="@mipmap/icon_right" />
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_right" />
     </LinearLayout>
 
     <View
@@ -165,6 +166,7 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:hint="请输入银行预留手机号"
+            android:maxLines="1"
             android:paddingLeft="10dp"
             android:textColor="@color/default_text_color"
             android:textColorHint="@color/material_grey_500"

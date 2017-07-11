@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_loan"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,12 +18,12 @@
     <RelativeLayout
         android:id="@+id/rl_legal_person"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_weight="1"
         android:background="@color/material_white">
 
         <ImageView
+            android:id="@+id/iv_image"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginBottom="10dp"
@@ -33,54 +32,47 @@
             android:background="@mipmap/iv_legal_person" />
 
         <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/iv_image"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@mipmap/icon_legal_person" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="法人贷" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_legal_person"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="法人贷" />
 
             <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/divider" />
 
             <TextView
+                android:id="@+id/tv_highest_money"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:text="最高(元)         2000" />
 
             <TextView
+                android:id="@+id/tv_max_day"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:text="期限                7-14天" />
 
             <TextView
+                android:id="@+id/tv_interest"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:text="日息                0.02%-0.05%" />
         </LinearLayout>
     </RelativeLayout>
@@ -88,12 +80,12 @@
     <RelativeLayout
         android:id="@+id/rl_house"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_weight="1"
         android:background="@color/material_white">
 
         <ImageView
+            android:id="@+id/iv_image2"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginBottom="10dp"
@@ -102,62 +94,95 @@
             android:background="@mipmap/iv_home" />
 
         <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/iv_image2"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@mipmap/icon_home" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="房产贷" />
-            </LinearLayout>
-
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_home"
+                android:drawablePadding="5dp"
+                android:text="房产贷" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/divider" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:text="最高(元)         2000" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:text="期限                7-14天" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:text="日息                0.02%-0.05%" />
         </LinearLayout>
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"></LinearLayout>
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="2"></LinearLayout>-->
 
-</LinearLayout>
+</LinearLayout><!--以前的--><!--<?xml version="1.0" encoding="utf-8"?>--><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--android:id="@+id/activity_loan"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="vertical">-->
+
+    <!--<com.daiqile.xianjindai.view.TopBar--><!--android:id="@+id/topbar"--><!--android:layout_width="match_parent"--><!--android:layout_height="@dimen/appbar_min_height_56"--><!--android:paddingLeft="@dimen/activity_horizontal_margin"--><!--app:leftDrawable="@mipmap/iv_prev"--><!--app:title="关联贷款"--><!--app:titleTextColor="@color/material_lightBlue_A200"--><!--app:titleTextSize="@dimen/appbar_text_size_20" />-->
+
+    <!--<RelativeLayout--><!--android:id="@+id/rl_legal_person"--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_marginTop="10dp"--><!--android:layout_weight="1"--><!--android:background="@color/material_white">-->
+
+    <!--<ImageView--><!--android:layout_width="130dp"--><!--android:layout_height="130dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_marginLeft="10dp"--><!--android:layout_marginTop="10dp"--><!--android:background="@mipmap/iv_legal_person" />-->
+
+    <!--<LinearLayout--><!--android:layout_width="200dp"--><!--android:layout_height="match_parent"--><!--android:layout_alignParentEnd="true"--><!--android:layout_alignParentRight="true"--><!--android:layout_alignParentTop="true"--><!--android:orientation="vertical">-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:orientation="horizontal">-->
+
+    <!--<ImageView--><!--android:layout_width="30dp"--><!--android:layout_height="30dp"--><!--android:background="@mipmap/icon_legal_person" />-->
+
+    <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_marginBottom="5dp"--><!--android:layout_marginLeft="20dp"--><!--android:layout_marginTop="5dp"--><!--android:text="法人贷" />--><!--</LinearLayout>-->
+
+    <!--<View--><!--android:layout_width="match_parent"--><!--android:layout_height="1dp"--><!--android:background="@drawable/divider" />-->
+
+    <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:text="最高(元)         2000" />-->
+
+    <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:text="期限                7-14天" />-->
+
+    <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:text="日息                0.02%-0.05%" />--><!--</LinearLayout>--><!--</RelativeLayout>-->
+
+    <!--<RelativeLayout--><!--android:id="@+id/rl_house"--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_marginTop="10dp"--><!--android:layout_weight="1"--><!--android:background="@color/material_white">-->
+
+    <!--<ImageView--><!--android:layout_width="130dp"--><!--android:layout_height="130dp"--><!--android:layout_marginBottom="10dp"--><!--android:layout_marginLeft="10dp"--><!--android:layout_marginTop="10dp"--><!--android:background="@mipmap/iv_home" />-->
+
+    <!--<LinearLayout--><!--android:layout_width="200dp"--><!--android:layout_height="match_parent"--><!--android:layout_alignParentEnd="true"--><!--android:layout_alignParentRight="true"--><!--android:layout_alignParentTop="true"--><!--android:orientation="vertical">-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:orientation="horizontal">-->
+
+    <!--<ImageView--><!--android:layout_width="30dp"--><!--android:layout_height="30dp"--><!--android:background="@mipmap/icon_home" />-->
+
+    <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_marginBottom="5dp"--><!--android:layout_marginLeft="20dp"--><!--android:layout_marginTop="5dp"--><!--android:text="房产贷" />--><!--</LinearLayout>-->
+
+
+    <!--<View--><!--android:layout_width="match_parent"--><!--android:layout_height="1dp"--><!--android:background="@drawable/divider" />-->
+
+    <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:text="最高(元)         2000" />-->
+
+    <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:text="期限                7-14天" />-->
+
+    <!--<TextView--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="1"--><!--android:text="日息                0.02%-0.05%" />--><!--</LinearLayout>--><!--</RelativeLayout>-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="0dp"--><!--android:layout_weight="2"></LinearLayout>-->
+
+    <!--</LinearLayout>-->

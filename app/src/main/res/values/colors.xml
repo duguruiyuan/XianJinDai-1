@@ -19,7 +19,7 @@
 
     <color name="black">#FF1a1a26</color>
     <color name="alpha_black">#771a1a26</color>
-
+    <color name="font_black_content">#333</color>
     <!-- Red -->
     <color name="material_red_50">#fde0dc</color>
     <color name="material_red_100">#f9bdbb</color>

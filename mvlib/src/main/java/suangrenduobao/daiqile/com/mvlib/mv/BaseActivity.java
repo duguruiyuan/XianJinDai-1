@@ -1,5 +1,6 @@
 package suangrenduobao.daiqile.com.mvlib.mv;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -57,6 +58,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IDialo
     private int menuResId;
 
     protected Context mContext;
+    protected Activity mActivity;
 
     public Toolbar getmToolbar() {
         return mToolbar;
@@ -101,6 +103,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IDialo
 //        );
 
         mContext = this;
+        mActivity=this;
         ToastUtils.initToastUtilsContext(mContext.getApplicationContext());
 
         mTitle = (TextView) findViewById(R.id.tv_title_base);

@@ -18,6 +18,7 @@ import com.daiqile.xianjindai.model.ProvinceCityArea;
 import com.daiqile.xianjindai.utils.SoftInputUtil;
 import com.daiqile.xianjindai.utils.ToastUtil;
 import com.daiqile.xianjindai.view.TopBar;
+import com.hwangjr.rxbus.RxBus;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -451,14 +452,14 @@ public class BindCardActivity extends BaseActivity {
 
         Map<String, String> map = new HashMap<>();
         map.put("userId", MyApplication.getInstance().getUid());
-        map.put("bankNo", bankId);
+        map.put("bankNo", mCardNumber.replace(" ", ""));
         map.put("bankName", bankName);
         map.put("phone", mPhone);
         map.put("province_id", provinceNID);
         map.put("city_id", cityNID);
         map.put("county_id", countryNID);
 
-        MyApplication.getInstance().apiService.addBank(null).subscribeOn(Schedulers.io())
+        MyApplication.getInstance().apiService.addBank(map).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Result>() {
                     @Override
@@ -468,12 +469,14 @@ public class BindCardActivity extends BaseActivity {
                     @Override
                     public void onError(Throwable e) {
                         ToastUtils.showMessage("网络不好");
+
                     }
 
                     @Override
                     public void onNext(Result result) {
                         ToastUtils.showMessage(result.getMsg());
                         if (result.isSuccess()) {
+                            RxBus.get().post(Constants.REFRESH_BANK, "");
                             finish();
                         }
                     }

@@ -44,6 +44,7 @@ public class MyApplication extends BaseApp {
         SPUtils.init(Constants.XIANJINDAI);
         initLoginParams(null);
         initOkHttp();
+
         Retrofit retrofit = RetrofitClient.getInstance();
         apiService = retrofit.create(ApiService.class);
         UserPrefs.init(getApplicationContext());
@@ -76,20 +77,57 @@ public class MyApplication extends BaseApp {
             if (!TextUtils.isEmpty(sUser)) {
                 user = GsonUtil.GsonToBean(sUser, User.class);
                 uid = user.getUid();
+                token = user.getToken();
+//                phone = user.getPhone();
+//                loginPassword = user.getLoginPassword();
                 flag = true;
             } else {
                 uid = "";
+                token = "";
                 flag = false;
+//                phone = "";
+//                loginPassword = "";
             }
         } else {
             SPUtils.put(MyApplication.getInstance().getApplicationContext(), Constants.USER, GsonUtil.GsonString(user));
             uid = user.getUid();
             flag = true;
+            token = user.getToken();
+//            phone = user.getPhone();
+//            loginPassword = user.getLoginPassword();
         }
         Log.d("MyApplication", uid + flag);
+        Log.d("MyApplication", token);
+        Log.d("MyApplication", phone + " " + loginPassword);
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+        SPUtils.put(getApplicationContext(), Constants.PHONE, phone);
+    }
+
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
+        SPUtils.put(getApplicationContext(), Constants.LOGINPASSWORD, loginPassword);
+    }
+
+    public String getPhone() {
+        if (TextUtils.isEmpty(phone)) {
+            phone = SPUtils.get(getApplicationContext(), Constants.PHONE, "").toString();
+        }
+        return phone;
+    }
+
+    public String getLoginPassword() {
+        if (TextUtils.isEmpty(loginPassword)) {
+            loginPassword = SPUtils.get(getApplicationContext(), Constants.LOGINPASSWORD, "").toString();
+        }
+        return loginPassword;
     }
 
     private String uid;
+    private String token;
+    private String phone, loginPassword;
     private boolean flag = false;
 
     /**
@@ -105,10 +143,17 @@ public class MyApplication extends BaseApp {
         SPUtils.clear(MyApplication.getInstance().getApplicationContext());
         uid = "";
         flag = false;
+        token = "";
+        phone = "";
+        loginPassword = "";
     }
 
     public String getUid() {
         return uid;
+    }
+
+    public String getToken() {
+        return token;
     }
 
     public boolean isLogin() {

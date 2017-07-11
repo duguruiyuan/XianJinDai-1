@@ -22,29 +22,23 @@
 
     <!--<ScrollView-->
     <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
+    <!--android:layout_height="wrap_content">-->
 
     <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
 
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/rl_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+         />
 
-        <include layout="@layout/item_bank_card"></include>
-    </com.jude.easyrecyclerview.EasyRecyclerView>
+            <!--<include layout="@layout/item_bank_card"></include>-->
 
-    <ImageView
-        android:id="@+id/iv_bind"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:src="@mipmap/icon_bind" />
+
     <!--</LinearLayout>-->
-
 
     <!--</ScrollView>-->
 

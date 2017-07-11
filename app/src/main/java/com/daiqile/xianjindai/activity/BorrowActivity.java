@@ -8,15 +8,21 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.utils.TimeUtils;
 import com.daiqile.xianjindai.view.TopBar;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
 import butterknife.OnClick;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 
+import static com.daiqile.xianjindai.utils.TimeUtils.timeslashDay;
 
 public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener {
     @BindView(R.id.topbar)//topbar
@@ -58,9 +64,7 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     @BindView(R.id.btn_borrow)//确认借款按钮
             Button btnBorrow;
 
-
 //    private Activity mActivity;
-
 //    @Override
 //    public void init() {
 //        mActivity = BorrowActivity.this;
@@ -92,7 +96,19 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_borrow:
-                startActivity(new Intent(mContext, BorrowConfirmActivity.class));
+                Intent intent = new Intent(mContext, BorrowConfirmActivity.class);
+                Map<String, String> map = new HashMap<>();
+                map.put(Constants.LOANAMOUNT, tvBorrowMoney.getText().toString().trim().replace("¥", ""));
+
+//                String.format("%s-%s", TimeUtils.timeslashData(), TimeUtils.timeslashDay(defaultNumber));
+//                map.put(Constants.TERM, defaultNumber + "");
+                map.put(Constants.TERM, String.format("%s-%s", TimeUtils.timeslashData(), TimeUtils.timeslashDay(defaultNumber)));
+
+                map.put(Constants.LOANTYPE, loanType);
+                map.put(Constants.POUNDAGE, proceduresMoney.getText().toString().trim().replace("¥", ""));
+//                map.put(Constants.DUEMONEY, );
+                intent.putExtra(Constants.APPLY, (Serializable) map);
+                startActivity(intent);
                 break;
         }
     }
@@ -103,8 +119,18 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
         return R.layout.activity_borrow;
     }
 
+    int defaultNumber = 14;
+
+    String loanType;
+
     @Override
     protected void loadData() {
+
+        if (getIntent().hasExtra(Constants.LOANTYPE)) {
+            loanType = getIntent().getStringExtra(Constants.LOANTYPE);
+            Log.d("BorrowActivity", loanType);
+        }
+
         topBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
             @Override
             public void leftClick() {
@@ -116,16 +142,12 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
             }
         });
-
-
-        //借款日
+        //借款日  500 1000 1500 2000
         tvBorrowMoneyDay.setText(String.format("借款日:%s", TimeUtils.timeslashData()));
         //还款日
-        tvRepaymentDay.setText(String.format("还款日:%s", "7"));
+        tvRepaymentDay.setText(String.format("还款日:%s", timeslashDay(defaultNumber)));
 
-        borrowDay.setText("21天");
-
-        Log.d("BorrowActivity", TimeUtils.timeslashData());
+        borrowDay.setText(defaultNumber + "天");
 
         seekbarMoney.setOnSeekBarChangeListener(this);
         seekbarDay.setOnSeekBarChangeListener(this);
@@ -148,26 +170,17 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     public void onStopTrackingTouch(SeekBar seekBar) {
         int progress = seekBar.getProgress();
         if (R.id.seekbar_money == seekBar.getId()) {
-            seekBar.setProgress((progress / 25) * 25);//500 0 1000 1 1500 2 2000 3
-
+            seekBar.setProgress(progress / 25 == 3 ? 100 : (progress / 25 * 33));
             tvSelectMoney.setText(String.format("%d元", 500 * ((progress / 25 + 1))));
             tvBorrowMoney.setText(String.format("¥%d", 500 * ((progress / 25 + 1))));
 
-            if (progress > 0 && progress < 33) {
-                seekBar.setProgress(0);
-                tvSelectMoney.setText("500元");
-            } else if (progress >= 33 && progress < 66) {
-                seekBar.setProgress(33);
-            } else if (progress >= 66 && progress <= 100) {
-                seekBar.setProgress(100);
-            }
-
-
         } else if (R.id.seekbar_day == seekBar.getId()) {
-            Log.d("BorrowActivity", "progress:" + progress);
+            defaultNumber = progress > 50 ? 14 : 7;
+            seekBar.setProgress(progress > 50 ? 100 : 0);
+            borrowDay.setText(defaultNumber + "天");
+            tvSelectDay.setText(defaultNumber + "天");
 
-            seekBar.setProgress(((progress / 50) + 1) * 50);
-            tvSelectDay.setText(progress / 50 == 1 ? "14天" : "7天");
+            tvRepaymentDay.setText(String.format("还款日:%s", timeslashDay(defaultNumber)));
         }
 
     }

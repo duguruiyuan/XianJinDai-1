@@ -29,4 +29,23 @@ public class Constants {
     public static final String USER = "user";
     public static final String XIANJINDAI = "xianjindai";
 
+    public static final String LOGINPASSWORD = "loginPassword";
+
+    public static final String REFRESH_BANK = "refresh_bank";
+
+
+    public static final String[] KINSFOLK = {"父母", "配偶", "兄弟", "姐妹"};
+    public static final String[] FRIEND = {"朋友", "同事"};
+
+    //借款类型
+    public static final String LOANTYPE = "loanType";
+
+
+    public static final String LOANAMOUNT = "loanAmount"; //贷款金额
+    public static final String TERM = "term";//贷款天数
+    public static final String POUNDAGE = "poundage";//手续费
+
+
+    public static final String APPLY = "apply";
+    public static final String DUEMONEY = "duemoney";
 }
