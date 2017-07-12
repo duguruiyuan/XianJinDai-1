@@ -26,14 +26,14 @@ android {
         }
     }
 
-//    signingConfigs {
-//        config {
-//            storeFile file(KEY_PATH)  //keystore的位置
-//            storePassword KEY_PASS   //密码
-//            keyAlias ALIAS_NAME  //别名
-//            keyPassword ALIAT_PASS  //别名密码
-//        }
-//    }
+    signingConfigs {
+        config {
+            storeFile file(KEY_PATH)  //keystore的位置
+            storePassword KEY_PASS   //密码
+            keyAlias ALIAS_NAME  //别名
+            keyPassword ALIAT_PASS  //别名密码
+        }
+    }
 //    configurations.all {
 //        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
 //    }

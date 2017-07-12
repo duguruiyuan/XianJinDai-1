@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="收款卡:"
+        android:textSize="@dimen/main_body_text_size_14" />
+
+    <TextView
+        android:id="@+id/tv_bank_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_toLeftOf="@+id/tv_bank_money"
+        android:ellipsize="end"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:text="中国银行卡 360000000000000000000360000000000000000000360000000000000000000"
+        android:textSize="@dimen/main_body_text_size_14" />
+
+    <TextView
+        android:id="@id/tv_bank_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="100"
+        android:textColor="@color/material_cyan_A100"
+        android:textSize="@dimen/main_body_text_size_14" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_bank_name"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="8dp"
+        android:text="借款时间："
+        android:textSize="@dimen/tip_text_size_12" />
+
+    <TextView
+        android:id="@+id/tv_borrow_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_bank_name"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="8dp"
+        android:text="2017-1-10"
+        android:textSize="@dimen/tip_text_size_12" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_borrow_time"
+        android:text="还款时间："
+        android:textSize="@dimen/tip_text_size_12" />
+
+    <TextView
+        android:id="@+id/tv_repayment_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_borrow_time"
+        android:layout_marginLeft="60dp"
+        android:text="2017-1-10"
+        android:textSize="@dimen/tip_text_size_12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_repayment_time"
+        android:text="借款状态："
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btn_protocol"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@+id/tv_money_time"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_select_bg"
+        android:text="查看协议"
+        android:textColor="@color/white"
+        android:textSize="@dimen/tip_text_size_12" />
+
+    <TextView
+        android:id="@+id/tv_money_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_repayment_time"
+        android:layout_marginLeft="60dp"
+        android:layout_toLeftOf="@id/btn_protocol"
+        android:text="申请中"
+        android:textSize="@dimen/tip_text_size_12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_money_status"
+        android:text="打款时间："
+        android:textSize="@dimen/tip_text_size_12" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_money_status"
+        android:text="打款时间："
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_money_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tv_money_status"
+        android:layout_marginLeft="60dp"
+        android:layout_toLeftOf="@id/btn_protocol"
+        android:text="未申请"
+        android:textSize="@dimen/tip_text_size_12" />
+
+
+</RelativeLayout>

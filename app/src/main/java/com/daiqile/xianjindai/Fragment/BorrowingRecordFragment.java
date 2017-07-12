@@ -15,6 +15,7 @@ import com.daiqile.xianjindai.base.BaseFragment;
 import com.daiqile.xianjindai.view.TopBar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,9 +35,7 @@ public class BorrowingRecordFragment extends BaseFragment {
 
     @Override
     public void init() {
-        titles.add("全部");
-        titles.add("进行中");
-        titles.add("已结清");
+        titles.addAll(Arrays.asList("全部", "进行中", "已结清"));
 
         fragments.add(new AllBorrowFragment());
         fragments.add(new UnderwayFragment());
@@ -78,7 +77,6 @@ public class BorrowingRecordFragment extends BaseFragment {
             return titles.get(position);
         }
     }
-
 
 
     @Override

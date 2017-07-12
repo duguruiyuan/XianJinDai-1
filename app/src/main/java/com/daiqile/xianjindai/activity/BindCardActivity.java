@@ -17,6 +17,7 @@ import com.daiqile.xianjindai.model.ProvinceCityArea;
 
 import com.daiqile.xianjindai.utils.SoftInputUtil;
 import com.daiqile.xianjindai.utils.ToastUtil;
+import com.daiqile.xianjindai.view.AddressFrameLayout;
 import com.daiqile.xianjindai.view.TopBar;
 import com.hwangjr.rxbus.RxBus;
 
@@ -45,15 +46,17 @@ public class BindCardActivity extends BaseActivity {
             EditText cardNumber;
     @BindView(R.id.tv_choose_bank)//选择银行卡
             TextView tvChooseBank;
-    @BindView(R.id.et_province)//选择省
-            TextView etProvince;
-    @BindView(R.id.et_city)//选择市
-            TextView etCity;
-    @BindView(R.id.et_country)//选择区
-            TextView etCountry;
+//    @BindView(R.id.et_province)//选择省
+//            TextView etProvince;
+//    @BindView(R.id.et_city)//选择市
+//            TextView etCity;
+//    @BindView(R.id.et_country)//选择区
+//            TextView etCountry;
     @BindView(R.id.et_phone)//手机号
             EditText etPhone;
 
+    @BindView(R.id.af_address)
+    AddressFrameLayout addressFrameLayout;
 
     OptionsPickerView bankOptions;
     OptionsPickerView provinceOptions;
@@ -66,20 +69,20 @@ public class BindCardActivity extends BaseActivity {
     private ArrayList<Bank.BankXFsBean> bankCardList;//银行卡列表集合
 
     //    private ArrayList<ProvinceCityArea.ProvinceListBean> provinceList = new ArrayList<>();//省份列表集合
-    private ArrayList<String> provinceName = new ArrayList<>();//省份名称集合
-    private ArrayList<String> provinceId = new ArrayList<>();//省份id集合
+//    private ArrayList<String> provinceName = new ArrayList<>();//省份名称集合
+//    private ArrayList<String> provinceId = new ArrayList<>();//省份id集合
 
     //    private ArrayList<ProvinceCityArea.CityListBean> cityList = new ArrayList<>();//城市列表集合
-    private ArrayList<String> cityName = new ArrayList<>();//城市名称集合
-    private ArrayList<String> cityNIDs = new ArrayList<>();//城市id集合
+//    private ArrayList<String> cityName = new ArrayList<>();//城市名称集合
+//    private ArrayList<String> cityNIDs = new ArrayList<>();//城市id集合
 
     //    private ArrayList<ProvinceCityArea.AreaListBean> countryList = new ArrayList<>();//区域列表集合
-    private ArrayList<String> countryName = new ArrayList<>();//区域名称集合
-    private ArrayList<String> countryNIDs = new ArrayList<>();//区域id集合
+//    private ArrayList<String> countryName = new ArrayList<>();//区域名称集合
+//    private ArrayList<String> countryNIDs = new ArrayList<>();//区域id集合
 
-    private String provinceNID = "";//选中省份id
-    private String cityNID = "";//选中城市id
-    private String countryNID = "";//选中区域id
+    //    private String provinceNID = "";//选中省份id
+//    private String cityNID = "";//选中城市id
+//    private String countryNID = "";//选中区域id
     private String bankId = "";//选中银行卡id
     private String bankName = "";//选中银行卡英文名称
 
@@ -91,11 +94,11 @@ public class BindCardActivity extends BaseActivity {
         countryOptions = new OptionsPickerView(mContext);
         bankOptions = new OptionsPickerView(mContext);
 
-        testCitys();
+//        testCitys();
         getBankList();
 
-        etCity.setVisibility(View.INVISIBLE);
-        etCountry.setVisibility(View.INVISIBLE);
+//        etCity.setVisibility(View.INVISIBLE);
+//        etCountry.setVisibility(View.INVISIBLE);
 
         topBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
             @Override
@@ -149,46 +152,46 @@ public class BindCardActivity extends BaseActivity {
 
     private static final String TAG = "BindCardActivity";
 
-    private void testCitys() {
-        File cityFile = new File(Environment.getExternalStorageDirectory(), Constants.CITYLIST);
-        if (!cityFile.exists()) {
-            MyApplication.getInstance().apiService.getProvinceList()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<ProvinceCityArea>() {
-                        @Override
-                        public void onCompleted() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            ToastUtil.showToast(BindCardActivity.this, e.toString());
-                        }
-
-                        @Override
-                        public void onNext(ProvinceCityArea province) {
-                            File cityFile = new File(Environment.getExternalStorageDirectory(), Constants.CITYLIST);
-                            File arealFile = new File(Environment.getExternalStorageDirectory(), Constants.AREALIST);
-                            File provnceFile = new File(Environment.getExternalStorageDirectory(), Constants.PROVINCELIST);
-
-                            if (!cityFile.exists()) {
-                                FileUtils.writeObj(cityFile, province.getCityList());
-                            }
-                            if (!arealFile.exists()) {
-                                FileUtils.writeObj(arealFile, province.getAreaList());
-                            }
-                            if (!provnceFile.exists()) {
-                                FileUtils.writeObj(provnceFile, province.getProvinceList());
-                            }
-                            getProvince();
-                        }
-                    });
-        } else {
-            getProvince();
-        }
-
-    }
+//    private void testCitys() {
+//        File cityFile = new File(Environment.getExternalStorageDirectory(), Constants.CITYLIST);
+//        if (!cityFile.exists()) {
+//            MyApplication.getInstance().apiService.getProvinceList()
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Subscriber<ProvinceCityArea>() {
+//                        @Override
+//                        public void onCompleted() {
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            ToastUtil.showToast(BindCardActivity.this, e.toString());
+//                        }
+//
+//                        @Override
+//                        public void onNext(ProvinceCityArea province) {
+//                            File cityFile = new File(Environment.getExternalStorageDirectory(), Constants.CITYLIST);
+//                            File arealFile = new File(Environment.getExternalStorageDirectory(), Constants.AREALIST);
+//                            File provnceFile = new File(Environment.getExternalStorageDirectory(), Constants.PROVINCELIST);
+//
+//                            if (!cityFile.exists()) {
+//                                FileUtils.writeObj(cityFile, province.getCityList());
+//                            }
+//                            if (!arealFile.exists()) {
+//                                FileUtils.writeObj(arealFile, province.getAreaList());
+//                            }
+//                            if (!provnceFile.exists()) {
+//                                FileUtils.writeObj(provnceFile, province.getProvinceList());
+//                            }
+//                            getProvince();
+//                        }
+//                    });
+//        } else {
+//            getProvince();
+//        }
+//
+//    }
 
     /**
      * 获取银行列表
@@ -271,129 +274,129 @@ public class BindCardActivity extends BaseActivity {
 
     }
 
-    ArrayList<ProvinceCityArea.ProvinceListBean> provincelistbean;
-    ArrayList<ProvinceCityArea.AreaListBean> areaListBeen;
-    ArrayList<ProvinceCityArea.CityListBean> cityListBeen;
+//    ArrayList<ProvinceCityArea.ProvinceListBean> provincelistbean;
+//    ArrayList<ProvinceCityArea.AreaListBean> areaListBeen;
+//    ArrayList<ProvinceCityArea.CityListBean> cityListBeen;
 
-    private void getProvince() {
-        if (null == provincelistbean) {
-            File provnceFile = new File(Environment.getExternalStorageDirectory(), Constants.PROVINCELIST);
-            provincelistbean = (ArrayList<ProvinceCityArea.ProvinceListBean>) FileUtils.readObj(provnceFile);
-        }
-        if (provincelistbean.size() > 0) {
-            for (ProvinceCityArea.ProvinceListBean provinceListBean : provincelistbean) {
-                provinceName.add(provinceListBean.getName());
-                provinceId.add(provinceListBean.getId() + "");
-            }
-            provinceOptions.setPicker(provinceName);
-            provinceOptions.setTitle("选择省");
-            provinceOptions.setCyclic(false);
-            provinceOptions.setSelectOptions(0);
-
-            provinceOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                @Override
-                public void onOptionsSelect(int options1, int option2, int options3) {
-                    etCity.setVisibility(View.VISIBLE);
-//                    etCountry.setVisibility(View.INVISIBLE);
-                    etCountry.setText("");
-                    etCity.setText("");
-                    etProvince.setText(provinceName.get(options1));
-                    provinceNID = provinceId.get(options1);
-                    getCity(provinceNID);
-                }
-            });
-        }
-    }
+//    private void getProvince() {
+//        if (null == provincelistbean) {
+//            File provnceFile = new File(Environment.getExternalStorageDirectory(), Constants.PROVINCELIST);
+//            provincelistbean = (ArrayList<ProvinceCityArea.ProvinceListBean>) FileUtils.readObj(provnceFile);
+//        }
+//        if (provincelistbean.size() > 0) {
+//            for (ProvinceCityArea.ProvinceListBean provinceListBean : provincelistbean) {
+//                provinceName.add(provinceListBean.getName());
+//                provinceId.add(provinceListBean.getId() + "");
+//            }
+//            provinceOptions.setPicker(provinceName);
+//            provinceOptions.setTitle("选择省");
+//            provinceOptions.setCyclic(false);
+//            provinceOptions.setSelectOptions(0);
+//
+//            provinceOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+//                @Override
+//                public void onOptionsSelect(int options1, int option2, int options3) {
+//                    etCity.setVisibility(View.VISIBLE);
+////                    etCountry.setVisibility(View.INVISIBLE);
+//                    etCountry.setText("");
+//                    etCity.setText("");
+//                    etProvince.setText(provinceName.get(options1));
+//                    provinceNID = provinceId.get(options1);
+//                    getCity(provinceNID);
+//                }
+//            });
+//        }
+//    }
 
     /*
       * 选择城市
       * @param id
       */
 
-    private void getCity(String id) {
-        if (null == cityListBeen) {
-            File cityFile = new File(Environment.getExternalStorageDirectory(), Constants.CITYLIST);
-            cityListBeen = (ArrayList<ProvinceCityArea.CityListBean>) FileUtils.readObj(cityFile);
-        }
-        if (cityListBeen.size() > 0) {
-            cityName = new ArrayList<>();
-            cityNIDs = new ArrayList<>();
-            for (ProvinceCityArea.CityListBean cityListBean : cityListBeen) {
-                if (id.equals(cityListBean.getProvinceId() + "")) {
-                    cityName.add(cityListBean.getName());
-                    cityNIDs.add(cityListBean.getId() + "");
-                }
-            }
-            if (cityName.size() > 0) {
-                Log.d(TAG, "a");
-                cityOptions.setPicker(cityName);
-                cityOptions.setTitle("选择市");
-                cityOptions.setCyclic(false);
-                cityOptions.setSelectOptions(0);
-                etCity.setText(cityName.get(0));
-                cityNID = cityNIDs.get(0);
-                countryNID = cityNID;
-//                countryNID = cityNIDs.get(0);
-                getCounty(cityNID);
-                cityOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int option2, int options3) {
-                        etCountry.setVisibility(View.VISIBLE);
-                        etCity.setText(cityName.get(options1));
-                        cityNID = cityNIDs.get(options1);
-                        getCounty(cityNID);
-                    }
-                });
-            } else {
-                etCountry.setText("");
-//                etCountry.setVisibility(View.INVISIBLE);
-//                etCity.setVisibility(View.INVISIBLE);
-//                etCity.setText(cityName.get(options1));
-            }
-        }
-    }
+//    private void getCity(String id) {
+//        if (null == cityListBeen) {
+//            File cityFile = new File(Environment.getExternalStorageDirectory(), Constants.CITYLIST);
+//            cityListBeen = (ArrayList<ProvinceCityArea.CityListBean>) FileUtils.readObj(cityFile);
+//        }
+//        if (cityListBeen.size() > 0) {
+//            cityName = new ArrayList<>();
+//            cityNIDs = new ArrayList<>();
+//            for (ProvinceCityArea.CityListBean cityListBean : cityListBeen) {
+//                if (id.equals(cityListBean.getProvinceId() + "")) {
+//                    cityName.add(cityListBean.getName());
+//                    cityNIDs.add(cityListBean.getId() + "");
+//                }
+//            }
+//            if (cityName.size() > 0) {
+//                Log.d(TAG, "a");
+//                cityOptions.setPicker(cityName);
+//                cityOptions.setTitle("选择市");
+//                cityOptions.setCyclic(false);
+//                cityOptions.setSelectOptions(0);
+//                etCity.setText(cityName.get(0));
+//                cityNID = cityNIDs.get(0);
+//                countryNID = cityNID;
+////                countryNID = cityNIDs.get(0);
+//                getCounty(cityNID);
+//                cityOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+//                    @Override
+//                    public void onOptionsSelect(int options1, int option2, int options3) {
+//                        etCountry.setVisibility(View.VISIBLE);
+//                        etCity.setText(cityName.get(options1));
+//                        cityNID = cityNIDs.get(options1);
+//                        getCounty(cityNID);
+//                    }
+//                });
+//            } else {
+//                etCountry.setText("");
+////                etCountry.setVisibility(View.INVISIBLE);
+////                etCity.setVisibility(View.INVISIBLE);
+////                etCity.setText(cityName.get(options1));
+//            }
+//        }
+//    }
 
     /*
      * 选择区
      * @param id
      */
-    private void getCounty(String id) {
-        if (null == areaListBeen) {
-            File arealFile = new File(Environment.getExternalStorageDirectory(), Constants.AREALIST);
-            areaListBeen = (ArrayList<ProvinceCityArea.AreaListBean>) FileUtils.readObj(arealFile);
-        }
-        Log.d(TAG, id);
-        if (areaListBeen.size() > 0) {
-            countryName = new ArrayList<>();
-            countryNIDs = new ArrayList<>();
-            for (ProvinceCityArea.AreaListBean areaListBean : areaListBeen) {
-                if (id.equals(areaListBean.getCityId() + "")) {
-                    Log.d(TAG, "a");
-                    countryName.add(areaListBean.getName());
-                    countryNIDs.add(areaListBean.getId() + "");
-                }
-            }
-//            if (countryList.size() > 0) {
-            if (countryName.size() > 0) {
-                etCountry.setText(countryName.get(0));
-                countryNID = countryNIDs.get(0);
+//    private void getCounty(String id) {
+//        if (null == areaListBeen) {
+//            File arealFile = new File(Environment.getExternalStorageDirectory(), Constants.AREALIST);
+//            areaListBeen = (ArrayList<ProvinceCityArea.AreaListBean>) FileUtils.readObj(arealFile);
+//        }
+//        Log.d(TAG, id);
+//        if (areaListBeen.size() > 0) {
+//            countryName = new ArrayList<>();
+//            countryNIDs = new ArrayList<>();
+//            for (ProvinceCityArea.AreaListBean areaListBean : areaListBeen) {
+//                if (id.equals(areaListBean.getCityId() + "")) {
+//                    Log.d(TAG, "a");
+//                    countryName.add(areaListBean.getName());
+//                    countryNIDs.add(areaListBean.getId() + "");
+//                }
+//            }
+////            if (countryList.size() > 0) {
+//            if (countryName.size() > 0) {
+//                etCountry.setText(countryName.get(0));
+//                countryNID = countryNIDs.get(0);
+//
+//                countryOptions.setPicker(countryName);
+//                countryOptions.setTitle("选择区");
+//                countryOptions.setCyclic(false);
+//                countryOptions.setSelectOptions(0);
+//                countryOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+//                    @Override
+//                    public void onOptionsSelect(int options1, int option2, int options3) {
+//                        etCountry.setText(countryName.get(options1));
+//                        countryNID = countryNIDs.get(options1);
+//                    }
+//                });
+//            }
+//        }
+//    }
 
-                countryOptions.setPicker(countryName);
-                countryOptions.setTitle("选择区");
-                countryOptions.setCyclic(false);
-                countryOptions.setSelectOptions(0);
-                countryOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                    @Override
-                    public void onOptionsSelect(int options1, int option2, int options3) {
-                        etCountry.setText(countryName.get(options1));
-                        countryNID = countryNIDs.get(options1);
-                    }
-                });
-            }
-        }
-    }
-
-    @OnClick({R.id.et_city, R.id.et_country, R.id.et_province, R.id.tv_choose_bank})
+    @OnClick({R.id.tv_choose_bank})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_choose_bank:
@@ -402,24 +405,24 @@ public class BindCardActivity extends BaseActivity {
                 }
                 bankOptions.show();
                 break;
-            case R.id.et_province:
-                if (SoftInputUtil.isOpen(mContext)) {
-                    SoftInputUtil.closeSoftInput(mContext, etProvince);
-                }
-                provinceOptions.show();
-                break;
-            case R.id.et_city:
-                if (SoftInputUtil.isOpen(mContext)) {
-                    SoftInputUtil.closeSoftInput(mContext, etCity);
-                }
-                cityOptions.show();
-                break;
-            case R.id.et_country:
-                if (SoftInputUtil.isOpen(mContext)) {
-                    SoftInputUtil.closeSoftInput(mContext, etCountry);
-                }
-                countryOptions.show();
-                break;
+//            case R.id.et_province:
+//                if (SoftInputUtil.isOpen(mContext)) {
+//                    SoftInputUtil.closeSoftInput(mContext, etProvince);
+//                }
+//                provinceOptions.show();
+//                break;
+//            case R.id.et_city:
+//                if (SoftInputUtil.isOpen(mContext)) {
+//                    SoftInputUtil.closeSoftInput(mContext, etCity);
+//                }
+//                cityOptions.show();
+//                break;
+//            case R.id.et_country:
+//                if (SoftInputUtil.isOpen(mContext)) {
+//                    SoftInputUtil.closeSoftInput(mContext, etCountry);
+//                }
+//                countryOptions.show();
+//                break;
         }
     }
 
@@ -435,7 +438,11 @@ public class BindCardActivity extends BaseActivity {
             ToastUtils.showMessage("请银行类型");
             return;
         }
-        if ("".equals(provinceNID)) {
+//        if ("".equals(provinceNID)) {
+//            ToastUtils.showMessage("请选择银行开户地");
+//            return;
+//        }
+        if ("-1".equals(addressFrameLayout.getProvinceId())) {
             ToastUtils.showMessage("请选择银行开户地");
             return;
         }
@@ -447,17 +454,22 @@ public class BindCardActivity extends BaseActivity {
             ToastUtils.showMessage("请输入正确的手机号码");
             return;
         }
-        Log.d(TAG, provinceNID + cityNID + countryNID);
+//        Log.d(TAG, provinceNID + cityNID + countryNID);
         Log.d(TAG, bankId + bankName);
 
+
+        if ("-1".equals(addressFrameLayout.getCityId())) {
+            ToastUtils.showMessage("台湾，香港，澳门这些地方不能申请");
+            return;
+        }
         Map<String, String> map = new HashMap<>();
         map.put("userId", MyApplication.getInstance().getUid());
         map.put("bankNo", mCardNumber.replace(" ", ""));
         map.put("bankName", bankName);
         map.put("phone", mPhone);
-        map.put("province_id", provinceNID);
-        map.put("city_id", cityNID);
-        map.put("county_id", countryNID);
+        map.put("province_id", addressFrameLayout.getProvinceId());
+        map.put("city_id", addressFrameLayout.getCityId());
+        map.put("county_id", addressFrameLayout.getCountryId());
 
         MyApplication.getInstance().apiService.addBank(map).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

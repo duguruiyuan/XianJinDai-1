@@ -1,20 +1,12 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/easy_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.jude.easyrecyclerview.EasyRecyclerView
-            android:id="@+id/easy_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_empty="@layout/view_empty"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"
+        app:layout_empty="@layout/view_empty" />
 
-
-
-</LinearLayout>
+</FrameLayout>
