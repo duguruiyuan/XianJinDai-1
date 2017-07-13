@@ -40,7 +40,6 @@
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait" />
@@ -83,6 +82,8 @@
         <activity
             android:name=".activity.LoanActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.AuthorizationActivity" />
+        <activity android:name=".PhoneServertActivity"></activity>
     </application>
 
 </manifest>

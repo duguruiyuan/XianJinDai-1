@@ -1,8 +1,5 @@
 package com.daiqile.xianjindai;
 
-import android.app.Activity;
-
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,21 +7,26 @@ import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.bqs.crawler.cloud.sdk.MnoAction;
+import com.bqs.crawler.cloud.sdk.OnMnoLoginListener;
+import com.bqs.crawler.cloud.sdk.OnSDKInitListener;
+import com.bqs.risk.df.android.OnBqsDFListener;
 import com.daiqile.xianjindai.Fragment.AccountFragment;
 import com.daiqile.xianjindai.Fragment.BorrowingRecordFragment;
 import com.daiqile.xianjindai.Fragment.IndexFragment;
-import com.daiqile.xianjindai.activity.LoginActivity;
-import com.daiqile.xianjindai.base.BaseActivity;
+
 import com.daiqile.xianjindai.utils.ToastUtil;
-import com.daiqile.xianjindai.view.TopBar;
+
 import com.daiqile.xianjindai.view.ViewPagerFix;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import haixianwang.daiqile.com.baiqishi.PermissionUtils;
+import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements OnBqsDFListener {
 
 
     /* @BindView(R.id.topbar)
@@ -34,7 +36,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar mBottomNavigationBar;
 
-    private Activity mActivity;
+    //    private Activity mActivity;
     private long clickTime = 0;
 
     private List<Fragment> fragments = new ArrayList<>();
@@ -43,13 +45,9 @@ public class MainActivity extends BaseActivity {
 
     private int p = 0;
 
-
     @Override
-    public void init() {
-        mActivity = MainActivity.this;
-        // application = (MyApplication) getApplication();
-
-        //设置ViewPager无法左右移动
+    protected void initConfig() {
+        super.initConfig();
 
         mPager.setScrollable(false);
         mPager.setOffscreenPageLimit(2);
@@ -65,33 +63,68 @@ public class MainActivity extends BaseActivity {
         p = 0;*/
         //设置底部导航栏
         mBottomNavigationBar
-                .setMode(BottomNavigationBar.MODE_FIXED)
-                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
+                .setMode(BottomNavigationBar.MODE_FIXED).
+                setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
                 .setActiveColor(R.color.def_reached_color1)
                 .setInActiveColor(R.color.black);
         mBottomNavigationBar.setBarBackgroundColor(R.color.material_white);
-        mBottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.icon_nav_home, getString(R.string.home_page)))
-                .addItem(new BottomNavigationItem(R.mipmap.icon_nav_borrow, getString(R.string.borrow)))
-                .addItem(new BottomNavigationItem(R.mipmap.icon_nav_user, getString(R.string.account)))
-                .setFirstSelectedPosition(0)
-                .initialise();
+        mBottomNavigationBar.addItem(new
+                BottomNavigationItem(R.mipmap.icon_nav_home, getString(R.string.home_page)
+        )).addItem(new BottomNavigationItem(R.mipmap.icon_nav_borrow, getString(R.string.borrow)
+        )).addItem(new BottomNavigationItem(R.mipmap.icon_nav_user, getString(R.string.account))).
+                setFirstSelectedPosition(0).initialise();
+
         mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(int position) {
-                mPager.setCurrentItem(position);
-            }
+                                                        @Override
+                                                        public void onTabSelected(int position) {
+                                                            mPager.setCurrentItem(position);
+                                                        }
 
-            @Override
-            public void onTabUnselected(int position) {
+                                                        @Override
+                                                        public void onTabUnselected(int position) {
 
-            }
+                                                        }
 
-            @Override
-            public void onTabReselected(int position) {
+                                                        @Override
+                                                        public void onTabReselected(int position) {
 
-            }
-        });
+                                                        }
+                                                    }
 
+        );
+
+    }
+
+    @Override
+    protected boolean switchToolbar() {
+        return false;
+    }
+
+//    @Override
+//    public void init() {
+//
+//
+//
+//    }
+
+//    @Override
+//    protected int initLayout() {
+//        return 0;
+//    }
+
+    @Override
+    protected void loadData() {
+
+    }
+
+    @Override
+    public void onSuccess(String s) {
+        Log.d("MainActivity", s + "成");
+    }
+
+    @Override
+    public void onFailure(String s, String s1) {
+        Log.d("MainActivity", s + " " + s1);
     }
 
     private class MainPagerAdapter extends FragmentPagerAdapter {
@@ -109,6 +142,7 @@ public class MainActivity extends BaseActivity {
         public int getCount() {
             return fragments.size();
         }
+
     }
 
     @Override
@@ -124,14 +158,14 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public int getLayoutId() {
+    public int initLayout() {
         return R.layout.activity_main;
     }
 
-    @Override
-    public Activity bindActivity() {
-        return this;
-    }
+//    @Override
+//    public Activity bindActivity() {
+//        return this;
+//    }
 
 
 }

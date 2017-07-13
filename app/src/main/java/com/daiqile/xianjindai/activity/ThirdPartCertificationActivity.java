@@ -1,17 +1,18 @@
 package com.daiqile.xianjindai.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.daiqile.xianjindai.R;
-import com.daiqile.xianjindai.base.BaseActivity;
 import com.daiqile.xianjindai.view.TopBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 
 /**
  * 三方认证
@@ -25,10 +26,12 @@ public class ThirdPartCertificationActivity extends BaseActivity {
     LinearLayout llSesameCreditScoreCertification;
     @BindView(R.id.ll_bank_water_certification)
     LinearLayout llBankWaterCertification;
-    private Activity mActivity;
+//    private Activity mActivity;
+
 
     @Override
-    public void init() {
+    protected void initConfig() {
+        super.initConfig();
         topBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
             @Override
             public void leftClick() {
@@ -42,28 +45,35 @@ public class ThirdPartCertificationActivity extends BaseActivity {
         });
     }
 
+
     @Override
-    public int getLayoutId() {
+    public int initLayout() {
         return R.layout.activity_third_part_certification;
     }
 
-    @Override
-    public Activity bindActivity() {
-        return this;
+    @OnClick({R.id.ll_mobile_phone_operator_authentication, R.id.ll_sesame_credit_score_certification, R.id.ll_bank_water_certification})
+    public void onViewClicked(View view) {
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.ll_mobile_phone_operator_authentication:
+                //手机
+                intent.setClass(mActivity, AuthorizationActivity.class);
+                break;
+            case R.id.ll_sesame_credit_score_certification:
+                intent.setClass(mActivity, AuthorizationActivity.class);
+                //芝麻
+                break;
+            case R.id.ll_bank_water_certification:
+                intent.setClass(mActivity, AuthorizationActivity.class);
+                //银行
+                break;
+        }
+        startActivity(intent);
     }
 
 
+    @Override
+    protected void loadData() {
 
-
-    @OnClick({R.id.ll_mobile_phone_operator_authentication, R.id.ll_sesame_credit_score_certification, R.id.ll_bank_water_certification})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ll_mobile_phone_operator_authentication:
-                break;
-            case R.id.ll_sesame_credit_score_certification:
-                break;
-            case R.id.ll_bank_water_certification:
-                break;
-        }
     }
 }

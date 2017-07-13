@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_phone_servert"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.daiqile.xianjindai.view.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_min_height_56"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        app:leftDrawable="@mipmap/iv_prev"
+        app:title="服务"
+        app:titleTextColor="@color/material_lightBlue_A200"
+        app:titleTextSize="@dimen/appbar_text_size_20" />
+
+    <com.daiqile.xianjindai.view.ClearEditText
+        android:id="@+id/et_servert_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入服务号"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:text=""
+        android:textColor="@color/font_black_content"
+        android:textColorHint="@color/text_gray"
+        android:textCursorDrawable="@drawable/button_select_bg"
+        android:textSize="@dimen/main_body_text_size_14" />
+
+    <Button
+        android:id="@+id/btn_query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登录" />
+
+</LinearLayout>
