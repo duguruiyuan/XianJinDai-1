@@ -60,33 +60,35 @@ public class RetrofitClient {
                         Log.d("RetrofitClient", chain.proceed(request).body().string());
                         try {
                             JSONObject jsonObject = new JSONObject(chain.proceed(request).body().string());
-                            if (!jsonObject.has("success")) {
-                                OkHttpUtils
-                                        .post()//
-                                        .url(Constants.BASE_URL + "xjd/front/user/login")
-                                        .addParams("phone", SPUtils.get(MyApplication.getInstance()
-                                                .getApplicationContext(), Constants.PHONE, "").toString())
-                                        .addParams("password", SPUtils.get(MyApplication.getInstance()
-                                                .getApplicationContext(), Constants.LOGINPASSWORD, "").toString())
-                                        .tag("Tag")
-                                        .build()//
-                                        .execute(new StringCallback() {
-                                            @Override
-                                            public void onError(Call call, Exception e, int id) {
-                                                Log.e("ll_yh", "登录失败404" + e.toString());
-                                            }
-
-                                            @Override
-                                            public void onResponse(String response, int id) {
-                                                User user = GsonUtil.GsonToBean(response, User.class);
-                                                if (user.isSuccess()) {
-                                                    UserPrefs.getInstance().setToken(user.getToken());
-                                                    UserPrefs.getInstance().setUid(user.getUid());
-                                                    MyApplication.getInstance().initLoginParams(user);
-                                                    Log.d("RetrofitClient", "成功");
+                            if (MyApplication.getInstance().isLogin() && !jsonObject.has("success") && jsonObject.has("msg")) {
+                                if ("token不合法或者过期".contains(jsonObject.getString("msg"))) {
+                                    OkHttpUtils
+                                            .post()//
+                                            .url(Constants.BASE_URL + "xjd/front/user/login")
+                                            .addParams("phone", SPUtils.get(MyApplication.getInstance()
+                                                    .getApplicationContext(), Constants.PHONE, "").toString())
+                                            .addParams("password", SPUtils.get(MyApplication.getInstance()
+                                                    .getApplicationContext(), Constants.LOGINPASSWORD, "").toString())
+                                            .tag("Tag")
+                                            .build()//
+                                            .execute(new StringCallback() {
+                                                @Override
+                                                public void onError(Call call, Exception e, int id) {
+                                                    Log.e("ll_yh", "登录失败404" + e.toString());
                                                 }
-                                            }
-                                        });
+
+                                                @Override
+                                                public void onResponse(String response, int id) {
+                                                    User user = GsonUtil.GsonToBean(response, User.class);
+                                                    if (user.isSuccess()) {
+                                                        UserPrefs.getInstance().setToken(user.getToken());
+                                                        UserPrefs.getInstance().setUid(user.getUid());
+                                                        MyApplication.getInstance().initLoginParams(user);
+                                                        Log.d("RetrofitClient", "自动登录成功");
+                                                    }
+                                                }
+                                            });
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
