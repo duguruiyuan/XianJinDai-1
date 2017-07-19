@@ -6,9 +6,9 @@
     android:orientation="vertical">
 
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
 
         <com.jude.easyrecyclerview.EasyRecyclerView
@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             app:layout_empty="@layout/view_empty"/>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
 
 </LinearLayout>

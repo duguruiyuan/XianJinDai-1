@@ -1,5 +1,7 @@
 package com.daiqile.xianjindai.utils;
 
+import android.util.Log;
+
 public final class RxString {
 
     public static String dataReplace(String data) {
@@ -13,6 +15,17 @@ public final class RxString {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static String repBank(String sParam) {
+        Log.d("RxString", sParam.substring(sParam.length() - 4, sParam.length()));
+        return "****"+sParam.substring(sParam.length() - 4, sParam.length());
+//        try {
+//            return sParam.replaceAll("\\d{12}(\\d{4})", "****$2");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "";
+//        }
     }
 
     public static boolean passwordlength(String str) {

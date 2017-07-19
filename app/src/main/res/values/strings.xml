@@ -29,4 +29,9 @@
     <string name="to_load_a_life_in">玩命加载中...</string>
 
 
+    <string name="str_http_network_error">网络不好，请稍后再试</string>
+
+
+
+
 </resources>

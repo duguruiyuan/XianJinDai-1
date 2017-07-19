@@ -7,6 +7,7 @@ import com.daiqile.xianjindai.MyApplication;
 
 import com.daiqile.xianjindai.UserPrefs;
 import com.daiqile.xianjindai.model.User;
+import com.orhanobut.logger.Logger;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -57,7 +58,7 @@ public class RetrofitClient {
                                 .newBuilder()
                                 .addHeader(Constants.TOKEN, MyApplication.getInstance().getToken())
                                 .build();
-                        Log.d("RetrofitClient", chain.proceed(request).body().string());
+                        Logger.json(chain.proceed(request).body().string());
                         try {
                             JSONObject jsonObject = new JSONObject(chain.proceed(request).body().string());
                             if (MyApplication.getInstance().isLogin() && !jsonObject.has("success") && jsonObject.has("msg")) {

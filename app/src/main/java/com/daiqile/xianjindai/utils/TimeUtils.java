@@ -1,8 +1,6 @@
 package com.daiqile.xianjindai.utils;
 
 
-import android.util.Log;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -217,10 +215,11 @@ public final class TimeUtils {
      */
     public static String timedate(String time) {
         SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        @SuppressWarnings("unused")
-        long lcc = Long.valueOf(time);
-        int i = Integer.parseInt(time);
-        String times = sdr.format(new Date(i * 1000L));
+//        @SuppressWarnings("unused")
+//        long lcc = Long.valueOf(time);
+        long i = Long.parseLong(time);
+//        String times = sdr.format(new Date(i * 1000L));
+        String times = sdr.format(new Date(i));
         return times;
 
     }

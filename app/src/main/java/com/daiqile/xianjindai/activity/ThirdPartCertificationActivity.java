@@ -30,6 +30,11 @@ public class ThirdPartCertificationActivity extends BaseActivity {
 
 
     @Override
+    protected boolean switchToolbar() {
+        return false;
+    }
+
+    @Override
     protected void initConfig() {
         super.initConfig();
         topBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
