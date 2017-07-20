@@ -60,11 +60,21 @@ public final class GsonUtil {
      * @return
      */
     public static <T> List<T> GsonToList(String gsonString, Class<T> cls) {
-        List<T> list = null;
-        if (gson != null) {
-            list = gson.fromJson(gsonString, new TypeToken<List<T>>() {
-            }.getType());
+        List<T> list = new ArrayList<>();
+//        if (gson != null) {
+//            list = gson.fromJson(gsonString, new TypeToken<List<T>>() {
+//            }.getType());
+//        }
+
+//        list = gson.fromJson(gsonString,
+//                new TypeToken<List<T>>() {
+//                }.getType());
+
+        JsonArray array = new JsonParser().parse(gsonString).getAsJsonArray();
+        for(JsonElement elem : array){
+            list.add(gson.fromJson(elem, cls));
         }
+
         return list;
     }
 

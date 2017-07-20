@@ -48,4 +48,8 @@ public class Constants {
 
     public static final String APPLY = "apply";
     public static final String DUEMONEY = "duemoney";
+
+    public static final String BEAN = "bean";
+
+    public static final String LOAN_JSON = "loan.json";
 }

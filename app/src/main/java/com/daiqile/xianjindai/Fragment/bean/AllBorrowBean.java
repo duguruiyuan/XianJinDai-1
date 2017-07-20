@@ -222,7 +222,7 @@ public class AllBorrowBean implements BaseBean{
         }
     }
 
-    public static class ListBean {
+    public static class ListBean implements BaseBean{
         /**
          * id : 114
          * userId : 111

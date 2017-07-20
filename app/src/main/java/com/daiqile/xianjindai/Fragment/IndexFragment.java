@@ -2,10 +2,12 @@ package com.daiqile.xianjindai.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -15,15 +17,23 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 
 import com.daiqile.xianjindai.Constants;
+import com.daiqile.xianjindai.Fragment.bean.LoanInfoBean;
+import com.daiqile.xianjindai.Fragment.bean.UserInfoBean;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.activity.BorrowActivity;
 import com.daiqile.xianjindai.activity.LoginActivity;
 
 import com.daiqile.xianjindai.model.Banner;
+import com.daiqile.xianjindai.utils.ApiRequest;
 import com.daiqile.xianjindai.utils.ImageLoader;
 import com.daiqile.xianjindai.view.TopBar;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,6 +43,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseFragment;
+import suangrenduobao.daiqile.com.mvlib.utils.GsonUtil;
+import suangrenduobao.daiqile.com.mvlib.utils.SPUtils;
+import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
 
 //首页
 public class IndexFragment extends BaseFragment {
@@ -50,12 +63,19 @@ public class IndexFragment extends BaseFragment {
 
     private List<Banner.PptsBean.ListBean> imageList;
 
+//    @BindView(R.id.fl_context)
+//    FrameLayout flContext;
 
     @Override
     public void onStart() {
         super.onStart();
         initTopBar();
         initView();
+    }
+
+    @Override
+    protected void initConfig() {
+        super.initConfig();
     }
 
     private void initTopBar() {
@@ -97,6 +117,7 @@ public class IndexFragment extends BaseFragment {
 
             }
         });
+
     }
 
 //    @Override
@@ -143,17 +164,48 @@ public class IndexFragment extends BaseFragment {
      */
     @OnClick({R.id.rl_person, R.id.rl_home_liren/*, R.id.rl_legal_person, R.id.rl_house*/})
     public void onClick(View view) {
+        ApiRequest.request(MyApplication.getInstance().apiService.
+                        requestUserMyinfo(MyApplication.getInstance().getUid(),
+                                SPUtils.get(MyApplication.getInstance(), Constants.PHONE, "").toString(),
+                                SPUtils.get(MyApplication.getInstance(), Constants.LOGINPASSWORD, "").toString()),
+                new Subscriber<UserInfoBean>() {
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+                    }
+
+                    @Override
+                    public void onNext(UserInfoBean userInfoBean) {
+                        UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
+                        if (0 == usersBean.getHasIdcardInfo()) {
+                            ToastUtils.showMessage("请先完成实名认证");
+                        } else if (0 == usersBean.getHasBank()) {
+                            ToastUtils.showMessage("请先绑定银行卡");
+                        } else {
+                            //丽人贷 需要
+                            if (0 == usersBean.getHasPhoto()) {
+                                ToastUtils.showMessage("请先上传银行流水证明");
+                            }
+                        }
+                    }
+                });
         Intent intent = new Intent();
         intent.setClass(mActivity, BorrowActivity.class);
         switch (view.getId()) {
             case R.id.rl_person:
-                intent.putExtra(Constants.LOANTYPE, "1");
+                intent.putExtra(Constants.LOANTYPE, "0");
+                //0
 //                intent = new Intent(mActivity, BorrowActivity.class);
 //                intent.setClass(mActivity,BorrowActivity.class);
                 break;
             case R.id.rl_home_liren:
-                intent.putExtra(Constants.LOANTYPE, "4");
-//                startActivity(new Intent(mActivity, BorrowActivity.class));
+                intent.putExtra(Constants.LOANTYPE, "1");
+                //1
                 break;
 //            case R.id.rl_legal_person:
 //                startActivity(new Intent(mActivity, BorrowActivity.class));
@@ -161,10 +213,10 @@ public class IndexFragment extends BaseFragment {
 //            case R.id.rl_house:
 //                startActivity(new Intent(mActivity, BorrowActivity.class));
 //                break;
-
         }
         startActivity(intent);
     }
+
 
     /**
      * 设置轮播图

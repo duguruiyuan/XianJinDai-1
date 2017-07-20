@@ -1,6 +1,8 @@
 package com.daiqile.xianjindai.utils;
 
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -221,7 +223,6 @@ public final class TimeUtils {
 //        String times = sdr.format(new Date(i * 1000L));
         String times = sdr.format(new Date(i));
         return times;
-
     }
 
     /**
@@ -276,7 +277,13 @@ public final class TimeUtils {
 
     public static String timeslashDay(int time) {
         SimpleDateFormat sdr = new SimpleDateFormat("yyyy/MM/dd");
-        Date curDate = new Date((System.currentTimeMillis() + time * 24 * 3600 * 1000));
+        Date curDate = new Date((System.currentTimeMillis() + time * 24 * 3600 * 1000L));
+        return sdr.format(curDate);
+    }
+
+    public static String timeslashDay(long time,int day) {
+        SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd");
+        Date curDate = new Date((time + day * 24 * 3600 * 1000L));
         return sdr.format(curDate);
     }
 

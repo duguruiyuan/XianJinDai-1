@@ -1,10 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.daiqile.xianjindai.Fragment.IndexFragment">
+    android:orientation="vertical">
 
     <com.daiqile.xianjindai.view.TopBar
         android:id="@+id/topbar"
@@ -35,6 +33,12 @@
                     android:id="@+id/convenient_banner"
                     android:layout_width="match_parent"
                     android:layout_height="150dp" />
+
+
+                <!--<FrameLayout-->
+                    <!--android:id="@+id/fl_context"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
 
                 <RelativeLayout
                     android:id="@+id/rl_person"
@@ -80,7 +84,7 @@
                             android:drawableLeft="@mipmap/icon_person"
                             android:drawablePadding="5dp"
                             android:gravity="center_vertical"
-                            android:text="个人现金" />
+                            android:text="现金贷" />
                         <!--</LinearLayout>-->
 
                         <View
@@ -93,19 +97,19 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="最高(元)         2000" />
+                            android:text="最高(元)         5000" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
-                            android:text="期限                7-14天" />
+                            android:text="期限                7天" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="日息                0.02%-0.05%" />
+                            android:text="费用                20%" />
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -116,6 +120,7 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/divider" />
+
                 <RelativeLayout
                     android:id="@+id/rl_home_liren"
                     android:layout_width="match_parent"
@@ -173,7 +178,12 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="最高(元)         2000" />
+                            android:text="最高(元)         50000" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="期限                12个月" />
 
                         <TextView
                             android:id="@+id/textView4"
@@ -181,12 +191,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
-                            android:text="日息                0.02%-0.05%" />
+                            android:text="费用                3%" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="期限                7-14天" />
 
                     </LinearLayout>
 

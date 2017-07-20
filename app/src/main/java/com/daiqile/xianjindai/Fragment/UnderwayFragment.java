@@ -1,22 +1,30 @@
 package com.daiqile.xianjindai.Fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.daiqile.xianjindai.BorrowingRecordCallback;
 import com.daiqile.xianjindai.Fragment.adapter.AllBorrowAdapter;
 import com.daiqile.xianjindai.Fragment.bean.AllBorrowBean;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 
+import com.daiqile.xianjindai.activity.RepaymentActivity;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,6 +38,7 @@ import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
 /**
  * 借款记录--进行中
  */
+@SuppressLint("ValidFragment")
 public class UnderwayFragment extends BaseFragment {
 
     @BindView(R.id.easy_recycler_view)
@@ -40,6 +49,12 @@ public class UnderwayFragment extends BaseFragment {
     private boolean sIsScrolling;
 
     private int page = 1;
+
+    BorrowingRecordCallback callback;
+
+    public UnderwayFragment(BorrowingRecordCallback callback) {
+        this.callback = callback;
+    }
 
     @NonNull
     @Override
@@ -61,15 +76,16 @@ public class UnderwayFragment extends BaseFragment {
             @Override
             public void onError(Throwable e) {
                 ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+                closeRefreshing();
             }
 
             @Override
             public void onNext(AllBorrowBean allBorrowBean) {
                 List<AllBorrowBean.ListBean> list = allBorrowBean.getList();
                 //判断是否是进行中
-
+                Collections.reverse(list);
                 for (AllBorrowBean.ListBean listBean : list) {
-                    if (listBean.getStatus() == 2) {
+                    if (0 == listBean.getStatus() || 1 == listBean.getStatus() || 2 == listBean.getStatus()) {
                         adapter.add(listBean);
                     }
                 }
@@ -80,7 +96,6 @@ public class UnderwayFragment extends BaseFragment {
                 closeRefreshing();
             }
         });
-
 //        HttpUtils.addSubscription("", "", null, new ApiCallback<AllBorrowBean>() {
 //            @Override
 //            public void onSuccess(AllBorrowBean allBorrowBean) {
@@ -151,10 +166,7 @@ public class UnderwayFragment extends BaseFragment {
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                if (null != callback) {
-//                    callback.getString(String.format("%d", adapter.getItem(position).getId()));
-//                }
-                Toast.makeText(mContext, "点击", Toast.LENGTH_SHORT).show();
+                callback.onCallBack(adapter.getItem(position));
             }
         });
         easyRecyclerView.setAdapter(adapter);

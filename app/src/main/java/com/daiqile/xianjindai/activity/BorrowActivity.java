@@ -9,19 +9,26 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.daiqile.xianjindai.Constants;
+import com.daiqile.xianjindai.Fragment.bean.LoanInfoBean;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.utils.TimeUtils;
 import com.daiqile.xianjindai.view.TopBar;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 
 import butterknife.OnClick;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
+import suangrenduobao.daiqile.com.mvlib.utils.GsonUtil;
 
+import static com.daiqile.xianjindai.R.id.tv_money_max;
 import static com.daiqile.xianjindai.utils.TimeUtils.timeslashDay;
 
 public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener {
@@ -49,7 +56,7 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
             TextView tvSelectMoney;
     @BindView(R.id.tv_money_min)//金额的最小值
             TextView tvMoneyMin;
-    @BindView(R.id.tv_money_max)//金额的最大值
+    @BindView(tv_money_max)//金额的最大值
             TextView tvMoneyMax;
     @BindView(R.id.seekbar_day)//贷款天数的进度条
             SeekBar seekbarDay;
@@ -92,6 +99,7 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 //
 //    }
 
+
     @OnClick(R.id.btn_borrow)
     public void onClick(View view) {
         switch (view.getId()) {
@@ -103,7 +111,6 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 //                String.format("%s-%s", TimeUtils.timeslashData(), TimeUtils.timeslashDay(defaultNumber));
 //                map.put(Constants.TERM, defaultNumber + "");
                 map.put(Constants.TERM, String.format("%s-%s", TimeUtils.timeslashData(), TimeUtils.timeslashDay(defaultNumber)));
-
                 map.put(Constants.LOANTYPE, loanType);
                 map.put(Constants.POUNDAGE, proceduresMoney.getText().toString().trim().replace("¥", ""));
 //                map.put(Constants.DUEMONEY, );
@@ -112,7 +119,6 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
                 break;
         }
     }
-
 
     @Override
     protected int initLayout() {
@@ -123,13 +129,46 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
     String loanType;
 
+    LoanInfoBean loanInfoBean;
+
+    List<LoanInfoBean> loanInfoBseens;
+
+    private void getLoanInfoBean() {
+        try {
+            InputStreamReader inputReader = new InputStreamReader(getAssets().open(Constants.LOAN_JSON));
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line = "";
+            String result = "";
+            while ((line = bufReader.readLine()) != null) {
+                result += line;
+            }
+            loanInfoBseens = GsonUtil.GsonToList(result, LoanInfoBean.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void loadData() {
-
         if (getIntent().hasExtra(Constants.LOANTYPE)) {
             loanType = getIntent().getStringExtra(Constants.LOANTYPE);
+
+            loanInfoBean = loanInfoBseens.get(Integer.parseInt(loanType));
+            if ("0".equals(loanType)) {
+                loanType = "1";
+            } else if ("0".equals(loanType)) {
+                loanType = "4";
+            }
             Log.d("BorrowActivity", loanType);
         }
+
+        defaultNumber = Integer.parseInt(loanInfoBean.getTime_limit());
+
+        tvMoneyMax.setText(loanInfoBean.getMax_money() + "元");
+        tvDayMax.setText(loanInfoBean.getTime_limit() + "天");
+
+        tvMoneyMin.setText(loanInfoBean.getMin_money() + "");
+        tvDayMin.setText(loanInfoBean.getMin_time());
 
         topBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
             @Override
@@ -139,7 +178,6 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
             @Override
             public void rightClick() {
-
             }
         });
         //借款日  500 1000 1500 2000
@@ -149,8 +187,12 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
         borrowDay.setText(defaultNumber + "天");
 
+        tvSelectDay.setText(defaultNumber + "天");
         seekbarMoney.setOnSeekBarChangeListener(this);
         seekbarDay.setOnSeekBarChangeListener(this);
+
+        tvSelectMoney.setText(loanInfoBean.getMax_money() + "元");
+        tvBorrowMoney.setText(loanInfoBean.getMax_money() + "元");
     }
 
     @Override
@@ -163,6 +205,12 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     }
 
     @Override
+    protected void initConfig() {
+        super.initConfig();
+        getLoanInfoBean();
+    }
+
+    @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
@@ -170,13 +218,23 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     public void onStopTrackingTouch(SeekBar seekBar) {
         int progress = seekBar.getProgress();
         if (R.id.seekbar_money == seekBar.getId()) {
-            seekBar.setProgress(progress / 25 == 3 ? 100 : (progress / 25 * 33));
-            tvSelectMoney.setText(String.format("%d元", 500 * ((progress / 25 + 1))));
-            tvBorrowMoney.setText(String.format("¥%d", 500 * ((progress / 25 + 1))));
+            int i = 100 / (loanInfoBean.getMax_money() / loanInfoBean.getMin_money());//20
+            Log.d("BorrowActivity", "progress/i:" + (progress / i));
+
+            seekBar.setProgress(progress / i == 100 / i ? 100 : progress / i * i);
+
+//            tvSelectMoney.setText(String.format("%d元", loanInfoBean.getMin_money() * (progress / i + 1)));
+//            tvBorrowMoney.setText(String.format("¥%d", loanInfoBean.getMin_money() * (progress / i + 1)));
+
+            tvSelectMoney.setText(String.format("%d元", loanInfoBean.getMin_money() * (progress / i==0?progress / i+ 1:progress / i)));
+            tvBorrowMoney.setText(String.format("¥%d", loanInfoBean.getMin_money() * (progress / i==0?progress / i+ 1:progress / i)));
 
         } else if (R.id.seekbar_day == seekBar.getId()) {
-            defaultNumber = progress > 50 ? 14 : 7;
+            defaultNumber = progress > 50 ? Integer.parseInt(loanInfoBean.getTime_limit().replace("天", "")) :
+                    Integer.parseInt(loanInfoBean.getMin_time().replace("天", ""));
+
             seekBar.setProgress(progress > 50 ? 100 : 0);
+
             borrowDay.setText(defaultNumber + "天");
             tvSelectDay.setText(defaultNumber + "天");
 

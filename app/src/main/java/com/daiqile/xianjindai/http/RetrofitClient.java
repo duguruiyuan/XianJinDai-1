@@ -58,11 +58,13 @@ public class RetrofitClient {
                                 .newBuilder()
                                 .addHeader(Constants.TOKEN, MyApplication.getInstance().getToken())
                                 .build();
-                        Logger.json(chain.proceed(request).body().string());
                         try {
-                            JSONObject jsonObject = new JSONObject(chain.proceed(request).body().string());
-                            if (MyApplication.getInstance().isLogin() && !jsonObject.has("success") && jsonObject.has("msg")) {
-                                if ("token不合法或者过期".contains(jsonObject.getString("msg"))) {
+                            String string = chain.proceed(request).body().string();
+                            JSONObject jsonObject = new JSONObject(string);
+                            Logger.json(string);
+                            if (MyApplication.getInstance().isLogin() && jsonObject.has("success") && jsonObject.has("msg")) {
+                                //15726818334 123456
+                                if (jsonObject.getString("msg").contains("token") && !jsonObject.getBoolean("success")) {
                                     OkHttpUtils
                                             .post()//
                                             .url(Constants.BASE_URL + "xjd/front/user/login")
@@ -75,11 +77,12 @@ public class RetrofitClient {
                                             .execute(new StringCallback() {
                                                 @Override
                                                 public void onError(Call call, Exception e, int id) {
-                                                    Log.e("ll_yh", "登录失败404" + e.toString());
+                                                    Log.e("RetrofitClient", "登录失败404" + e.toString());
                                                 }
 
                                                 @Override
                                                 public void onResponse(String response, int id) {
+                                                    Log.d("RetrofitClient", response);
                                                     User user = GsonUtil.GsonToBean(response, User.class);
                                                     if (user.isSuccess()) {
                                                         UserPrefs.getInstance().setToken(user.getToken());
@@ -89,6 +92,8 @@ public class RetrofitClient {
                                                     }
                                                 }
                                             });
+                                } else if (jsonObject.getString("msg").contains("手机号或密码错误") && !jsonObject.has("success")) {
+                                    Log.d("RetrofitClient", "手机号或密码错误");
                                 }
                             }
                         } catch (JSONException e) {

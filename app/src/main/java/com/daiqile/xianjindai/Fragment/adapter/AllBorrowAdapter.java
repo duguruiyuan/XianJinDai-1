@@ -1,18 +1,19 @@
 package com.daiqile.xianjindai.Fragment.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.daiqile.xianjindai.DealActivity;
 import com.daiqile.xianjindai.Fragment.bean.AllBorrowBean;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.utils.RxString;
 import com.daiqile.xianjindai.utils.TimeUtils;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-
-import butterknife.BindView;
 
 /**
  * Created by zkw on 2017/7/19.
@@ -55,11 +56,16 @@ public class AllBorrowAdapter extends RecyclerArrayAdapter<AllBorrowBean.ListBea
             super.setData(data);
 
             tvBankName.setText(data.getBankName() + " " + RxString.repBank(data.getBankNo()));
-            tvBankMoney.setText("¥1000");
+            tvBankMoney.setText("￥" + data.getLoanAmount());
 
-            tvBorrowTime.setText(TimeUtils.timedate(data.getApplyTime()+""));
-            tvRepaymentTime.setText(TimeUtils.timedate(data.getRepayTime()+""));
+            tvBorrowTime.setText(TimeUtils.timedate(data.getApplyTime() + ""));
+//            if ("-2793600000".equals(data.getLoanTime() + "")) {
+//                tvMoneyTime.setText("未打款"); //未打款
+//            } else {
+//            }
+            tvMoneyTime.setText("-2793600000".equals(data.getLoanTime() + "") ? "未打款" : TimeUtils.timedate(data.getLoanTime() + ""));
             String status = null;
+            tvRepaymentTime.setText(TimeUtils.timeslashDay(data.getApplyTime(), data.getTerm()));
             switch (data.getStatus()) {
                 case 0:
                     status = "申请";
@@ -81,7 +87,14 @@ public class AllBorrowAdapter extends RecyclerArrayAdapter<AllBorrowBean.ListBea
                     break;
             }
             tvMoneyStatus.setText(status);
-            tvMoneyTime.setText(status);
+
+
+            btnProtocol.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getContext().startActivity(new Intent(getContext(), DealActivity.class));
+                }
+            });
         }
     }
 }

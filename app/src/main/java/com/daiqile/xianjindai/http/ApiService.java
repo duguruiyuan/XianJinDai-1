@@ -2,6 +2,7 @@ package com.daiqile.xianjindai.http;
 
 import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.Fragment.bean.AllBorrowBean;
+import com.daiqile.xianjindai.Fragment.bean.UserInfoBean;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.Result;
 import com.daiqile.xianjindai.activity.bean.BankInfoList;
@@ -82,11 +83,18 @@ public interface ApiService {
     Observable<Result> updateRelative(@FieldMap Map<String, String> map);
 
 
-
     //借款记录 全部
     @POST("xjd/front/loan/findUserLoan")
     @FormUrlEncoded
     Observable<AllBorrowBean> requestAllBorrow(@Field("id") String userId);
+
+
+    //个人信息列表
+    @POST("xjd/front/user/myInfo")
+    @FormUrlEncoded
+    Observable<UserInfoBean> requestUserMyinfo(@Field("userId") String userId,
+                                               @Field("phone") String phone,
+                                               @Field("loginPassword") String loginPassword);
 
 
 }

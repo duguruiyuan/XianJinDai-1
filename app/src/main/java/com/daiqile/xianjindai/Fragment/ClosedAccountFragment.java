@@ -17,6 +17,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -60,15 +61,15 @@ public class ClosedAccountFragment extends BaseFragment {
 
             @Override
             public void onError(Throwable e) {
-                ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+                ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));closeRefreshing();
             }
 
             @Override
             public void onNext(AllBorrowBean allBorrowBean) {
                 List<AllBorrowBean.ListBean> list = allBorrowBean.getList();
-
+                Collections.reverse(list);
                 for (AllBorrowBean.ListBean listBean : list) {
-                    if (listBean.getStatus() == 2) {
+                    if (3 == listBean.getStatus() || -1 == listBean.getStatus()) {
                         adapter.add(listBean);
                     }
                 }
@@ -148,15 +149,15 @@ public class ClosedAccountFragment extends BaseFragment {
         itemDecoration.setDrawLastItem(true);
         easyRecyclerView.addItemDecoration(itemDecoration);
 
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-//                if (null != callback) {
-//                    callback.getString(String.format("%d", adapter.getItem(position).getId()));
-//                }
-                Toast.makeText(mContext, "点击", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+////                if (null != callback) {
+////                    callback.getString(String.format("%d", adapter.getItem(position).getId()));
+////                }
+//                Toast.makeText(mContext, "点击", Toast.LENGTH_SHORT).show();
+//            }
+//        });
         easyRecyclerView.setAdapter(adapter);
         easyRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

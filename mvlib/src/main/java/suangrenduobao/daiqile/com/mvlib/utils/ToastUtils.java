@@ -33,6 +33,15 @@ public final class ToastUtils {
             }
     }
 
+    public static void showMessage(@NonNull CharSequence message, int gravity) {
+        if (isShow)
+            try {
+                ToastUtils.showMessage(ToastUtils.mContext, message, gravity);
+            } catch (Exception e) {
+                LogUtils.d("Exception", e.toString());
+            }
+    }
+
     public static void showMessage(@IdRes @NonNull int message) {
         if (isShow)
             try {
@@ -50,6 +59,22 @@ public final class ToastUtils {
             try {
                 if (toast == null) {
                     toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
+                } else {
+                    toast.setText(message);
+                }
+            } catch (Exception e) {
+                LogUtils.d("Exception", e.toString());
+            }
+            toast.show();
+        }
+    }
+
+    public static void showMessage(Context context, @NonNull CharSequence message, int gravity) {
+        if (isShow) {
+            try {
+                if (toast == null) {
+                    toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
+                    toast.setGravity(gravity, 0, 0);
                 } else {
                     toast.setText(message);
                 }

@@ -96,9 +96,9 @@ public class MyApplication extends BaseApp {
 //            phone = user.getPhone();
 //            loginPassword = user.getLoginPassword();
         }
-        Log.d("MyApplication", uid + flag);
-        Log.d("MyApplication", token);
-        Log.d("MyApplication", phone + " " + loginPassword);
+//        Log.d("MyApplication", uid + flag);
+//        Log.d("MyApplication", token);
+//        Log.d("MyApplication", phone + " " + loginPassword);
     }
 
     public void setPhone(String phone) {
@@ -157,6 +157,7 @@ public class MyApplication extends BaseApp {
     }
 
     public boolean isLogin() {
+        Log.d("MyApplication", "flag:" + flag);
         return flag;
     }
 

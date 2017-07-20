@@ -83,7 +83,9 @@
             android:name=".activity.LoanActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.AuthorizationActivity" />
-        <activity android:name=".PhoneServertActivity"></activity>
+        <activity android:name=".PhoneServertActivity" />
+        <activity android:name=".DealActivity" />
+        <activity android:name=".activity.RepaymentActivity"></activity>
     </application>
 
 </manifest>
