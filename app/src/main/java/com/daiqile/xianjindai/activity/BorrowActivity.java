@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -193,6 +194,8 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
         tvSelectMoney.setText(loanInfoBean.getMax_money() + "元");
         tvBorrowMoney.setText(loanInfoBean.getMax_money() + "元");
+
+        proceduresMoney.setText("¥" + loanInfoBean.getMax_money() * Double.parseDouble(loanInfoBean.getLoan_expenses().replace("%", "")) / 100);
     }
 
     @Override
@@ -218,26 +221,29 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     public void onStopTrackingTouch(SeekBar seekBar) {
         int progress = seekBar.getProgress();
         if (R.id.seekbar_money == seekBar.getId()) {
-            int i = 100 / (loanInfoBean.getMax_money() / loanInfoBean.getMin_money());//20
-            Log.d("BorrowActivity", "progress/i:" + (progress / i));
+            int i = 100 / (loanInfoBean.getMax_money() / loanInfoBean.getMin_money() - 1);//20
+            if (progress == 100) {
+                seekBar.setProgress(100);
+            } else {
+                seekBar.setProgress(progress / i * i);
+            }
+//            tvSelectMoney.setText(String.format("%d元", loanInfoBean.getMin_money() * (progress / i == 0 ? progress / i + 1 : progress / i)));
+//            tvBorrowMoney.setText(String.format("¥%d", loanInfoBean.getMin_money() * (progress / i == 0 ? progress / i + 1 : progress / i)));
 
-            seekBar.setProgress(progress / i == 100 / i ? 100 : progress / i * i);
+            Log.d("BorrowActivity", "progress / i + 1:" + (progress / i + 1));
 
-//            tvSelectMoney.setText(String.format("%d元", loanInfoBean.getMin_money() * (progress / i + 1)));
-//            tvBorrowMoney.setText(String.format("¥%d", loanInfoBean.getMin_money() * (progress / i + 1)));
+            tvSelectMoney.setText(String.format("%d元", loanInfoBean.getMin_money() * (progress / i + 1)));
+            tvBorrowMoney.setText(String.format("¥%d", loanInfoBean.getMin_money() * (progress / i + 1)));
 
-            tvSelectMoney.setText(String.format("%d元", loanInfoBean.getMin_money() * (progress / i==0?progress / i+ 1:progress / i)));
-            tvBorrowMoney.setText(String.format("¥%d", loanInfoBean.getMin_money() * (progress / i==0?progress / i+ 1:progress / i)));
+            proceduresMoney.setText("¥" + loanInfoBean.getMin_money() * (progress / i + 1) * Double.parseDouble(loanInfoBean.getLoan_expenses().replace("%", "")) / 100);
+
 
         } else if (R.id.seekbar_day == seekBar.getId()) {
             defaultNumber = progress > 50 ? Integer.parseInt(loanInfoBean.getTime_limit().replace("天", "")) :
                     Integer.parseInt(loanInfoBean.getMin_time().replace("天", ""));
-
             seekBar.setProgress(progress > 50 ? 100 : 0);
-
             borrowDay.setText(defaultNumber + "天");
             tvSelectDay.setText(defaultNumber + "天");
-
             tvRepaymentDay.setText(String.format("还款日:%s", timeslashDay(defaultNumber)));
         }
 

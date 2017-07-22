@@ -39,6 +39,7 @@ public class BorrowConfirmActivity extends BaseActivity {
     TextView tvProcedure;
 
 
+
     @Override
     protected boolean switchToolbar() {
         return false;
@@ -80,7 +81,7 @@ public class BorrowConfirmActivity extends BaseActivity {
             tvBorrowDay.setText(term);
             tvProcedure.setText(poundage);
 
-            tvDueMoney.setText((Integer.parseInt(loanAmount) + Integer.parseInt(poundage)) + "");
+            tvDueMoney.setText((Double.parseDouble(loanAmount.replace("元", "")) + Double.parseDouble(poundage.replace("元", ""))) + "");
         }
 
     }

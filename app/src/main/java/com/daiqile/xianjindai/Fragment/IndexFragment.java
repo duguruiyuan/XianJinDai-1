@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -177,6 +178,7 @@ public class IndexFragment extends BaseFragment {
                     @Override
                     public void onError(Throwable e) {
                         ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+                        Log.d("IndexFragment", "e:" + e.toString());
                     }
 
                     @Override
@@ -184,12 +186,15 @@ public class IndexFragment extends BaseFragment {
                         UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
                         if (0 == usersBean.getHasIdcardInfo()) {
                             ToastUtils.showMessage("请先完成实名认证");
+
                         } else if (0 == usersBean.getHasBank()) {
                             ToastUtils.showMessage("请先绑定银行卡");
+
                         } else {
                             //丽人贷 需要
-                            if (0 == usersBean.getHasPhoto()) {
+                            if (TextUtils.isEmpty(usersBean.getHasPhoto())) {
                                 ToastUtils.showMessage("请先上传银行流水证明");
+
                             }
                         }
                     }
