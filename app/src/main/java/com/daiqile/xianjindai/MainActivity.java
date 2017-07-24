@@ -1,6 +1,5 @@
 package com.daiqile.xianjindai;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,14 +8,12 @@ import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.bqs.crawler.cloud.sdk.MnoAction;
-import com.bqs.crawler.cloud.sdk.OnMnoLoginListener;
-import com.bqs.crawler.cloud.sdk.OnSDKInitListener;
 import com.bqs.risk.df.android.OnBqsDFListener;
 import com.daiqile.xianjindai.Fragment.AccountFragment;
 import com.daiqile.xianjindai.Fragment.BorrowingRecordFragment;
 import com.daiqile.xianjindai.Fragment.IndexFragment;
 
+import com.daiqile.xianjindai.activity.LoginActivity;
 import com.daiqile.xianjindai.utils.ToastUtil;
 
 import com.daiqile.xianjindai.view.ViewPagerFix;
@@ -81,17 +78,22 @@ public class MainActivity extends BaseActivity implements OnBqsDFListener {
         mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
                                                         @Override
                                                         public void onTabSelected(int position) {
-                                                            mPager.setCurrentItem(position);
+                                                            if (MyApplication.getInstance().isLogin()) {
+                                                                mPager.setCurrentItem(position);
+                                                            } else {
+                                                                Log.d("MainActivity", "a");
+                                                                startActivity(new Intent(mActivity, LoginActivity.class));
+//                                                                mBottomNavigationBar.selectTab(0);
+                                                                mBottomNavigationBar.setFirstSelectedPosition(0).initialise();
+                                                            }
                                                         }
 
                                                         @Override
                                                         public void onTabUnselected(int position) {
-
                                                         }
 
                                                         @Override
                                                         public void onTabReselected(int position) {
-
                                                         }
                                                     }
 

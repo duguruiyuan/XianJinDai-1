@@ -3,6 +3,7 @@ package com.daiqile.xianjindai.activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.MyApplication;
@@ -57,7 +58,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void rightClick() {
-                startActivity(new Intent(mContext, RegistAvtivity.class));
+//                startActivity(new Intent(mContext, RegistAvtivity.class));
             }
         });
     }
@@ -116,7 +117,7 @@ public class LoginActivity extends BaseActivity {
 
     private static final String TAG = "LoginActivity";
 
-    @OnClick({R.id.tv_forget, R.id.btn_login})
+    @OnClick({R.id.tv_forget, R.id.btn_login, R.id.tv_registered})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_forget:
@@ -124,6 +125,10 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btn_login:
                 login();
+                break;
+
+            case R.id.tv_registered:
+                startActivity(new Intent(mContext, RegistAvtivity.class));
                 break;
         }
     }

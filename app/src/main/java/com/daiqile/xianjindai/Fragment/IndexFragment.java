@@ -113,7 +113,7 @@ public class IndexFragment extends BaseFragment {
             public void onItemClick(int position) {
                 if (imageList.size() > 0) {
                     // TODO: 2017/7/10 图片的点击跳转
-                    Log.d("IndexFragment", imageList.get(position).getId() + "");
+                    Log.d("IndexFragment", imageList.get(position).getId() + "轮播图点击");
                 }
 
             }
@@ -194,32 +194,36 @@ public class IndexFragment extends BaseFragment {
                             //丽人贷 需要
                             if (TextUtils.isEmpty(usersBean.getHasPhoto())) {
                                 ToastUtils.showMessage("请先上传银行流水证明");
-
                             }
                         }
                     }
                 });
         Intent intent = new Intent();
         intent.setClass(mActivity, BorrowActivity.class);
-        switch (view.getId()) {
-            case R.id.rl_person:
-                intent.putExtra(Constants.LOANTYPE, "0");
-                //0
+        if (MyApplication.getInstance().isLogin()) {
+            switch (view.getId()) {
+                case R.id.rl_person:
+                    intent.putExtra(Constants.LOANTYPE, "0");
+                    //0
 //                intent = new Intent(mActivity, BorrowActivity.class);
 //                intent.setClass(mActivity,BorrowActivity.class);
-                break;
-            case R.id.rl_home_liren:
-                intent.putExtra(Constants.LOANTYPE, "1");
-                //1
-                break;
+                    break;
+                case R.id.rl_home_liren:
+                    intent.putExtra(Constants.LOANTYPE, "1");
+                    //1
+                    break;
 //            case R.id.rl_legal_person:
 //                startActivity(new Intent(mActivity, BorrowActivity.class));
 //                break;
 //            case R.id.rl_house:
 //                startActivity(new Intent(mActivity, BorrowActivity.class));
 //                break;
+            }
+            startActivity(intent);
+        } else {
+            startActivity(new Intent(mActivity, LoginActivity.class));
         }
-        startActivity(intent);
+
     }
 
 

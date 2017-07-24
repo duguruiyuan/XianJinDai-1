@@ -8,6 +8,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
+    <!--app:rightDrawable="@mipmap/regist"-->
     <com.daiqile.xianjindai.view.TopBar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
@@ -15,14 +16,13 @@
         android:background="@color/material_white"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         app:leftDrawable="@mipmap/iv_prev"
-        app:rightDrawable="@mipmap/regist"
         app:title="登录"
         app:titleTextColor="@color/material_lightBlue_A200"
         app:titleTextSize="@dimen/appbar_text_size_20" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="5dp"
         android:background="@drawable/divider" />
 
     <com.daiqile.xianjindai.view.ClearEditText
@@ -42,6 +42,11 @@
         android:textColorHint="@color/cccccc"
         android:textCursorDrawable="@null"
         android:textSize="@dimen/small_title_text_size_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider" />
 
     <com.daiqile.xianjindai.view.ClearEditText
         android:id="@+id/et_password"
@@ -74,14 +79,29 @@
         android:textColor="@color/white"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_forget"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="5dp"
-        android:text="忘记密码？"
-        android:textColor="@color/blue" />
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_registered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="5dp"
+            android:text="注册"
+            android:textColor="@color/blue" />
+
+        <TextView
+            android:id="@+id/tv_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:text="忘记密码？"
+            android:textColor="@color/blue" />
+    </RelativeLayout>
 
 
     <!--<LinearLayout-->
