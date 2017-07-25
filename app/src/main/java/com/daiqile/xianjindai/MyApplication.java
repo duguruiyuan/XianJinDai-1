@@ -69,6 +69,7 @@ public class MyApplication extends BaseApp {
             StrictMode.setVmPolicy(builder.build());
             builder.detectFileUriExposure();
         }
+        Log.d("MyApplication", uid);
     }
 
     public void initLoginParams(User user) {
@@ -149,6 +150,7 @@ public class MyApplication extends BaseApp {
     }
 
     public String getUid() {
+        Log.d("MyApplication", uid);
         return uid;
     }
 
@@ -157,7 +159,6 @@ public class MyApplication extends BaseApp {
     }
 
     public boolean isLogin() {
-        Log.d("MyApplication", "flag:" + flag);
         return flag;
     }
 

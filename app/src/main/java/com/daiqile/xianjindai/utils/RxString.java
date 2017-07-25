@@ -18,7 +18,7 @@ public final class RxString {
     }
 
     public static String repBank(String sParam) {
-        Log.d("RxString", sParam.substring(sParam.length() - 4, sParam.length()));
+//        Log.d("RxString", sParam.substring(sParam.length() - 4, sParam.length()));
         return "****"+sParam.substring(sParam.length() - 4, sParam.length());
 //        try {
 //            return sParam.replaceAll("\\d{12}(\\d{4})", "****$2");

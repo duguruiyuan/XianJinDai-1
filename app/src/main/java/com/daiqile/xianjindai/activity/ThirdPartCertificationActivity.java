@@ -1,8 +1,6 @@
 package com.daiqile.xianjindai.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -10,7 +8,6 @@ import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.view.TopBar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 

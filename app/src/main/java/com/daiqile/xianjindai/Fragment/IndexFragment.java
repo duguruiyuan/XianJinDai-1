@@ -25,6 +25,7 @@ import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.activity.BorrowActivity;
 import com.daiqile.xianjindai.activity.LoginActivity;
 
+import com.daiqile.xianjindai.activity.ThirdPartCertificationActivity;
 import com.daiqile.xianjindai.model.Banner;
 import com.daiqile.xianjindai.utils.ApiRequest;
 import com.daiqile.xianjindai.utils.ImageLoader;
@@ -164,62 +165,52 @@ public class IndexFragment extends BaseFragment {
      * 点击事件 1 个人现金 2:法人贷 3:房产贷 4:丽人贷
      */
     @OnClick({R.id.rl_person, R.id.rl_home_liren/*, R.id.rl_legal_person, R.id.rl_house*/})
-    public void onClick(View view) {
-        ApiRequest.request(MyApplication.getInstance().apiService.
-                        requestUserMyinfo(MyApplication.getInstance().getUid(),
-                                SPUtils.get(MyApplication.getInstance(), Constants.PHONE, "").toString(),
-                                SPUtils.get(MyApplication.getInstance(), Constants.LOGINPASSWORD, "").toString()),
-                new Subscriber<UserInfoBean>() {
+    public void onClick(final View view) {
+        if (MyApplication.getInstance().isLogin()) {
+            ApiRequest.request(MyApplication.getInstance().apiService.
+                            requestUserMyinfo(MyApplication.getInstance().getUid(),
+                                    SPUtils.get(MyApplication.getInstance(), Constants.PHONE, "").toString(),
+                                    SPUtils.get(MyApplication.getInstance(), Constants.LOGINPASSWORD, "").toString()),
+                    new Subscriber<UserInfoBean>() {
 
-                    @Override
-                    public void onCompleted() {
-                    }
+                        @Override
+                        public void onCompleted() {
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
-                        Log.d("IndexFragment", "e:" + e.toString());
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+                            Log.d("IndexFragment", "e:" + e.toString());
+                        }
 
-                    @Override
-                    public void onNext(UserInfoBean userInfoBean) {
-                        UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
-                        if (0 == usersBean.getHasIdcardInfo()) {
-                            ToastUtils.showMessage("请先完成实名认证");
-
-                        } else if (0 == usersBean.getHasBank()) {
-                            ToastUtils.showMessage("请先绑定银行卡");
-
-                        } else {
-                            //丽人贷 需要
-                            if (TextUtils.isEmpty(usersBean.getHasPhoto())) {
+                        @Override
+                        public void onNext(UserInfoBean userInfoBean) {
+                            UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
+                            if (0 == usersBean.getHasIdcardInfo()) {
+                                ToastUtils.showMessage("请先完成手机运营商认证");
+                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+                            } else if (0 == usersBean.getHasBank()) {
+                                ToastUtils.showMessage("请先绑定银行卡");
+                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+                            } else if (view.getId() == R.id.rl_home_liren && TextUtils.isEmpty(usersBean.getHasPhoto())) {//丽人贷 需要
                                 ToastUtils.showMessage("请先上传银行流水证明");
+                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+                            } else {
+                                Intent intent = new Intent();
+                                intent.setClass(mActivity, BorrowActivity.class);
+                                switch (view.getId()) {
+                                    case R.id.rl_person:
+                                        intent.putExtra(Constants.LOANTYPE, "0");
+                                        break;
+                                    case R.id.rl_home_liren:
+                                        intent.putExtra(Constants.LOANTYPE, "1");
+                                        break;
+                                }
+                                startActivity(intent);
                             }
                         }
-                    }
-                });
-        Intent intent = new Intent();
-        intent.setClass(mActivity, BorrowActivity.class);
-        if (MyApplication.getInstance().isLogin()) {
-            switch (view.getId()) {
-                case R.id.rl_person:
-                    intent.putExtra(Constants.LOANTYPE, "0");
-                    //0
-//                intent = new Intent(mActivity, BorrowActivity.class);
-//                intent.setClass(mActivity,BorrowActivity.class);
-                    break;
-                case R.id.rl_home_liren:
-                    intent.putExtra(Constants.LOANTYPE, "1");
-                    //1
-                    break;
-//            case R.id.rl_legal_person:
-//                startActivity(new Intent(mActivity, BorrowActivity.class));
-//                break;
-//            case R.id.rl_house:
-//                startActivity(new Intent(mActivity, BorrowActivity.class));
-//                break;
-            }
-            startActivity(intent);
+                    });
+
         } else {
             startActivity(new Intent(mActivity, LoginActivity.class));
         }

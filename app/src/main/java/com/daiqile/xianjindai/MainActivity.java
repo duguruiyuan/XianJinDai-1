@@ -78,14 +78,14 @@ public class MainActivity extends BaseActivity implements OnBqsDFListener {
         mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
                                                         @Override
                                                         public void onTabSelected(int position) {
-                                                            if (MyApplication.getInstance().isLogin()) {
-                                                                mPager.setCurrentItem(position);
-                                                            } else {
-                                                                Log.d("MainActivity", "a");
-                                                                startActivity(new Intent(mActivity, LoginActivity.class));
-//                                                                mBottomNavigationBar.selectTab(0);
-                                                                mBottomNavigationBar.setFirstSelectedPosition(0).initialise();
-                                                            }
+//                                                            if (MyApplication.getInstance().isLogin()) {
+                                                            mPager.setCurrentItem(position);
+//                                                            } else {
+//                                                                Log.d("MainActivity", "a");
+//                                                                startActivity(new Intent(mActivity, LoginActivity.class));
+////                                                                mBottomNavigationBar.selectTab(0);
+//                                                                mBottomNavigationBar.setFirstSelectedPosition(0).initialise();
+//                                                            }
                                                         }
 
                                                         @Override

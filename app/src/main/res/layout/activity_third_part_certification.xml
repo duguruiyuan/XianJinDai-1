@@ -16,6 +16,11 @@
         app:titleTextColor="@color/material_lightBlue_A200"
         app:titleTextSize="@dimen/appbar_text_size_20" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/divider"/>
+
     <LinearLayout
         android:id="@+id/ll_mobile_phone_operator_authentication"
         android:layout_width="match_parent"
@@ -42,6 +47,11 @@
             android:src="@mipmap/icon_right" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider" />
 
     <LinearLayout
         android:id="@+id/ll_sesame_credit_score_certification"
@@ -72,6 +82,11 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider" />
+
     <LinearLayout
         android:id="@+id/ll_bank_water_certification"
         android:layout_width="match_parent"
@@ -84,8 +99,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="银行流水认证"
+            android:text="银行流水证明"
             android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="(丽人贷用户要填写)"
+            android:textColor="#d3d3d3" />
 
         <Space
             android:layout_width="0dp"
