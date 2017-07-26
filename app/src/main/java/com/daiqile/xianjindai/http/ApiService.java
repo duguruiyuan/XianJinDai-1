@@ -96,5 +96,15 @@ public interface ApiService {
                                                @Field("phone") String phone,
                                                @Field("loginPassword") String loginPassword);
 
+    //人脸识别
+    @POST("xjd/front/user/realApproveForApp")
+    @FormUrlEncoded
+    Observable<Result> realApproveForApp(@Field("userId") String userId,
+                                         @Field("id_name") String id_name,
+                                         @Field("id_no") String id_no,
+                                         @Field("age") String age,
+                                         @Field("date_birthday") String date_birthday,
+                                         @Field("addr_card") String addr_card,
+                                         @Field("startCard") String startCard);
 
 }
