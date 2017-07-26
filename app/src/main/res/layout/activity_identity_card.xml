@@ -3,8 +3,8 @@
     android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/activity_identity_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,62 +15,71 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/appbar_min_height_56"
             android:background="@color/material_white"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             app:leftDrawable="@mipmap/iv_prev"
             app:title="身份认证"
             app:titleTextColor="@color/material_lightBlue_A200"
-            app:titleTextSize="@dimen/appbar_text_size_20"
-            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+            app:titleTextSize="@dimen/appbar_text_size_20" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="@drawable/divider"/>
+            android:background="@drawable/divider" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:id="@+id/ll_front_card"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_weight="1">
+                android:orientation="vertical">
+
                 <ImageView
+                    android:id="@+id/iv_positive"
                     android:layout_width="100dp"
                     android:layout_height="60dp"
-                    android:src="@mipmap/icon_card"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    android:src="@mipmap/icon_card" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="拍摄正面"/>
+                    android:text="拍摄正面" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_contrary_card"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_weight="1">
+                android:orientation="vertical">
+
                 <ImageView
+                    android:id="@+id/iv_reverse"
                     android:layout_width="100dp"
                     android:layout_height="60dp"
-                    android:src="@mipmap/icon_card"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    android:src="@mipmap/icon_card" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="拍摄反面"/>
+                    android:text="拍摄反面" />
             </LinearLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="@drawable/divider"/>
+            android:background="@drawable/divider" />
 
         <LinearLayout
             android:id="@+id/ll_face_photo"
@@ -79,49 +88,57 @@
             android:layout_weight="2"
             android:gravity="center"
             android:orientation="vertical">
+
             <ImageView
+                android:id="@+id/iv_person"
                 android:layout_width="100dp"
                 android:layout_height="60dp"
-                android:src="@mipmap/icon_face"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:src="@mipmap/icon_face" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="拍摄人脸"/>
+                android:text="拍摄人脸" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/divider"/>
+            android:background="@drawable/divider" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="3">
+            android:layout_weight="3"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:text="温馨提示"
-                android:textColor="@color/material_orange_400"/>
+                android:textColor="@color/material_orange_400" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="9dp"
-                android:textColor="@color/material_grey_500"
-                android:text="1.拍摄身份证照片务必区分人像面、国徽面"/>
+                android:layout_marginTop="5dp"
+                android:text="1.拍摄身份证照片务必区分人像面、国徽面"
+                android:textColor="@color/material_grey_500" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="9dp"
-                android:textColor="@color/material_grey_500"
-                android:text="2.身份证照片需本人"/>
+                android:layout_marginTop="5dp"
+                android:text="2.身份证照片需本人"
+                android:textColor="@color/material_grey_500" />
 
         </LinearLayout>
+
         <Button
             android:id="@+id/btn_card"
             android:layout_width="match_parent"
@@ -129,7 +146,7 @@
             android:background="@drawable/bg_round_blue"
             android:text="提交"
             android:textColor="@color/material_white"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
     </LinearLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

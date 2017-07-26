@@ -23,13 +23,13 @@ public class LaunchActivity extends BaseActivity {
 
     @BindView(R.id.img_launch)
     ImageView imgLaunch;
-    private Activity mActivity;
-    private MyApplication application ;
+//    private Activity mActivity;
+//    private MyApplication application ;
 
     @Override
     public void init() {
-        mActivity = LaunchActivity.this;
-        application = (MyApplication) getApplication();
+//        mActivity = LaunchActivity.this;
+//        application = (MyApplication) getApplication();
         animate(LaunchActivity.this);
 
     }

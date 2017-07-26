@@ -1,1 +1,1 @@
-include ':app', ':mvlib', ':baiqishi'
+include ':app', ':mvlib', ':baiqishi', ':picselector'
