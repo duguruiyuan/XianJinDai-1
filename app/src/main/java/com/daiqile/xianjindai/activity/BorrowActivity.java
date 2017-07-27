@@ -156,8 +156,12 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
             loanInfoBean = loanInfoBseens.get(Integer.parseInt(loanType));
             if ("0".equals(loanType)) {
                 loanType = "1";
-            } else if ("0".equals(loanType)) {
+            } else if ("1".equals(loanType)) {
                 loanType = "4";
+            } else if ("3".equals(loanType)) {
+//                loanType = "4";
+            } else if ("4".equals(loanType)) {
+//                loanType = "4";
             }
             Log.d("BorrowActivity", loanType);
         }

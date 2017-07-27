@@ -5,12 +5,17 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.daiqile.xianjindai.utils.ApiRequest;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+
+import rx.Subscriber;
+import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
 
 import static org.junit.Assert.*;
 

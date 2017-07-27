@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 获取MAC地址 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读写sdcard，storage等等 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <supports-screensapplication
         android:anyDensity="true"
@@ -87,11 +87,11 @@
         <activity android:name=".PhoneServertActivity" />
         <activity android:name=".DealActivity" />
         <activity android:name=".activity.RepaymentActivity" />
-
         <activity
             android:name=".CropAcitivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.BankCertificateActivity"></activity>
     </application>
 
 </manifest>

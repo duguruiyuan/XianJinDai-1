@@ -85,14 +85,18 @@ public class AllBorrowFragment extends BaseFragment {
             @Override
             public void onNext(AllBorrowBean allBorrowBean) {
                 List<AllBorrowBean.ListBean> list = allBorrowBean.getList();
-                Collections.reverse(list);
-                if (null != list && list.size() > 0) {
-                    adapter.addAll(allBorrowBean.getList());
-                    adapter.notifyDataSetChanged();
-                } else {
+                if (null!=list&&list.size()>0) {
+                    Collections.reverse(list);
+                    if (null != list && list.size() > 0) {
+                        adapter.addAll(allBorrowBean.getList());
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        adapter.stopMore();
+                    }
+                    adapter.stopMore();
+                }else {
                     adapter.stopMore();
                 }
-                adapter.stopMore();
                 closeRefreshing();
             }
         });

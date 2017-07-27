@@ -128,10 +128,10 @@ public class IdentityCardActivity extends BaseActivity {
                 break;
             case R.id.btn_card://提交按钮
                 // TODO: 2017/7/26 提交
-                Log.d("IdentityCardActivity", "ivPositive.getTag()+ivReverse.getTag()+ivPerson.getTag():" + (ivPositive.getTag().toString()
-                        + ivReverse.getTag().toString() + ivPerson.getTag().toString()));
+//                Log.d("IdentityCardActivity", "ivPositive.getTag()+ivReverse.getTag()+ivPerson.getTag():" + (ivPositive.getTag().toString()
+//                        + ivReverse.getTag().toString() + ivPerson.getTag().toString()));
+//                Log.d("IdentityCardActivity", "filePathList.size():" + filePathList.size());
 
-                Log.d("IdentityCardActivity", "filePathList.size():" + filePathList.size());
                 if (filePathList.size() >= 3) {
                     filePositive = new File(filePathList.get(0));
                     fileReverse = new File(filePathList.get(1));
@@ -166,7 +166,7 @@ public class IdentityCardActivity extends BaseActivity {
                         }
                     });
                 } else {
-                    ToastUtils.showMessage("请选择图片");
+                    ToastUtils.showMessage("请先完成人脸识别");
                 }
                 break;
         }
@@ -201,7 +201,7 @@ public class IdentityCardActivity extends BaseActivity {
                 File img = new File(mImageList.get(0));
                 Glide.with(MyApplication.getInstance().getApplicationContext()).load(img).into(imageView);
             } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "取消", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "取消", Toast.LENGTH_SHORT).show();
             }
         }
     }

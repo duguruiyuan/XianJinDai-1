@@ -61,12 +61,12 @@ public class RetrofitClient {
                         try {
                             String string = chain.proceed(request).body().string();
                             JSONObject jsonObject = new JSONObject(string);
+                            Log.d("RetrofitClient", string);
                             Logger.json(string);
                             if (MyApplication.getInstance().isLogin() && jsonObject.has("success") && jsonObject.has("msg")) {
                                 //15726818334 123456
                                 if (jsonObject.getString("msg").contains("token") && !jsonObject.getBoolean("success")) {
-                                    OkHttpUtils
-                                            .post()//
+                                    OkHttpUtils.post()//
                                             .url(Constants.BASE_URL + "xjd/front/user/login")
                                             .addParams("phone", SPUtils.get(MyApplication.getInstance()
                                                     .getApplicationContext(), Constants.PHONE, "").toString())

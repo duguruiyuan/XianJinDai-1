@@ -66,7 +66,7 @@ public class ThirdPartCertificationActivity extends BaseActivity {
                 //芝麻
                 break;
             case R.id.ll_bank_water_certification:
-                intent.setClass(mActivity, AuthorizationActivity.class);
+                intent.setClass(mActivity, BankCertificateActivity.class);
                 //银行
                 break;
         }

@@ -7,12 +7,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.daiqile.xianjindai.Constants;
+import com.daiqile.xianjindai.Fragment.bean.UserInfoBean;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.Result;
+import com.daiqile.xianjindai.UserInfoRequest;
+import com.daiqile.xianjindai.utils.CallBack;
 import com.daiqile.xianjindai.view.TopBar;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ import rx.schedulers.Schedulers;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 import suangrenduobao.daiqile.com.mvlib.utils.RegexValidateUtil;
 import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
+import suangrenduobao.daiqile.com.mvlib.utils.http.BaseBean;
 
 /**
  * 紧急联系人
@@ -81,7 +86,6 @@ public class EmergencyContactActivity extends BaseActivity {
 //        qq2	是	string	第二联系人对应的QQ
 //        weChat	是	string	第一联系人对应的微信
 //        weChat2
-
         String mChonosePerson = tvChoosePerson.getText().toString().trim();
         String mEtName = etName.getText().toString().trim();
         String mEtPhone = etPhone.getText().toString().trim();
@@ -174,15 +178,14 @@ public class EmergencyContactActivity extends BaseActivity {
             @Override
             public void onNext(Result result) {
                 ToastUtils.showMessage(result.getMsg());
+                if (result.isSuccess()) {
+                    finish();
+                }
 
             }
         });
 
     }
-
-    //    @BindView(R.id.activity_emergency_contact)
-//    LinearLayout activityEmergencyContact;
-//    private Activity mActivity;
 
     OptionsPickerView OnePeopleOptions;
     OptionsPickerView TwoPeopleOptions;
@@ -199,8 +202,6 @@ public class EmergencyContactActivity extends BaseActivity {
         for (String s : Constants.FRIEND) {
             twoPeopleList.add(s);
         }
-//        onePeopleList = (ArrayList<String>) Arrays.asList(Constants.KINSFOLK);
-//        twoPeopleList = (ArrayList<String>) Arrays.asList(Constants.FRIEND);
 
         OnePeopleOptions = new OptionsPickerView(mActivity);
         TwoPeopleOptions = new OptionsPickerView(mActivity);
@@ -290,7 +291,27 @@ public class EmergencyContactActivity extends BaseActivity {
 
     @Override
     protected void loadData() {
+        UserInfoRequest.requestUserInfo(new CallBack() {
+            @Override
+            public void onNext(BaseBean baseBean) {
+                UserInfoBean.UsersBean usersBean = ((UserInfoBean) baseBean).getUsers().get(0);
+                tvChoosePerson.setText(usersBean.getFirstContactType());
+                etName.setText(usersBean.getFirstContactName());
+                etPhone.setText(usersBean.getFirstContactCellPhone());
+                etqq.setText(usersBean.getQq());
+                etWeixin.setText(usersBean.getWeChat());
+                tvChoosePersonTwo.setText(usersBean.getSecondContactType());
+                etNameTwo.setText(usersBean.getSecondContactName());
+                etPhoneTwo.setText(usersBean.getOtherContactCellPhone());
+                etqqTwo.setText(usersBean.getQq2());
+                etWeixinTwo.setText(usersBean.getWeChat2());
+            }
 
+            @Override
+            public void onError() {
+                ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+            }
+        });
     }
 
 

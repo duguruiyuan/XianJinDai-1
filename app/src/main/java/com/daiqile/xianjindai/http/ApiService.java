@@ -15,16 +15,24 @@ import com.daiqile.xianjindai.model.Province;
 import com.daiqile.xianjindai.model.ProvinceCityArea;
 import com.daiqile.xianjindai.model.User;
 
+import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 import rx.Observable;
+
 
 /**
  * Created by G150T on 2017/6/21.
@@ -72,7 +80,7 @@ public interface ApiService {
     Observable<Result> addBank(@FieldMap Map<String, String> map);
 
     //银行卡列表
-    @POST("xjd/front/user/bankList")
+    @POST("xjd//front/user/bankList")
     @FormUrlEncoded
     Observable<BankInfoList> getBankLists(@FieldMap Map<String, String> map);
 
@@ -84,9 +92,9 @@ public interface ApiService {
 
 
     //借款记录 全部
-    @POST("xjd/front/loan/findUserLoan")
+    @POST("xjd/front/loan/findUserLoan")//userId
     @FormUrlEncoded
-    Observable<AllBorrowBean> requestAllBorrow(@Field("id") String userId);
+    Observable<AllBorrowBean> requestAllBorrow(@Field("userId") String userId);//id
 
 
     //个人信息列表
@@ -106,5 +114,14 @@ public interface ApiService {
                                          @Field("date_birthday") String date_birthday,
                                          @Field("addr_card") String addr_card,
                                          @Field("startCard") String startCard);
+
+    //图片上传
+    @Multipart
+    @POST("xjd/front/loan/loanUploadImg")
+    Observable<Result> loanUploadImg(@Query("id") String userId,
+                                     @Part() List<MultipartBody.Part> parts);
+
+
+
 
 }

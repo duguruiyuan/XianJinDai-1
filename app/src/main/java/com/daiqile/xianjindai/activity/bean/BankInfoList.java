@@ -9,7 +9,15 @@ import suangrenduobao.daiqile.com.mvlib.utils.http.BaseBean;
  */
 
 public class BankInfoList implements BaseBean {
+
     private List<BanksBean> banks;
+    /**
+     * msg : 0000
+     * success : true
+     */
+
+    private String msg;
+    private boolean success;
 
     public List<BanksBean> getBanks() {
         return banks;
@@ -18,6 +26,23 @@ public class BankInfoList implements BaseBean {
     public void setBanks(List<BanksBean> banks) {
         this.banks = banks;
     }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
 
     public static class BanksBean {
         /**

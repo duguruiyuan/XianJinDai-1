@@ -45,7 +45,8 @@ public class UserInfoBean implements BaseBean {
         this.users = users;
     }
 
-    public static class UsersBean {
+    public class UsersBean implements BaseBean {
+
         /**
          * id : 111
          * page :
@@ -139,7 +140,7 @@ public class UserInfoBean implements BaseBean {
          */
 
         private int id;
-//        private String page;
+        //        private String page;
 //        private String ip;
 //        private String userName;
 //        private String loginPassword;
@@ -148,20 +149,20 @@ public class UserInfoBean implements BaseBean {
 //        private String email;
 //        private String realName;
         private String phone;
-//        private String otherPhone;
-//        private String companyAddress;
+        private String otherPhone;
+        //        private String companyAddress;
 //        private String companyPhone;
 //        private String company;
 //        private String monthIncome;
 //        private String job;
         private int hasBank;
         private int hasIdcardInfo;
-//        private int hasWorkInfo;
+        //        private int hasWorkInfo;
 //        private int hasContactInfo;
 //        private int hasAddressBook;
 //        private int hasSwitch;
         private String hasPhoto;
-//        private String socialSecurity;
+        //        private String socialSecurity;
 //        private String netLoanInfo;
 //        private String carInfo;
 //        private String sesameCreditImg;
@@ -172,9 +173,9 @@ public class UserInfoBean implements BaseBean {
 //        private String otherContactType2;
 //        private String otherContactCellPhone2;
 //        private String age;
-//        private String qq2;
-//        private String weChat2;
-//        private String education;
+        private String qq2;
+        private String weChat2;
+        //        private String education;
 //        private String houseSituation;
 //        private int hasSocial;
 //        private int level;
@@ -182,14 +183,14 @@ public class UserInfoBean implements BaseBean {
 //        private long createdTime;
 //        private long updatedTime;
         private int status;
-//        private String remark;
+        //        private String remark;
 //        private String freezeDate;
 //        private String province;
 //        private String province_id;
 //        private String parentProvince;
 //        private String parentprovince_id;
-//        private String city;
-//        private String city_id;
+        private String city;
+        //        private String city_id;
 //        private String parentCity;
 //        private String parentcity_id;
 //        private String county;
@@ -200,32 +201,32 @@ public class UserInfoBean implements BaseBean {
 //        private String liveTime;
 //        private String trades;
 //        private String marriage;
-//        private String firstContactName;
-//        private String firstContactType;
-//        private String firstContactCellPhone;
-//        private String secondContactName;
-//        private String secondContactType;
-//        private String secondContactCellPhone;
-//        private String otherContactType;
-//        private String otherContactCellPhone;
-//        private String otherContactName;
-//        private String weChat;
-//        private String qq;
-//        private String channel;
+        private String firstContactName;
+        private String firstContactType;
+        private String firstContactCellPhone;
+        private String secondContactName;
+        private String secondContactType;
+        private String secondContactCellPhone;
+        private String otherContactType;
+        private String otherContactCellPhone;
+        private String otherContactName;
+        private String weChat;
+        private String qq;
+        //        private String channel;
 //        private String workState;
         private String data;
-//        private String workTime;
+        //        private String workTime;
 //        private String alipayAccount;
 //        private String positionInformation;
 //        private int deleteFlag;
-//        private String picOne;
-//        private String picTwo;
-//        private String picThree;
-//        private String picFour;
-//        private String picFive;
-//        private String picSix;
-//        private String picSeven;
-//        private String picEight;
+        private String picOne;
+        private String picTwo;
+        private String picThree;
+        private String picFour;
+        private String picFive;
+        private String picSix;
+        private String picSeven;
+        private String picEight;
 //        private String userVo;
 
         public int getId() {
@@ -307,14 +308,14 @@ public class UserInfoBean implements BaseBean {
         public void setPhone(String phone) {
             this.phone = phone;
         }
-//
-//        public String getOtherPhone() {
-//            return otherPhone;
-//        }
-//
-//        public void setOtherPhone(String otherPhone) {
-//            this.otherPhone = otherPhone;
-//        }
+
+        public String getOtherPhone() {
+            return otherPhone;
+        }
+
+        public void setOtherPhone(String otherPhone) {
+            this.otherPhone = otherPhone;
+        }
 //
 //        public String getCompanyAddress() {
 //            return companyAddress;
@@ -491,7 +492,7 @@ public class UserInfoBean implements BaseBean {
 //            this.otherContactCellPhone2 = otherContactCellPhone2;
 //        }
 
-//        public String getAge() {
+        //        public String getAge() {
 //            return age;
 //        }
 //
@@ -499,21 +500,22 @@ public class UserInfoBean implements BaseBean {
 //            this.age = age;
 //        }
 //
-//        public String getQq2() {
-//            return qq2;
-//        }
-//
-//        public void setQq2(String qq2) {
-//            this.qq2 = qq2;
-//        }
-//
-//        public String getWeChat2() {
-//            return weChat2;
-//        }
-//
-//        public void setWeChat2(String weChat2) {
-//            this.weChat2 = weChat2;
-//        }
+        public String getQq2() {
+            return qq2;
+        }
+
+        public void setQq2(String qq2) {
+            this.qq2 = qq2;
+        }
+
+        //
+        public String getWeChat2() {
+            return weChat2;
+        }
+
+        public void setWeChat2(String weChat2) {
+            this.weChat2 = weChat2;
+        }
 //
 //        public String getEducation() {
 //            return education;
@@ -627,13 +629,13 @@ public class UserInfoBean implements BaseBean {
 //            this.parentprovince_id = parentprovince_id;
 //        }
 
-//        public String getCity() {
-//            return city;
-//        }
-//
-//        public void setCity(String city) {
-//            this.city = city;
-//        }
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
 //
 //        public String getCity_id() {
 //            return city_id;
@@ -707,7 +709,7 @@ public class UserInfoBean implements BaseBean {
 //            this.liveTime = liveTime;
 //        }
 
-//        public String getTrades() {
+        //        public String getTrades() {
 //            return trades;
 //        }
 //
@@ -723,69 +725,69 @@ public class UserInfoBean implements BaseBean {
 //            this.marriage = marriage;
 //        }
 //
-//        public String getFirstContactName() {
-//            return firstContactName;
-//        }
-//
-//        public void setFirstContactName(String firstContactName) {
-//            this.firstContactName = firstContactName;
-//        }
+        public String getFirstContactName() {
+            return firstContactName;
+        }
 
-//        public String getFirstContactType() {
-//            return firstContactType;
-//        }
-//
-//        public void setFirstContactType(String firstContactType) {
-//            this.firstContactType = firstContactType;
-//        }
-//
-//        public String getFirstContactCellPhone() {
-//            return firstContactCellPhone;
-//        }
-//
-//        public void setFirstContactCellPhone(String firstContactCellPhone) {
-//            this.firstContactCellPhone = firstContactCellPhone;
-//        }
-//
-//        public String getSecondContactName() {
-//            return secondContactName;
-//        }
-//
-//        public void setSecondContactName(String secondContactName) {
-//            this.secondContactName = secondContactName;
-//        }
-//
-//        public String getSecondContactType() {
-//            return secondContactType;
-//        }
-//
-//        public void setSecondContactType(String secondContactType) {
-//            this.secondContactType = secondContactType;
-//        }
+        public void setFirstContactName(String firstContactName) {
+            this.firstContactName = firstContactName;
+        }
 
-//        public String getSecondContactCellPhone() {
-//            return secondContactCellPhone;
-//        }
-//
-//        public void setSecondContactCellPhone(String secondContactCellPhone) {
-//            this.secondContactCellPhone = secondContactCellPhone;
-//        }
-//
-//        public String getOtherContactType() {
-//            return otherContactType;
-//        }
-//
-//        public void setOtherContactType(String otherContactType) {
-//            this.otherContactType = otherContactType;
-//        }
-//
-//        public String getOtherContactCellPhone() {
-//            return otherContactCellPhone;
-//        }
-//
-//        public void setOtherContactCellPhone(String otherContactCellPhone) {
-//            this.otherContactCellPhone = otherContactCellPhone;
-//        }
+        public String getFirstContactType() {
+            return firstContactType;
+        }
+
+        public void setFirstContactType(String firstContactType) {
+            this.firstContactType = firstContactType;
+        }
+
+        public String getFirstContactCellPhone() {
+            return firstContactCellPhone;
+        }
+
+        public void setFirstContactCellPhone(String firstContactCellPhone) {
+            this.firstContactCellPhone = firstContactCellPhone;
+        }
+
+        public String getSecondContactName() {
+            return secondContactName;
+        }
+
+        public void setSecondContactName(String secondContactName) {
+            this.secondContactName = secondContactName;
+        }
+
+        public String getSecondContactType() {
+            return secondContactType;
+        }
+
+        public void setSecondContactType(String secondContactType) {
+            this.secondContactType = secondContactType;
+        }
+
+        public String getSecondContactCellPhone() {
+            return secondContactCellPhone;
+        }
+
+        public void setSecondContactCellPhone(String secondContactCellPhone) {
+            this.secondContactCellPhone = secondContactCellPhone;
+        }
+
+        public String getOtherContactType() {
+            return otherContactType;
+        }
+
+        public void setOtherContactType(String otherContactType) {
+            this.otherContactType = otherContactType;
+        }
+
+        public String getOtherContactCellPhone() {
+            return otherContactCellPhone;
+        }
+
+        public void setOtherContactCellPhone(String otherContactCellPhone) {
+            this.otherContactCellPhone = otherContactCellPhone;
+        }
 //
 //        public String getOtherContactName() {
 //            return otherContactName;
@@ -795,21 +797,22 @@ public class UserInfoBean implements BaseBean {
 //            this.otherContactName = otherContactName;
 //        }
 
-//        public String getWeChat() {
-//            return weChat;
-//        }
-//
-//        public void setWeChat(String weChat) {
-//            this.weChat = weChat;
-//        }
-//
-//        public String getQq() {
-//            return qq;
-//        }
-//
-//        public void setQq(String qq) {
-//            this.qq = qq;
-//        }
+        public String getWeChat() {
+            return weChat;
+        }
+
+        public void setWeChat(String weChat) {
+            this.weChat = weChat;
+        }
+
+        //
+        public String getQq() {
+            return qq;
+        }
+
+        public void setQq(String qq) {
+            this.qq = qq;
+        }
 //
 //        public String getChannel() {
 //            return channel;
@@ -835,7 +838,7 @@ public class UserInfoBean implements BaseBean {
             this.data = data;
         }
 
-//        public String getWorkTime() {
+        //        public String getWorkTime() {
 //            return workTime;
 //        }
 //
@@ -867,69 +870,69 @@ public class UserInfoBean implements BaseBean {
 //            this.deleteFlag = deleteFlag;
 //        }
 //
-//        public String getPicOne() {
-//            return picOne;
-//        }
-//
-//        public void setPicOne(String picOne) {
-//            this.picOne = picOne;
-//        }
-//
-//        public String getPicTwo() {
-//            return picTwo;
-//        }
-//
-//        public void setPicTwo(String picTwo) {
-//            this.picTwo = picTwo;
-//        }
-//
-//        public String getPicThree() {
-//            return picThree;
-//        }
-//
-//        public void setPicThree(String picThree) {
-//            this.picThree = picThree;
-//        }
-//
-//        public String getPicFour() {
-//            return picFour;
-//        }
-//
-//        public void setPicFour(String picFour) {
-//            this.picFour = picFour;
-//        }
-//
-//        public String getPicFive() {
-//            return picFive;
-//        }
-//
-//        public void setPicFive(String picFive) {
-//            this.picFive = picFive;
-//        }
-//
-//        public String getPicSix() {
-//            return picSix;
-//        }
-//
-//        public void setPicSix(String picSix) {
-//            this.picSix = picSix;
-//        }
-//
-//        public String getPicSeven() {
-//            return picSeven;
-//        }
-//
-//        public void setPicSeven(String picSeven) {
-//            this.picSeven = picSeven;
-//        }
-//
-//        public String getPicEight() {
-//            return picEight;
-//        }
-//
-//        public void setPicEight(String picEight) {
-//            this.picEight = picEight;
-//        }
+        public String getPicOne() {
+            return picOne;
+        }
+
+        public void setPicOne(String picOne) {
+            this.picOne = picOne;
+        }
+
+        public String getPicTwo() {
+            return picTwo;
+        }
+
+        public void setPicTwo(String picTwo) {
+            this.picTwo = picTwo;
+        }
+
+        public String getPicThree() {
+            return picThree;
+        }
+
+        public void setPicThree(String picThree) {
+            this.picThree = picThree;
+        }
+
+        public String getPicFour() {
+            return picFour;
+        }
+
+        public void setPicFour(String picFour) {
+            this.picFour = picFour;
+        }
+
+        public String getPicFive() {
+            return picFive;
+        }
+
+        public void setPicFive(String picFive) {
+            this.picFive = picFive;
+        }
+
+        public String getPicSix() {
+            return picSix;
+        }
+
+        public void setPicSix(String picSix) {
+            this.picSix = picSix;
+        }
+
+        public String getPicSeven() {
+            return picSeven;
+        }
+
+        public void setPicSeven(String picSeven) {
+            this.picSeven = picSeven;
+        }
+
+        public String getPicEight() {
+            return picEight;
+        }
+
+        public void setPicEight(String picEight) {
+            this.picEight = picEight;
+        }
 //
 //        public String getUserVo() {
 //            return userVo;

@@ -82,17 +82,19 @@ public class UnderwayFragment extends BaseFragment {
             @Override
             public void onNext(AllBorrowBean allBorrowBean) {
                 List<AllBorrowBean.ListBean> list = allBorrowBean.getList();
-                //判断是否是进行中
-                Collections.reverse(list);
-                for (AllBorrowBean.ListBean listBean : list) {
-                    if (0 == listBean.getStatus() || 1 == listBean.getStatus() || 2 == listBean.getStatus()) {
-                        adapter.add(listBean);
-                    }
-                }
                 if (null != list && list.size() > 0) {
+                    //判断是否是进行中
+                    Collections.reverse(list);
+                    for (AllBorrowBean.ListBean listBean : list) {
+                        if (0 == listBean.getStatus() || 1 == listBean.getStatus() || 2 == listBean.getStatus()) {
+                            adapter.add(listBean);
+                        }
+                    }
                     adapter.notifyDataSetChanged();
+                    adapter.stopMore();
+                }else{
+                    adapter.stopMore();
                 }
-                adapter.stopMore();
                 closeRefreshing();
             }
         });

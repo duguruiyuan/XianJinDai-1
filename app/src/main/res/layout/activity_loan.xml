@@ -15,6 +15,11 @@
         app:titleTextColor="@color/material_lightBlue_A200"
         app:titleTextSize="@dimen/appbar_text_size_20" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/divider" />
+
     <RelativeLayout
         android:id="@+id/rl_legal_person"
         android:layout_width="match_parent"
@@ -59,7 +64,7 @@
                 android:id="@+id/tv_highest_money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="最高(元)         2000" />
+                android:text="最高(元)         100000" />
 
             <TextView
                 android:id="@+id/tv_max_day"
@@ -67,15 +72,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:text="期限                7-14天" />
+                android:text="期限                12个月" />
 
             <TextView
                 android:id="@+id/tv_interest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="日息                0.02%-0.05%" />
+                android:text="日息                20%" />
         </LinearLayout>
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider"/>
 
     <RelativeLayout
         android:id="@+id/rl_house"
@@ -117,19 +126,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="最高(元)         2000" />
+                android:text="最高(元)         100000" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:text="期限                7-14天" />
+                android:text="期限                12个月" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="日息                0.02%-0.05%" />
+                android:text="日息                20%" />
         </LinearLayout>
     </RelativeLayout>
 

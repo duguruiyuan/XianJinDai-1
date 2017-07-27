@@ -23,6 +23,7 @@ import com.daiqile.xianjindai.Fragment.bean.UserInfoBean;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.activity.BorrowActivity;
+import com.daiqile.xianjindai.activity.IdentityCardActivity;
 import com.daiqile.xianjindai.activity.LoginActivity;
 
 import com.daiqile.xianjindai.activity.ThirdPartCertificationActivity;
@@ -187,8 +188,8 @@ public class IndexFragment extends BaseFragment {
                         public void onNext(UserInfoBean userInfoBean) {
                             UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
                             if (0 == usersBean.getHasIdcardInfo()) {
-                                ToastUtils.showMessage("请先完成手机运营商认证");
-                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+                                ToastUtils.showMessage("请先完成实名认证");
+                                startActivity(new Intent(mActivity, IdentityCardActivity.class));
                             } else if (0 == usersBean.getHasBank()) {
                                 ToastUtils.showMessage("请先绑定银行卡");
                                 startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));

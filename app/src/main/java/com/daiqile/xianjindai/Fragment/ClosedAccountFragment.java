@@ -61,23 +61,27 @@ public class ClosedAccountFragment extends BaseFragment {
 
             @Override
             public void onError(Throwable e) {
-                ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));closeRefreshing();
+                ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+                closeRefreshing();
             }
 
             @Override
             public void onNext(AllBorrowBean allBorrowBean) {
                 List<AllBorrowBean.ListBean> list = allBorrowBean.getList();
-                Collections.reverse(list);
-                for (AllBorrowBean.ListBean listBean : list) {
-                    if (3 == listBean.getStatus() || -1 == listBean.getStatus()) {
-                        adapter.add(listBean);
-                    }
-                }
-                //判断是否是进行中
                 if (null != list && list.size() > 0) {
+                    Collections.reverse(list);
+                    for (AllBorrowBean.ListBean listBean : list) {
+                        if (3 == listBean.getStatus() || -1 == listBean.getStatus()) {
+                            adapter.add(listBean);
+                        }
+                    }
+                    //判断是否是进行中
+
                     adapter.notifyDataSetChanged();
+                    adapter.stopMore();
+                } else {
+                    adapter.stopMore();
                 }
-                adapter.stopMore();
                 closeRefreshing();
             }
         });

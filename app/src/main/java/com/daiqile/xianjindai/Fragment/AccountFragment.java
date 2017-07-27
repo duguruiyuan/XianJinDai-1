@@ -85,7 +85,7 @@ public class AccountFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 Log.d("AccountFragment", "加载");
-                if (null!=swipeRefresh&&swipeRefresh.isRefreshing()) {
+                if (null != swipeRefresh && swipeRefresh.isRefreshing()) {
                     swipeRefresh.setRefreshing(false);
                 }
             }
@@ -135,7 +135,26 @@ public class AccountFragment extends BaseFragment {
                 goActivity(ChangePwdActivity.class, true);
                 break;
             case R.id.ll_service://拨打客服电话
-                startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + "400-165-65656")));
+//                startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + "400-165-65656")));
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+                builder.setMessage("确定联系客服\n"+getString(R.string.str_customer_service));
+                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + getString(R.string.str_customer_service))));
+                    }
+                });
+
+                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
                 break;
             case R.id.ll_versions:
                 break;
@@ -155,7 +174,7 @@ public class AccountFragment extends BaseFragment {
         if (falg) {
             if (!MyApplication.getInstance().isLogin()) {
                 intent.setClass(mActivity, LoginActivity.class);
-            }else{
+            } else {
                 intent.setClass(mActivity, clazz);
             }
         } else {

@@ -93,7 +93,6 @@ public class BorrowingRecordFragment extends BaseFragment implements BorrowingRe
                 break;
         }
 
-        // TODO: 2017/7/20 真是上线要打开
 //        if ("-2793600000".equals(bean.getLoanTime() + "")) {
 //            ToastUtils.showMessage("未打款", Gravity.CENTER);  //未打款
 //        } else {

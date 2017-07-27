@@ -146,6 +146,7 @@ public class BankCardActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
+                Log.d("BankCardActivity", "网络不好");
                 ToastUtils.showMessage("网络不好");
                 if (easyRecyclerView.getSwipeToRefresh().isRefreshing()) {
                     easyRecyclerView.getSwipeToRefresh().setRefreshing(false);
@@ -157,10 +158,12 @@ public class BankCardActivity extends BaseActivity {
                 // TODO: 2017/7/10 银行卡列表
                 Log.d("BankCardActivity", "银行卡列表");
                 List<BankInfoList.BanksBean> banks = bankInfoList.getBanks();
-                if (banks.size() > 0) {
+                if (null != banks && banks.size() > 0) {
                     adapter.addAll(banks);
                     adapter.notifyDataSetChanged();
 //                    adapter.stopMore();
+                } else {
+                    ToastUtils.showMessage("你还没有银行卡");
                 }
             }
         });
