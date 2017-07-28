@@ -1,8 +1,10 @@
 package com.daiqile.xianjindai;
 
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.bqs.crawler.cloud.sdk.OnMnoLoginListener;
+import com.daiqile.xianjindai.activity.ThirdPartCertificationActivity;
 import com.daiqile.xianjindai.view.ClearEditText;
 import com.daiqile.xianjindai.view.TopBar;
 
@@ -66,6 +68,7 @@ public class PhoneServertActivity extends BaseActivity {
             @Override
             public void onLoginSuccess() {
                 //验证成功
+                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
                 finish();
             }
 

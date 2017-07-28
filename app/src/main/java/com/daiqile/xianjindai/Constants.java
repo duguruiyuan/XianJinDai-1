@@ -52,4 +52,17 @@ public class Constants {
     public static final String BEAN = "bean";
 
     public static final String LOAN_JSON = "loan.json";
+
+    //有盾
+    public static final String OUTORDERID = "201707112690";
+    public static final String AUTHKEY = "4cc6f21e-2dde-4f56-9a36-f5beda81d980";
+    public static final String URLNOTIFY = "";
+
+    public static final int RQF_PAY = 0xff;
+    public static final String ZHIMAXINYONG = "zhimaxingyong";
+    public static final String BAIQISHISTATUS = "BaiQiShiStatus";
+
+
+    public static final String PHONE_BAIQISHI="phone_baiqishi";
+    public static final String ZHIMAXINYONG_BAIQISHI="zhimaxinyong_baiqishi";
 }

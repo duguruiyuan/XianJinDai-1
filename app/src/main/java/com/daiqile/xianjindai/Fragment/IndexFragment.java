@@ -193,6 +193,9 @@ public class IndexFragment extends BaseFragment {
                             } else if (0 == usersBean.getHasBank()) {
                                 ToastUtils.showMessage("请先绑定银行卡");
                                 startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+                            } else if (!SPUtils.contains(MyApplication.getInstance().getApplicationContext(), Constants.PHONE_BAIQISHI)) {
+                                ToastUtils.showMessage("请先完成手机运行商认证");
+                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
                             } else if (view.getId() == R.id.rl_home_liren && TextUtils.isEmpty(usersBean.getHasPhoto())) {//丽人贷 需要
                                 ToastUtils.showMessage("请先上传银行流水证明");
                                 startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));

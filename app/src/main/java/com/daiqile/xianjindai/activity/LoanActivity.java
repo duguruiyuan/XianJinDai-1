@@ -81,10 +81,14 @@ public class LoanActivity extends BaseActivity {
                         public void onNext(UserInfoBean userInfoBean) {
                             UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
                             if (0 == usersBean.getHasIdcardInfo()) {
-                                ToastUtils.showMessage("请先完成手机运营商认证");
+                                ToastUtils.showMessage("请先完成实名认证");
                                 startActivity(new Intent(LoanActivity.this, IdentityCardActivity.class));
                             } else if (0 == usersBean.getHasBank()) {
                                 ToastUtils.showMessage("请先绑定银行卡");
+                                startActivity(new Intent(LoanActivity.this, ThirdPartCertificationActivity.class));
+                                //是否使用了芝麻信用
+                            } else if (!SPUtils.contains(MyApplication.getInstance().getApplicationContext(), Constants.ZHIMAXINYONG_BAIQISHI)) {
+                                ToastUtils.showMessage("请先完成芝麻信用");
                                 startActivity(new Intent(LoanActivity.this, ThirdPartCertificationActivity.class));
                             } else if (!usersBean.getCity().equals("宁波")) {
                                 ToastUtils.showMessage(getString(R.string.str_rule));

@@ -18,15 +18,21 @@
         app:titleTextColor="@color/material_lightBlue_A200"
         app:titleTextSize="@dimen/appbar_text_size_20" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/divider" />
+
     <TextView
         android:id="@+id/tv_money"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:paddingLeft="5dp"
         android:singleLine="true"
-        android:textSize="@dimen/tip_text_size_12"
+        android:textColor="@color/font_black_content"
+        android:textSize="@dimen/main_body_text_size_14"
         tools:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
 
     <View
@@ -37,12 +43,13 @@
     <TextView
         android:id="@+id/tv_bank_number"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:paddingLeft="5dp"
         android:singleLine="true"
-        android:textSize="@dimen/tip_text_size_12"
+        android:textColor="@color/font_black_content"
+        android:textSize="@dimen/main_body_text_size_14"
         tools:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
 
     <Button

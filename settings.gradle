@@ -1,1 +1,1 @@
-include ':app', ':mvlib', ':baiqishi', ':picselector'
+include ':app', ':mvlib', ':baiqishi', ':picselector', ':udidsafe', ':lianlianPay'

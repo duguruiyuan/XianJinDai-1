@@ -58,6 +58,7 @@ public class RetrofitClient {
                                 .newBuilder()
                                 .addHeader(Constants.TOKEN, MyApplication.getInstance().getToken())
                                 .build();
+                        Log.d("RetrofitClient", MyApplication.getInstance().getToken());
                         try {
                             String string = chain.proceed(request).body().string();
                             JSONObject jsonObject = new JSONObject(string);
@@ -65,7 +66,9 @@ public class RetrofitClient {
                             Logger.json(string);
                             if (MyApplication.getInstance().isLogin() && jsonObject.has("success") && jsonObject.has("msg")) {
                                 //15726818334 123456
-                                if (jsonObject.getString("msg").contains("token") && !jsonObject.getBoolean("success")) {
+//                                !jsonObject.getBoolean("success"))
+                                if (jsonObject.getString("msg").contains("token") || jsonObject.getString("msg").contains("0000") &&
+                                        jsonObject.getBoolean("success")||!jsonObject.getBoolean("success")) {
                                     OkHttpUtils.post()//
                                             .url(Constants.BASE_URL + "xjd/front/user/login")
                                             .addParams("phone", SPUtils.get(MyApplication.getInstance()

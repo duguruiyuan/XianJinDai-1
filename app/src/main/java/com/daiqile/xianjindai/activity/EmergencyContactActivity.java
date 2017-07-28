@@ -16,6 +16,7 @@ import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.Result;
 import com.daiqile.xianjindai.UserInfoRequest;
+import com.daiqile.xianjindai.utils.ApiRequest;
 import com.daiqile.xianjindai.utils.CallBack;
 import com.daiqile.xianjindai.view.TopBar;
 
@@ -150,7 +151,7 @@ public class EmergencyContactActivity extends BaseActivity {
         }
 
         Map<String, String> map = new HashMap<>();
-        map.put("userId", MyApplication.getInstance().getUid());
+        map.put("id", MyApplication.getInstance().getUid());
         map.put("firstContactName", mEtName);
         map.put("firstContactType", mChonosePerson);
         map.put("firstContactCellPhone", mEtPhone);
@@ -162,9 +163,7 @@ public class EmergencyContactActivity extends BaseActivity {
         map.put("secondContactCellPhone", mEtPhoneTwo);
         map.put("qq2", mEtqqTwo);
         map.put("weChat2", mEtWeixinTwo);
-
-        MyApplication.getInstance().apiService.updateRelative(map).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Result>() {
+        ApiRequest.request(MyApplication.getInstance().apiService.updateRelative(map), new Subscriber<Result>() {
             @Override
             public void onCompleted() {
 
@@ -184,7 +183,28 @@ public class EmergencyContactActivity extends BaseActivity {
 
             }
         });
-
+//        MyApplication.getInstance().apiService.addBank(map).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<Result>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        ToastUtils.showMessage("网络不好");
+//                    }
+//
+//                    @Override
+//                    public void onNext(Result result) {
+//                        ToastUtils.showMessage(result.getMsg());
+//                        if (result.isSuccess()) {
+//                            finish();
+//                        }
+//
+//                    }
+//                });
     }
 
     OptionsPickerView OnePeopleOptions;
@@ -217,12 +237,11 @@ public class EmergencyContactActivity extends BaseActivity {
 
             @Override
             public void rightClick() {
-
             }
         });
 
         OnePeopleOptions.setPicker(onePeopleList);
-        OnePeopleOptions.setSelectOptions(0);
+//        OnePeopleOptions.setSelectOptions(0);
         OnePeopleOptions.setCyclic(false);
         OnePeopleOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
             @Override
@@ -233,7 +252,7 @@ public class EmergencyContactActivity extends BaseActivity {
         });
 
         TwoPeopleOptions.setPicker(twoPeopleList);
-        TwoPeopleOptions.setSelectOptions(0);
+//        TwoPeopleOptions.setSelectOptions(0);
         TwoPeopleOptions.setCyclic(false);
 
         TwoPeopleOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
@@ -259,24 +278,6 @@ public class EmergencyContactActivity extends BaseActivity {
         });
     }
 
-//    @Override
-//    public void init() {
-////        mActivity = EmergencyContactActivity.this;
-//        OnePeopleOptions = new OptionsPickerView(mActivity);
-//        TwoPeopleOptions = new OptionsPickerView(mActivity);
-//        OnePeople();
-//        topbar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
-//            @Override
-//            public void leftClick() {
-//                finish();
-//            }
-//
-//            @Override
-//            public void rightClick() {
-//
-//            }
-//        });
-//    }
 
     @Override
     protected boolean switchToolbar() {
@@ -300,9 +301,10 @@ public class EmergencyContactActivity extends BaseActivity {
                 etPhone.setText(usersBean.getFirstContactCellPhone());
                 etqq.setText(usersBean.getQq());
                 etWeixin.setText(usersBean.getWeChat());
+
                 tvChoosePersonTwo.setText(usersBean.getSecondContactType());
-                etNameTwo.setText(usersBean.getSecondContactName());
-                etPhoneTwo.setText(usersBean.getOtherContactCellPhone());
+                etNameTwo.setText(usersBean.getSecondContactName());//secondContactCellPhone
+                etPhoneTwo.setText(usersBean.getSecondContactCellPhone());
                 etqqTwo.setText(usersBean.getQq2());
                 etWeixinTwo.setText(usersBean.getWeChat2());
             }

@@ -38,6 +38,7 @@ public final class PermissionUtils {
         params.setCertNo(cardId);
         params.setName(name);
         params.setMobile(phone);
+        params.setTimeout(30);
         SDKInitialize.getInstance().initialize(params, onSDKInitListener);
     }
 

@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('securePay-v3.0.4-170517.aar'))

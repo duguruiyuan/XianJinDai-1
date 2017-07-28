@@ -17,49 +17,91 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="10dp"
         android:background="@drawable/divider" />
 
-    <com.daiqile.xianjindai.view.ClearEditText
-        android:id="@+id/et_name"
+    <com.bqs.crawler.cloud.sdk.LoginWebView
+        android:id="@+id/login_webview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入姓名"
-        android:inputType="textPersonName"
-        android:maxLines="1"
-        android:text=""
-        android:textColor="@color/font_black_content"
-        android:textColorHint="@color/text_gray"
-        android:textCursorDrawable="@drawable/button_select_bg"
-        android:textSize="@dimen/main_body_text_size_14" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
-    <com.daiqile.xianjindai.view.ClearEditText
-        android:id="@+id/et_carid"
+    <LinearLayout
+        android:id="@+id/myll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入身份证"
-        android:inputType="number"
-        android:textColor="@color/font_black_content"
-        android:textColorHint="@color/text_gray"
-        android:textCursorDrawable="@drawable/button_select_bg"
-        android:textSize="@dimen/main_body_text_size_14" />
-
-    <com.daiqile.xianjindai.view.ClearEditText
-        android:id="@+id/et_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入手机号码"
-        android:inputType="phone"
-        android:textColor="@color/font_black_content"
-        android:textColorHint="@color/text_gray"
-        android:textCursorDrawable="@drawable/button_select_bg"
-        android:textSize="@dimen/main_body_text_size_14" />
-
-    <Button
-        android:id="@+id/btn_authorization"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="确认授权" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
+        <com.daiqile.xianjindai.view.ClearEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_bg_line_gray"
+            android:hint="请输入姓名"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:text=""
+            android:textColor="@color/font_black_content"
+            android:textColorHint="@color/text_gray"
+            android:textCursorDrawable="@drawable/button_select_bg"
+            android:textSize="@dimen/main_body_text_size_14" />
+        <!--<EditText-->
+        <!--android:id="@+id/editName"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@drawable/edit_bg_line_gray"-->
+        <!--android:hint="请输入姓名"-->
+        <!--android:imeOptions="actionUnspecified"-->
+        <!--android:maxLines="1"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:singleLine="true"-->
+        <!--android:textColor="#5B595A"-->
+        <!--android:textColorHint="#5B595A"-->
+        <!--android:textCursorDrawable="@null"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:textSize="15sp"-->
+        <!--/>-->
+        <com.daiqile.xianjindai.view.ClearEditText
+            android:id="@+id/et_carid"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_bg_line_gray"
+            android:hint="请输入身份证"
+            android:inputType="number"
+            android:paddingLeft="5dp"
+            android:textColor="@color/font_black_content"
+            android:textColorHint="@color/text_gray"
+            android:textCursorDrawable="@drawable/button_select_bg"
+            android:textSize="@dimen/main_body_text_size_14" />
+
+        <com.daiqile.xianjindai.view.ClearEditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_bg_line_gray"
+            android:hint="请输入手机号码"
+            android:inputType="phone"
+            android:paddingLeft="5dp"
+            android:textColor="@color/font_black_content"
+            android:textColorHint="@color/text_gray"
+            android:textCursorDrawable="@drawable/button_select_bg"
+            android:textSize="@dimen/main_body_text_size_14" />
+
+        <Button
+            android:id="@+id/btn_authorization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/blue"
+            android:text="确认授权"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
 </LinearLayout>

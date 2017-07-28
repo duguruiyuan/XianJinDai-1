@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
@@ -19,6 +20,8 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zkw on 2017/7/27.
@@ -33,6 +36,12 @@ public class BankCertificateAdapter extends RecyclerArrayAdapter<BankCertificate
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         return new BankCertificateViewHolder(parent);
+    }
+
+    ArrayList<String> strings = new ArrayList<>();
+
+    public List<String> getImageList() {
+        return strings;
     }
 
     class BankCertificateViewHolder extends BaseViewHolder<BankCertificateBean.ImageBean> {
@@ -51,27 +60,35 @@ public class BankCertificateAdapter extends RecyclerArrayAdapter<BankCertificate
         public void setData(BankCertificateBean.ImageBean data) {
             super.setData(data);
             if (TextUtils.isEmpty(data.getUrl())) {
-                Glide.with(MyApplication.getInstance().getApplicationContext()).load(data.getRes())
+                Glide.with(MyApplication.getInstance().getApplicationContext()).load(data.getRes()).error(data.getRes())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .skipMemoryCache(false)
                         .into(ivHead);
+                strings.add(getAdapterPosition(),data.getRes() + "");
             } else if (data.isFlag()) {
                 File file = new File(data.getUrl());
                 if (file.exists()) {
-                    Glide.with(MyApplication.getInstance().getApplicationContext()).load(file)
+                    Glide.with(MyApplication.getInstance().getApplicationContext()).load(file).error(data.getRes())
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .skipMemoryCache(false)
                             .into(ivHead);
+                    strings.add(getAdapterPosition(),file.getAbsolutePath());
                 }
             } else {
                 try {
                     Glide.with(MyApplication.getInstance().getApplicationContext())
                             .load(String.format("%s%s", Constants.BASE_URL, data.getUrl()))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .skipMemoryCache(false)
                             .error(data.getRes()).into(ivHead);
+                    strings.add(getAdapterPosition(),String.format("%s%s", Constants.BASE_URL, data.getUrl()));
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    File file = new File(data.getUrl());
-//                    Glide.with(MyApplication.getInstance().getApplicationContext()).load(file)
-//                            .into(ivHead);
                 }
             }
             tvMark.setText(String.format("银行流水%d", (data.getPostion() + 1)));
         }
     }
+
+
 }

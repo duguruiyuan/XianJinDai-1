@@ -19,11 +19,13 @@
     <com.daiqile.xianjindai.view.ClearEditText
         android:id="@+id/et_servert_code"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/edit_bg_line_gray"
         android:hint="请输入服务号"
         android:inputType="textPersonName"
         android:maxLines="1"
-        android:text=""
+        android:paddingLeft="5dp"
         android:textColor="@color/font_black_content"
         android:textColorHint="@color/text_gray"
         android:textCursorDrawable="@drawable/button_select_bg"
@@ -33,6 +35,9 @@
         android:id="@+id/btn_query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="登录" />
+        android:layout_margin="10dp"
+        android:background="@color/blue"
+        android:text="登录"
+        android:textColor="@color/white" />
 
 </LinearLayout>

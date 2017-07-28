@@ -10,8 +10,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/baiqishi" />
+            <option value="$PROJECT_DIR$/lianlianPay" />
             <option value="$PROJECT_DIR$/mvlib" />
             <option value="$PROJECT_DIR$/picselector" />
+            <option value="$PROJECT_DIR$/udidsafe" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

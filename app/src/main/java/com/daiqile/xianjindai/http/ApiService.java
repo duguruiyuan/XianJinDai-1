@@ -86,7 +86,7 @@ public interface ApiService {
 
 
     //紧急联系人
-    @POST("xjd/front/user/updateRelative")
+    @POST("/xjd/front/user/updateRelative")
     @FormUrlEncoded
     Observable<Result> updateRelative(@FieldMap Map<String, String> map);
 
@@ -122,6 +122,10 @@ public interface ApiService {
                                      @Part() List<MultipartBody.Part> parts);
 
 
-
+    //支付回调
+    @POST("xjd/front/loan/repayment")
+    @FormUrlEncoded
+    Observable<Result> paycallback(@Field("lid") String lid,
+                                   @Field("shouldRepayAmount") String shouldRepayAmount);
 
 }

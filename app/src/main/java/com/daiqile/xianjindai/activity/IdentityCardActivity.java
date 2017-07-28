@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.authreal.api.AuthBuilder;
+import com.authreal.api.OnResultListener;
 import com.bumptech.glide.Glide;
 import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.MyApplication;
@@ -117,14 +119,42 @@ public class IdentityCardActivity extends BaseActivity {
     @OnClick({R.id.topbar, R.id.ll_front_card, R.id.ll_contrary_card, R.id.ll_face_photo, R.id.btn_card})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+
             case R.id.ll_front_card://正面
-                showCameraType(0);
-                break;
+//                AuthBuilder authBuilder = new AuthBuilder(Constants.OUTORDERID, Constants.AUTHKEY,
+//                        Constants.URLNOTIFY, new OnResultListener() {
+//                    @Override
+//                    public void onResult(String s) {
+//                        Log.d("IdentityCardActivity", s);
+//                    }
+//                });
+//                authBuilder.faceAuth(this);
+//                break;
             case R.id.ll_contrary_card://反面
-                showCameraType(1);
-                break;
+//                new AuthBuilder(Constants.OUTORDERID, Constants.AUTHKEY,
+//                        Constants.URLNOTIFY, new OnResultListener() {
+//                    @Override
+//                    public void onResult(String s) {
+//                        Log.d("IdentityCardActivity", s);
+//                    }
+//                });
+//                break;
             case R.id.ll_face_photo://拍摄人脸
-                showCameraType(2);
+//                new AuthBuilder(Constants.OUTORDERID, Constants.AUTHKEY,
+//                        Constants.URLNOTIFY, new OnResultListener() {
+//                    @Override
+//                    public void onResult(String s) {
+//                        Log.d("IdentityCardActivity", s);
+//                    }
+//                });
+                AuthBuilder authBuilder = new AuthBuilder(Constants.OUTORDERID, Constants.AUTHKEY,
+                        Constants.URLNOTIFY, new OnResultListener() {
+                    @Override
+                    public void onResult(String s) {
+                        Log.d("IdentityCardActivity", s);
+                    }
+                });
+                authBuilder.faceAuth(this);
                 break;
             case R.id.btn_card://提交按钮
                 // TODO: 2017/7/26 提交

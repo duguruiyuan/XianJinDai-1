@@ -2,15 +2,14 @@ package com.daiqile.xianjindai.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.FutureTarget;
+import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.Fragment.bean.UserInfoBean;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
@@ -28,9 +27,8 @@ import com.yanzhenjie.album.Album;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import okhttp3.MediaType;
@@ -62,12 +60,13 @@ public class BankCertificateActivity extends BaseActivity {
 
     ArrayList<String> imageList = new ArrayList<>();
     ArrayList<BankCertificateBean.ImageBean> list = new ArrayList<>();
-    ArrayList<String> myFileList = new ArrayList<>();
 
     @Override
     protected int initLayout() {
         return R.layout.activity_bank_certificate;
     }
+
+    UserInfoBean mUserInfoBean;
 
     @Override
     protected void loadData() {
@@ -104,14 +103,15 @@ public class BankCertificateActivity extends BaseActivity {
             @Override
             public void onNext(BaseBean baseBean) {
                 UserInfoBean userInfoBean = (UserInfoBean) baseBean;
-                list.add(new BankCertificateBean.ImageBean(0, userInfoBean.getUsers().get(0).getPicOne(), R.drawable.my_photo));
-                list.add(new BankCertificateBean.ImageBean(1, userInfoBean.getUsers().get(0).getPicTwo(), R.drawable.my_photo));
-                list.add(new BankCertificateBean.ImageBean(2, userInfoBean.getUsers().get(0).getPicThree(), R.drawable.my_photo));
-                list.add(new BankCertificateBean.ImageBean(3, userInfoBean.getUsers().get(0).getPicFour(), R.drawable.my_photo));
-                list.add(new BankCertificateBean.ImageBean(4, userInfoBean.getUsers().get(0).getPicFive(), R.drawable.my_photo));
-                list.add(new BankCertificateBean.ImageBean(5, userInfoBean.getUsers().get(0).getPicSix(), R.drawable.my_photo));
-                list.add(new BankCertificateBean.ImageBean(6, userInfoBean.getUsers().get(0).getPicSeven(), R.drawable.my_photo));
-                list.add(new BankCertificateBean.ImageBean(7, userInfoBean.getUsers().get(0).getPicEight(), R.drawable.my_photo));
+                mUserInfoBean = userInfoBean;
+                list.add(new BankCertificateBean.ImageBean(0, mUserInfoBean.getUsers().get(0).getPicOne(), R.drawable.my_photo));
+                list.add(new BankCertificateBean.ImageBean(1, mUserInfoBean.getUsers().get(0).getPicTwo(), R.drawable.my_photo));
+                list.add(new BankCertificateBean.ImageBean(2, mUserInfoBean.getUsers().get(0).getPicThree(), R.drawable.my_photo));
+                list.add(new BankCertificateBean.ImageBean(3, mUserInfoBean.getUsers().get(0).getPicFour(), R.drawable.my_photo));
+                list.add(new BankCertificateBean.ImageBean(4, mUserInfoBean.getUsers().get(0).getPicFive(), R.drawable.my_photo));
+                list.add(new BankCertificateBean.ImageBean(5, mUserInfoBean.getUsers().get(0).getPicSix(), R.drawable.my_photo));
+                list.add(new BankCertificateBean.ImageBean(6, mUserInfoBean.getUsers().get(0).getPicSeven(), R.drawable.my_photo));
+                list.add(new BankCertificateBean.ImageBean(7, mUserInfoBean.getUsers().get(0).getPicEight(), R.drawable.my_photo));
                 adapter.addAll(list);
                 adapter.notifyDataSetChanged();
             }
@@ -162,37 +162,79 @@ public class BankCertificateActivity extends BaseActivity {
     }
 
     private void loanUploadImg() {
-        List<File> fileList = new ArrayList<>();
-        for (String s : myFileList) {
-            if (!TextUtils.isEmpty(s)) {
-                fileList.add(new File(s));
-            }
-        }
-        if (fileList.size() > 0) {
-            ApiRequest.request(MyApplication.getInstance().apiService.loanUploadImg(MyApplication.getInstance().getUid(),
-                    filesToMultipartBodyParts(fileList)), new Subscriber<Result>() {
-                @Override
-                public void onCompleted() {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    List<File> fileList = new ArrayList<>();
 
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    ToastUtils.showMessage(getString(R.string.str_http_network_error));
-                }
-
-                @Override
-                public void onNext(Result result) {
-                    if (result.isSuccess()) {
-                        ToastUtils.showMessage("上传成功");
-                    } else {
-                        ToastUtils.showMessage(result.getMsg());
+                    for (String s : adapter.getImageList()) {
+                        FutureTarget<File> fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
+                                .load(String.format("%s", s)).downloadOnly(100, 100);
+                        fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
                     }
+
+//                    fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
+//                            .load(String.format("%s%s", Constants.BASE_URL, list.get(1).getUrl())).downloadOnly(100, 100);
+//                    fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
+//
+//                    fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
+//                            .load(String.format("%s%s", Constants.BASE_URL, list.get(2).getUrl())).downloadOnly(100, 100);
+//                    fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
+//
+//                    fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
+//                            .load(String.format("%s%s", Constants.BASE_URL, list.get(3).getUrl())).downloadOnly(100, 100);
+//                    fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
+//
+//                    fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
+//                            .load(String.format("%s%s", Constants.BASE_URL, list.get(4).getUrl())).downloadOnly(100, 100);
+//                    fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
+//
+//                    fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
+//                            .load(String.format("%s%s", Constants.BASE_URL, list.get(5).getUrl())).downloadOnly(100, 100);
+//                    fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
+//
+//                    fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
+//                            .load(String.format("%s%s", Constants.BASE_URL, list.get(6).getUrl())).downloadOnly(100, 100);
+//                    fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
+//
+//                    fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
+//                            .load(String.format("%s%s", Constants.BASE_URL, list.get(7).getUrl())).downloadOnly(100, 100);
+//                    fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
+
+                    if (fileList.size() > 0) {
+                        ApiRequest.request(MyApplication.getInstance().apiService.loanUploadImg(MyApplication.getInstance().getUid(),
+                                filesToMultipartBodyParts(fileList)), new Subscriber<Result>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                ToastUtils.showMessage(getString(R.string.str_http_network_error));
+                            }
+
+                            @Override
+                            public void onNext(Result result) {
+                                if (result.isSuccess()) {
+                                    ToastUtils.showMessage("上传成功");
+                                } else {
+                                    ToastUtils.showMessage(result.getMsg());
+                                }
+                            }
+                        });
+                    } else {
+                        ToastUtils.showMessage("最小上传一张图片");
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
                 }
-            });
-        } else {
-            ToastUtils.showMessage("最小上传一张图片");
-        }
+            }
+        }.start();
     }
 
     @Override
@@ -201,7 +243,6 @@ public class BankCertificateActivity extends BaseActivity {
             if (resultCode == RESULT_OK) {
                 list.get(mPostion).setUrl(Album.parseResult(data).get(0));
                 list.get(mPostion).setFlag(true);
-                myFileList.add(Album.parseResult(data).get(0));
                 adapter.notifyDataSetChanged();
             } else if (resultCode == RESULT_CANCELED) {
             }
