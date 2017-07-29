@@ -60,7 +60,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="120dp"
                 android:background="@color/material_lightBlue_A200"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -262,7 +262,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_below="@+id/rl"
-                android:background="#fff" />
+                android:background="@drawable/divider" />
 
             <RelativeLayout
                 android:id="@+id/rl1"
@@ -325,16 +325,17 @@
                     android:textSize="16sp" />
             </RelativeLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@color/material_white"></LinearLayout>
+                android:layout_height="60dp"
+                android:background="@color/material_white" />
 
             <Button
                 android:id="@+id/btn_borrow"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_round_blue"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@color/blue"
                 android:text="下一步"
                 android:textColor="@color/material_white"
                 android:textSize="16sp" />

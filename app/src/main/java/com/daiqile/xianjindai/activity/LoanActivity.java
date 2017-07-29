@@ -79,6 +79,18 @@ public class LoanActivity extends BaseActivity {
 
                         @Override
                         public void onNext(UserInfoBean userInfoBean) {
+//                            Intent intent = new Intent();
+//                            intent.setClass(LoanActivity.this, LoanSuggestsActivity.class);
+//                            switch (view.getId()) {
+//                                case R.id.rl_legal_person:
+//                                    intent.putExtra(Constants.LOANTYPE, "2");
+//                                    break;
+//                                case R.id.rl_house:
+//                                    intent.putExtra(Constants.LOANTYPE, "3");
+//                                    break;
+//                            }
+//                            startActivity(intent);
+                            // TODO: 2017/7/29 一定需要印刷
                             UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
                             if (0 == usersBean.getHasIdcardInfo()) {
                                 ToastUtils.showMessage("请先完成实名认证");
@@ -93,15 +105,14 @@ public class LoanActivity extends BaseActivity {
                             } else if (!usersBean.getCity().equals("宁波")) {
                                 ToastUtils.showMessage(getString(R.string.str_rule));
                             } else {
-                                // TODO: 2017/7/27 需要修改的
                                 Intent intent = new Intent();
-                                intent.setClass(LoanActivity.this, BorrowActivity.class);
+                                intent.setClass(LoanActivity.this, LoanSuggestsActivity.class);
                                 switch (view.getId()) {
                                     case R.id.rl_legal_person:
-                                        intent.putExtra(Constants.LOANTYPE, "3");
+                                        intent.putExtra(Constants.LOANTYPE, "2");
                                         break;
                                     case R.id.rl_house:
-                                        intent.putExtra(Constants.LOANTYPE, "4");
+                                        intent.putExtra(Constants.LOANTYPE, "3");
                                         break;
                                 }
                                 startActivity(intent);

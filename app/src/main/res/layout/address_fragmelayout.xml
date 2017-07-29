@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="30dp"
+    android:gravity="center"
     android:orientation="horizontal">
 
     <TextView
@@ -19,8 +20,8 @@
         android:layout_height="30dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="请选择市"
         android:paddingLeft="10dp"
+        android:text="请选择市"
         android:textSize="@dimen/main_body_text_size_14" />
 
     <TextView
@@ -29,7 +30,7 @@
         android:layout_height="30dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="请选择区"
         android:paddingLeft="10dp"
+        android:text="请选择区"
         android:textSize="@dimen/main_body_text_size_14" />
 </LinearLayout>

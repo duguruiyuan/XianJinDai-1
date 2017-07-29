@@ -24,6 +24,7 @@ import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.activity.BorrowActivity;
 import com.daiqile.xianjindai.activity.IdentityCardActivity;
+import com.daiqile.xianjindai.activity.LoanSuggestsActivity;
 import com.daiqile.xianjindai.activity.LoginActivity;
 
 import com.daiqile.xianjindai.activity.ThirdPartCertificationActivity;
@@ -186,6 +187,19 @@ public class IndexFragment extends BaseFragment {
 
                         @Override
                         public void onNext(UserInfoBean userInfoBean) {
+//                            Intent intent = new Intent();
+//                            intent.setClass(mActivity, LoanSuggestsActivity.class);
+//                            switch (view.getId()) {
+//                                case R.id.rl_person:
+//                                    intent.putExtra(Constants.LOANTYPE, "0");
+//                                    break;
+//                                case R.id.rl_home_liren:
+//                                    intent.putExtra(Constants.LOANTYPE, "1");
+//                                    break;
+//                            }
+//                            startActivity(intent);
+                            // TODO: 2017/7/29 一定需要印刷
+
                             UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
                             if (0 == usersBean.getHasIdcardInfo()) {
                                 ToastUtils.showMessage("请先完成实名认证");
@@ -201,7 +215,7 @@ public class IndexFragment extends BaseFragment {
                                 startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
                             } else {
                                 Intent intent = new Intent();
-                                intent.setClass(mActivity, BorrowActivity.class);
+                                intent.setClass(mActivity, LoanSuggestsActivity.class);
                                 switch (view.getId()) {
                                     case R.id.rl_person:
                                         intent.putExtra(Constants.LOANTYPE, "0");

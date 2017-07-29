@@ -1,29 +1,35 @@
 package com.daiqile.xianjindai.activity;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.daiqile.xianjindai.Fragment.bean.UserInfoBean;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
-import com.daiqile.xianjindai.base.BaseActivity;
-import com.daiqile.xianjindai.model.Province;
-import com.daiqile.xianjindai.model.ProvinceCityArea;
+import com.daiqile.xianjindai.Result;
+import com.daiqile.xianjindai.UserInfoRequest;
+import com.daiqile.xianjindai.utils.ApiRequest;
+import com.daiqile.xianjindai.utils.CallBack;
 import com.daiqile.xianjindai.utils.SoftInputUtil;
+import com.daiqile.xianjindai.view.AddressFrameLayout;
 import com.daiqile.xianjindai.view.TopBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
+import suangrenduobao.daiqile.com.mvlib.utils.RegexValidateUtil;
+import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
+import suangrenduobao.daiqile.com.mvlib.utils.http.BaseBean;
+
 
 /**
  * 个人信息页面
@@ -34,54 +40,168 @@ public class PersonalDetailsActivity extends BaseActivity {
             TopBar topbar;
     @BindView(R.id.et_phone)//手机号码
             EditText etPhone;
-    @BindView(R.id.et_province)//省
-            TextView etProvince;
-    @BindView(R.id.et_city)//市
-            TextView etCity;
-    @BindView(R.id.et_country)//区
-            TextView etCountry;
     @BindView(R.id.et_address_detail)//详细地址
             EditText etAddressDetail;
     @BindView(R.id.et_work_address)//工作单位
             EditText etWorkAddress;
-    @BindView(R.id.btn_bind_card)//提交按钮
-            Button btnBindCard;
     @BindView(R.id.et_work_address_phone)//工作单位号码
             EditText etWorkAddressPhone;
-    private Activity mActivity;
-    private MyApplication application;
-
-    OptionsPickerView provinceOptions;//选择省
-    OptionsPickerView cityOptions;//选择市
-    OptionsPickerView countryOptions;//选择县
-
-    private ArrayList<ProvinceCityArea.ProvinceListBean> provinceList = new ArrayList<>();//省份列表集合
-    private ArrayList<String> provinceName = new ArrayList<>();//省份名称集合
-    private ArrayList<String> provinceId = new ArrayList<>();//省份id集合
-
-    private ArrayList<ProvinceCityArea.CityListBean> cityList = new ArrayList<>();//城市列表集合
-    private ArrayList<String> cityName = new ArrayList<>();//城市名称集合
-    private ArrayList<String> cityNIDs = new ArrayList<>();//城市id集合
-
-    private ArrayList<ProvinceCityArea.AreaListBean> countryList = new ArrayList<>();//区域列表集合
-    private ArrayList<String> countryName = new ArrayList<>();//区域名称集合
-    private ArrayList<String> countryNIDs = new ArrayList<>();//区域id集合
-
-    private String provinceNID = "";//选中省份id
-    private String cityNID = "";//选中城市id
-    private String countryNID = "";//选中区域id
+    @BindView(R.id.af_address)
+    AddressFrameLayout afAddress;
+    @BindView(R.id.et_work_name)
+    EditText etWorkName;
+    @BindView(R.id.et_housing_situation)
+    EditText etHousingSituation;
+    @BindView(R.id.et_marriage_status)
+    TextView etMarriageStatus;
 
     @Override
-    public void init() {
-        mActivity = PersonalDetailsActivity.this;
-        application = (MyApplication) getApplication();
-        provinceOptions = new OptionsPickerView(mActivity);
-        cityOptions = new OptionsPickerView(mActivity);
-        countryOptions = new OptionsPickerView(mActivity);
+    public int initLayout() {
+        return R.layout.activity_personal_details;
+    }
 
-        etCity.setVisibility(View.INVISIBLE);
-        etCountry.setVisibility(View.INVISIBLE);
-        getProvince();
+
+    @OnClick({R.id.btn_bind_card, R.id.et_marriage_status, R.id.tv_other_optional})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_bind_card:
+                String strPhone = etPhone.getText().toString().trim();
+                if (TextUtils.isEmpty(strPhone)) {
+                    ToastUtils.showMessage("请输入手机号码");
+                    return;
+                }
+                if (!RegexValidateUtil.checkCellphone(strPhone)) {
+                    ToastUtils.showMessage("请输入正确的手机号码");
+                    return;
+                }
+                if ("-1".equals(afAddress.getCityId())) {
+                    ToastUtils.showMessage("台湾，香港，澳门这些地方不能申请");
+                    return;
+                }
+                if (TextUtils.isEmpty(strPhone)) {
+                    ToastUtils.showMessage("请输入手机号码");
+                    return;
+                }
+
+                if ("-1".equals(afAddress.getProvinceId())) {
+                    ToastUtils.showMessage("请选择省市区");
+                    return;
+                }
+
+                String strAddressDetail = etAddressDetail.getText().toString().trim();
+                if (TextUtils.isEmpty(strAddressDetail)) {
+                    ToastUtils.showMessage("请输入详细地址");
+                    return;
+                }
+
+
+                String strWorkName = etWorkName.getText().toString().trim();
+                if (TextUtils.isEmpty(strWorkName)) {
+                    ToastUtils.showMessage("请输入工作单位");
+                    return;
+                }
+                String strWorkAddressPhone = etWorkAddressPhone.getText().toString().trim();
+                if (TextUtils.isEmpty(strWorkAddressPhone)) {
+                    ToastUtils.showMessage("请输入公司电话");
+                    return;
+                }
+                String strWorkAddress = etWorkAddress.getText().toString().trim();
+                if (TextUtils.isEmpty(strWorkAddress)) {
+                    ToastUtils.showMessage("请输入公司地址");
+                    return;
+                }
+                String strHousingSituation = etHousingSituation.getText().toString().trim();
+                if (TextUtils.isEmpty(strHousingSituation)) {
+                    ToastUtils.showMessage("请输入住房情况");
+                    return;
+                }
+                String strMarriageStatus = etMarriageStatus.getText().toString().trim();
+                if (TextUtils.isEmpty(strMarriageStatus)) {
+                    ToastUtils.showMessage("请选择婚姻情况");
+                    return;
+                }
+
+                Map<String, String> map = new HashMap<>();
+                map.put("userId", MyApplication.getInstance().getUid());
+                map.put("other_phone", strPhone);
+                map.put("province_id", afAddress.getProvinceId());
+                map.put("city_id", afAddress.getCityId());
+                map.put("county_id", afAddress.getCountryId());
+                map.put("area", strAddressDetail);
+                map.put("company_phone", strWorkAddressPhone);
+                map.put("company", strWorkName);
+                map.put("house_situation", strHousingSituation);
+                map.put("company_address", strWorkAddress);
+                map.put("marriage", strMarriageStatus);
+                ApiRequest.request(MyApplication.getInstance().apiService.userInfo(map), new Subscriber<Result>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtils.showMessage(getString(R.string.str_http_network_error));
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if (result.isSuccess()) {
+                            finish();
+                        }
+                        ToastUtils.showMessage(result.getMsg());
+                    }
+                });
+
+
+                break;
+
+            case R.id.et_marriage_status:
+                if (SoftInputUtil.isOpen(mContext)) {
+                    SoftInputUtil.closeSoftInput(mContext, etMarriageStatus);
+                }
+                marriageOptions.show();
+                break;
+
+            case R.id.tv_other_optional:
+                //其他信息 跳转
+                startActivity(new Intent(mActivity, OtherOptionalActivity.class));
+                break;
+        }
+    }
+
+    @Override
+    protected boolean switchToolbar() {
+        return false;
+    }
+
+    @Override
+    protected void loadData() {
+        UserInfoRequest.requestUserInfo(new CallBack() {
+            @Override
+            public void onNext(BaseBean baseBean) {
+                UserInfoBean.UsersBean userInfoBean = ((UserInfoBean) baseBean).getUsers().get(0);
+                etPhone.setText(userInfoBean.getOtherPhone());
+
+                etAddressDetail.setText(userInfoBean.getArea());
+
+                etWorkName.setText(userInfoBean.getCompany());
+                etWorkAddressPhone.setText(userInfoBean.getCompanyPhone());
+
+                etWorkAddress.setText(userInfoBean.getCompanyAddress());
+                etHousingSituation.setText(userInfoBean.getHouseSituation());
+                etMarriageStatus.setText(userInfoBean.getMarriage());
+
+                afAddress.setAddress(userInfoBean.getProvince(), userInfoBean.getCity(),
+                        userInfoBean.getCounty());
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+
         topbar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
             @Override
             public void leftClick() {
@@ -93,187 +213,27 @@ public class PersonalDetailsActivity extends BaseActivity {
 
             }
         });
-    }
-
-    /**
-     * 选择省份
-     */
-    private void getProvince() {
-        application.apiService.getProvinceList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ProvinceCityArea>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(ProvinceCityArea province) {
-                        provinceName.clear();
-                        provinceId.clear();
-                        provinceList.clear();
-                        provinceList.addAll(province.getProvinceList());
-                        for (int i = 0; i < provinceList.size(); i++) {
-                            provinceName.add(provinceList.get(i).getName());
-                            provinceId.add(provinceList.get(i).getId() + "");
-                        }
-                        provinceOptions.setPicker(provinceName);
-                        provinceOptions.setTitle("选择省");
-                        provinceOptions.setCyclic(false);
-                        provinceOptions.setSelectOptions(0);
-                        provinceOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                            @Override
-                            public void onOptionsSelect(int options1, int option2, int options3) {
-                                etCity.setVisibility(View.VISIBLE);
-                                etProvince.setText(provinceName.get(options1));
-                                provinceNID = provinceId.get(options1);
-                                getCity(provinceNID);
-                            }
-                        });
-                    }
-                });
-    }
-
-    /**
-     * 选择城市
-     *
-     * @param id
-     */
-    private void getCity(final String id) {
-        application.apiService.getCityList(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ProvinceCityArea>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(ProvinceCityArea city) {
-                        cityName.clear();
-                        cityNIDs.clear();
-                        cityList.clear();
-                        cityList.addAll(city.getCityList());
-                        for (int i = 0; i < cityList.size(); i++) {
-                            cityName.add(cityList.get(i).getName());
-                            cityNIDs.add(cityList.get(i).getId() + "");
-                        }
-                        cityOptions.setPicker(cityName);
-                        cityOptions.setTitle("选择市");
-                        cityOptions.setCyclic(false);
-                        cityOptions.setSelectOptions(0);
-                        etCity.setText(cityName.get(0));
-                        cityNID = cityNIDs.get(0);
-                        cityOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                            @Override
-                            public void onOptionsSelect(int options1, int option2, int options3) {
-                                etCountry.setVisibility(View.VISIBLE);
-                                etCity.setText(cityName.get(options1));
-                                cityNID = cityNIDs.get(options1);
-                                getCounty(cityNID);
-                            }
-                        });
-                    }
-
-
-                });
-    }
-
-    /**
-     * 选择区
-     *
-     * @param id
-     */
-    private void getCounty(String id) {
-
-        application.apiService.getCountryList(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ProvinceCityArea>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(ProvinceCityArea country) {
-                        countryName.clear();
-                        countryNIDs.clear();
-                        countryList.clear();
-                        countryList.addAll(country.getAreaList());
-                        for (int i = 0; i < countryList.size(); i++) {
-                            countryName.add(countryList.get(i).getName());
-                            countryNIDs.add(countryList.get(i).getId() + "");
-                        }
-                        etCountry.setText(countryName.get(0));
-                        countryNID = countryNIDs.get(0);
-                        countryOptions.setPicker(countryName);
-                        countryOptions.setTitle("选择区");
-                        countryOptions.setCyclic(false);
-                        countryOptions.setSelectOptions(0);
-                        countryOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
-                            @Override
-                            public void onOptionsSelect(int options1, int option2, int options3) {
-                                etCountry.setText(countryName.get(options1));
-                                countryNID = countryNIDs.get(options1);
-                            }
-                        });
-                    }
-                });
-    }
-
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_personal_details;
-    }
-
-    @Override
-    public Activity bindActivity() {
-        return this;
-    }
-
-
-    @OnClick({R.id.et_province, R.id.et_city, R.id.et_country, R.id.btn_bind_card})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.et_province:
-                if (SoftInputUtil.isOpen(mActivity)) {
-                    SoftInputUtil.closeSoftInput(mActivity, etProvince);
+        if (null == marriageList) {
+            marriageList = new ArrayList<>();
+            marriageList.add("已婚已育");
+            marriageList.add("已婚未育");
+            marriageList.add("未婚");
+            marriageList.add("离异");
+            marriageOptions = new OptionsPickerView(mContext);
+            marriageOptions.setCancelable(true);
+            marriageOptions.setPicker(marriageList);
+            marriageOptions.setCyclic(false);
+            marriageOptions.setSelectOptions(0);
+            marriageOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                @Override
+                public void onOptionsSelect(int options1, int option2, int options3) {
+                    etMarriageStatus.setText(marriageList.get(options1));
                 }
-                provinceOptions.show();
-                break;
-            case R.id.et_city:
-                if (SoftInputUtil.isOpen(mActivity)) {
-                    SoftInputUtil.closeSoftInput(mActivity, etCity);
-                }
-                cityOptions.show();
-                break;
-            case R.id.et_country:
-                if (SoftInputUtil.isOpen(mActivity)) {
-                    SoftInputUtil.closeSoftInput(mActivity, etCountry);
-                }
-                countryOptions.show();
-                break;
-            case R.id.btn_bind_card:
-                break;
+            });
         }
     }
+
+    ArrayList<String> marriageList;
+    OptionsPickerView marriageOptions;
+
 }

@@ -31,16 +31,8 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-//        assertEquals("com.daiqile.xianjindai", appContext.getPackageName());
-//        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-//
-//        String format = decimalFormat.format("20");
-//        Log.d("BorrowActivity", format);
 
-        int i = Integer.parseInt("202");
 
-        System.out.print(i);
-        Log.d("ExampleInstrumentedTest", "a");
 
     }
 }

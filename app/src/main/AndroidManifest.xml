@@ -11,11 +11,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读写sdcard，storage等等 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <supports-screensapplication
         android:anyDensity="true"
@@ -95,12 +94,12 @@
             android:name=".CropAcitivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.BankCertificateActivity"></activity>
+        <activity android:name=".activity.BankCertificateActivity" />
 
-        <service
-            android:name="com.yintong.secure.service.PayService"
-            >
-        </service>
+        <service android:name="com.yintong.secure.service.PayService" />
+
+        <activity android:name=".activity.OtherOptionalActivity" />
+        <activity android:name=".activity.LoanSuggestsActivity"></activity>
     </application>
 
 </manifest>

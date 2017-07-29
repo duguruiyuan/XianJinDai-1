@@ -72,6 +72,9 @@ public class AddressFrameLayout extends FrameLayout implements View.OnClickListe
         countryText = (TextView) view.findViewById(R.id.tv_select_country);
         countryText.setOnClickListener(this);
 
+        cityText.setVisibility(INVISIBLE);
+        countryText.setVisibility(INVISIBLE);
+
         final File provnceFile = new File(Environment.getExternalStorageDirectory(), Constants.PROVINCELIST);
         final File cityFile = new File(Environment.getExternalStorageDirectory(), Constants.CITYLIST);
         final File arealFile = new File(Environment.getExternalStorageDirectory(), Constants.AREALIST);
@@ -100,6 +103,29 @@ public class AddressFrameLayout extends FrameLayout implements View.OnClickListe
                             provincelistbean = (ArrayList<ProvinceCityArea.ProvinceListBean>) province.getProvinceList();
                             areaListBeen = (ArrayList<ProvinceCityArea.AreaListBean>) province.getAreaList();
                             cityListBeen = (ArrayList<ProvinceCityArea.CityListBean>) province.getCityList();
+
+                            //省
+                            provinceNames = new ArrayList<>();
+                            provinceIds = new ArrayList<>();
+                            for (ProvinceCityArea.ProvinceListBean provinceListBean : provincelistbean) {
+                                provinceNames.add(provinceListBean.getName());
+                                provinceIds.add(provinceListBean.getId() + "");
+                            }
+                            provinceId = provinceIds.get(0);
+
+                            //市
+                            cityNames = new ArrayList<>();
+                            cityIds = new ArrayList<>();
+
+                            //区
+                            countryNames = new ArrayList<>();
+                            countryIds = new ArrayList<>();
+
+                            getCity();
+                            cityId = cityIds.get(0);
+
+                            getCountry();
+                            countryId = countryIds.get(0);
                         }
                     });
         } else {
@@ -153,6 +179,9 @@ public class AddressFrameLayout extends FrameLayout implements View.OnClickListe
                 public void onOptionsSelect(int options1, int option2, int options3) {
                     switch (index) {
                         case 0:
+                            cityText.setVisibility(VISIBLE);
+                            countryText.setVisibility(VISIBLE);
+
                             provinceId = provinceIds.get(options1);
                             getCity();//市
                             if (cityIds.size() > 0) {
@@ -215,7 +244,6 @@ public class AddressFrameLayout extends FrameLayout implements View.OnClickListe
         }
     }
 
-
     private void getCity() {
         cityNames.clear();
         cityIds.clear();
@@ -240,6 +268,56 @@ public class AddressFrameLayout extends FrameLayout implements View.OnClickListe
                 countryIds.add(areaListBean.getId() + "");
             }
         }
+    }
+
+    public void setAddress(String province, String city, String area) {
+        cityText.setVisibility(VISIBLE);
+        countryText.setVisibility(VISIBLE);
+
+
+        provinceText.setText(province);
+        cityText.setText(city);
+        countryText.setText(area);
+        //省
+        for (ProvinceCityArea.ProvinceListBean provinceListBean : provincelistbean) {
+            if (province.equals(provinceListBean.getName())) {
+                provinceId = provinceListBean.getId() + "";
+            }
+        }
+
+        //市
+        for (ProvinceCityArea.CityListBean cityListBean : cityListBeen) {
+            if (city.equals(cityListBean.getName())) {
+                cityId = cityListBean.getId() + "";
+            }
+        }
+        cityNames.clear();
+        cityIds.clear();
+
+        countryNames.clear();
+        countryIds.clear();
+        for (ProvinceCityArea.CityListBean cityListBean : cityListBeen) {
+            if (provinceId.equals(cityListBean.getProvinceId() + "")) {
+                cityNames.add(cityListBean.getName());
+                cityIds.add(cityListBean.getId() + "");
+            }
+        }
+
+        //区
+        for (ProvinceCityArea.AreaListBean areaListBean : areaListBeen) {
+            if (area.equals(areaListBean.getName() + "")) {
+                countryId = areaListBean.getId() + "";
+            }
+        }
+        countryNames.clear();
+        countryIds.clear();
+        for (ProvinceCityArea.AreaListBean areaListBean : areaListBeen) {
+            if (cityId.equals(areaListBean.getCityId() + "")) {
+                countryNames.add(areaListBean.getName());
+                countryIds.add(areaListBean.getId() + "");
+            }
+        }
+
     }
 
 

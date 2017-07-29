@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_loan_suggests"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.daiqile.xianjindai.view.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_min_height_56"
+        android:background="@color/material_white"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        app:leftDrawable="@mipmap/iv_prev"
+        app:title="产品说明"
+        app:titleTextColor="@color/material_lightBlue_A200"
+        app:titleTextSize="@dimen/appbar_text_size_20" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/divider" />
+
+    <TextView
+        android:id="@+id/tv_loan_describe"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:text="TextView"
+        android:textSize="@dimen/main_body_text_size_14" />
+
+    <Button
+        android:id="@+id/btn_card"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:background="@color/blue"
+        android:text="下一步"
+        android:textColor="@color/material_white"
+        android:textSize="16sp" />
+
+</LinearLayout>

@@ -4,17 +4,27 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
+import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.MainActivity;
 import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.base.BaseActivity;
+import com.daiqile.xianjindai.model.ProvinceCityArea;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import suangrenduobao.daiqile.com.mvlib.utils.FileUtils;
 
 /**
  * 启动图页面
@@ -31,6 +41,40 @@ public class LaunchActivity extends BaseActivity {
 //        mActivity = LaunchActivity.this;
 //        application = (MyApplication) getApplication();
         animate(LaunchActivity.this);
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                final File provnceFile = new File(Environment.getExternalStorageDirectory(), Constants.PROVINCELIST);
+                final File cityFile = new File(Environment.getExternalStorageDirectory(), Constants.CITYLIST);
+                final File arealFile = new File(Environment.getExternalStorageDirectory(), Constants.AREALIST);
+
+                if (!provnceFile.exists() || !cityFile.exists() || !arealFile.exists()) {
+                    MyApplication.getInstance().apiService.getProvinceList()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<ProvinceCityArea>() {
+                                @Override
+                                public void onCompleted() {
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.d("AddressFrameLayout", "e:" + e);
+                                }
+
+                                @Override
+                                public void onNext(ProvinceCityArea province) {
+                                    FileUtils.writeObj(cityFile, province.getCityList());
+                                    FileUtils.writeObj(arealFile, province.getAreaList());
+                                    FileUtils.writeObj(provnceFile, province.getProvinceList());
+                                }
+                            });
+                }
+            }
+        }.start();
 
     }
 

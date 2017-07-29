@@ -202,7 +202,6 @@ public class BankCertificateActivity extends BaseActivity {
 //                    fileFutureTarget = Glide.with(MyApplication.getInstance().getApplicationContext())
 //                            .load(String.format("%s%s", Constants.BASE_URL, list.get(7).getUrl())).downloadOnly(100, 100);
 //                    fileList.add(new File(fileFutureTarget.get().getAbsolutePath()));
-
                     if (fileList.size() > 0) {
                         ApiRequest.request(MyApplication.getInstance().apiService.loanUploadImg(MyApplication.getInstance().getUid(),
                                 filesToMultipartBodyParts(fileList)), new Subscriber<Result>() {

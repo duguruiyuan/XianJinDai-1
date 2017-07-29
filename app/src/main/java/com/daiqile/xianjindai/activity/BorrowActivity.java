@@ -71,35 +71,6 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
     @BindView(R.id.btn_borrow)//确认借款按钮
             Button btnBorrow;
 
-//    private Activity mActivity;
-//    @Override
-//    public void init() {
-//        mActivity = BorrowActivity.this;
-//        topBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
-//            @Override
-//            public void leftClick() {
-//                finish();
-//            }
-//
-//            @Override
-//            public void rightClick() {
-//
-//            }
-//        });
-//
-//
-//        //借款日
-//        tvBorrowMoneyDay.setText(String.format("借款日:%s", TimeUtils.timeslashData()));
-//        //还款日
-//        tvRepaymentDay.setText(String.format("还款日:%s", "7"));
-//
-//        borrowDay.setText("21天");
-//
-//        Log.d("BorrowActivity", TimeUtils.timeslashData());
-//
-//    }
-
-
     @OnClick(R.id.btn_borrow)
     public void onClick(View view) {
         switch (view.getId()) {
@@ -107,6 +78,7 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
                 Intent intent = new Intent(mContext, BorrowConfirmActivity.class);
                 Map<String, String> map = new HashMap<>();
                 map.put(Constants.LOANAMOUNT, tvBorrowMoney.getText().toString().trim().replace("¥", ""));
+
 
 //                String.format("%s-%s", TimeUtils.timeslashData(), TimeUtils.timeslashDay(defaultNumber));
 //                map.put(Constants.TERM, defaultNumber + "");
@@ -155,13 +127,13 @@ public class BorrowActivity extends BaseActivity implements SeekBar.OnSeekBarCha
 
             loanInfoBean = loanInfoBseens.get(Integer.parseInt(loanType));
             if ("0".equals(loanType)) {
-                loanType = "1";
+                loanType = "1";//现金贷
             } else if ("1".equals(loanType)) {
-                loanType = "4";
+                loanType = "4";//丽人贷
+            } else if ("2".equals(loanType)) {
+                loanType = "2";//法人
             } else if ("3".equals(loanType)) {
-//                loanType = "4";
-            } else if ("4".equals(loanType)) {
-//                loanType = "4";
+                loanType = "3";//房贷
             }
             Log.d("BorrowActivity", loanType);
         }

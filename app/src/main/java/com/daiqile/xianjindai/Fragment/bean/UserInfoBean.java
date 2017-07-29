@@ -150,10 +150,10 @@ public class UserInfoBean implements BaseBean {
 //        private String realName;
         private String phone;
         private String otherPhone;
-        //        private String companyAddress;
-//        private String companyPhone;
-//        private String company;
-//        private String monthIncome;
+        private String companyAddress;
+        private String companyPhone;
+        private String company;
+        //        private String monthIncome;
 //        private String job;
         private int hasBank;
         private int hasIdcardInfo;
@@ -176,8 +176,8 @@ public class UserInfoBean implements BaseBean {
         private String qq2;
         private String weChat2;
         //        private String education;
-//        private String houseSituation;
-//        private int hasSocial;
+        private String houseSituation;
+        //        private int hasSocial;
 //        private int level;
 //        private int score;
 //        private long createdTime;
@@ -185,22 +185,22 @@ public class UserInfoBean implements BaseBean {
         private int status;
         //        private String remark;
 //        private String freezeDate;
-//        private String province;
-//        private String province_id;
+        private String province;
+        //        private String province_id;
 //        private String parentProvince;
 //        private String parentprovince_id;
         private String city;
         //        private String city_id;
 //        private String parentCity;
 //        private String parentcity_id;
-//        private String county;
-//        private String county_id;
+        private String county;
+        //        private String county_id;
 //        private String parentCounty;
 //        private String parentcounty_id;
-//        private String area;
-//        private String liveTime;
+        private String area;
+        //        private String liveTime;
 //        private String trades;
-//        private String marriage;
+        private String marriage;
         private String firstContactName;
         private String firstContactType;
         private String firstContactCellPhone;
@@ -317,29 +317,30 @@ public class UserInfoBean implements BaseBean {
             this.otherPhone = otherPhone;
         }
 //
-//        public String getCompanyAddress() {
-//            return companyAddress;
-//        }
-//
-//        public void setCompanyAddress(String companyAddress) {
-//            this.companyAddress = companyAddress;
-//        }
+        public String getCompanyAddress() {
+            return companyAddress;
+        }
 
-//        public String getCompanyPhone() {
-//            return companyPhone;
-//        }
-//
-//        public void setCompanyPhone(String companyPhone) {
-//            this.companyPhone = companyPhone;
-//        }
-//
-//        public String getCompany() {
-//            return company;
-//        }
-//
-//        public void setCompany(String company) {
-//            this.company = company;
-//        }
+        public void setCompanyAddress(String companyAddress) {
+            this.companyAddress = companyAddress;
+        }
+
+        public String getCompanyPhone() {
+            return companyPhone;
+        }
+
+        public void setCompanyPhone(String companyPhone) {
+            this.companyPhone = companyPhone;
+        }
+
+        //
+        public String getCompany() {
+            return company;
+        }
+
+        public void setCompany(String company) {
+            this.company = company;
+        }
 //
 //        public String getMonthIncome() {
 //            return monthIncome;
@@ -525,13 +526,13 @@ public class UserInfoBean implements BaseBean {
 //            this.education = education;
 //        }
 
-//        public String getHouseSituation() {
-//            return houseSituation;
-//        }
-//
-//        public void setHouseSituation(String houseSituation) {
-//            this.houseSituation = houseSituation;
-//        }
+        public String getHouseSituation() {
+            return houseSituation;
+        }
+
+        public void setHouseSituation(String houseSituation) {
+            this.houseSituation = houseSituation;
+        }
 
 //        public int getHasSocial() {
 //            return hasSocial;
@@ -581,7 +582,7 @@ public class UserInfoBean implements BaseBean {
             this.status = status;
         }
 
-//        public String getRemark() {
+        //        public String getRemark() {
 //            return remark;
 //        }
 //
@@ -597,13 +598,13 @@ public class UserInfoBean implements BaseBean {
 //            this.freezeDate = freezeDate;
 //        }
 //
-//        public String getProvince() {
-//            return province;
-//        }
-//
-//        public void setProvince(String province) {
-//            this.province = province;
-//        }
+        public String getProvince() {
+            return province;
+        }
+
+        public void setProvince(String province) {
+            this.province = province;
+        }
 //
 //        public String getProvince_id() {
 //            return province_id;
@@ -660,16 +661,16 @@ public class UserInfoBean implements BaseBean {
 //        public void setParentcity_id(String parentcity_id) {
 //            this.parentcity_id = parentcity_id;
 //        }
-//
-//        public String getCounty() {
-//            return county;
-//        }
-//
-//        public void setCounty(String county) {
-//            this.county = county;
-//        }
 
-//        public String getCounty_id() {
+        public String getCounty() {
+            return county;
+        }
+
+        public void setCounty(String county) {
+            this.county = county;
+        }
+
+        //        public String getCounty_id() {
 //            return county_id;
 //        }
 //
@@ -693,13 +694,13 @@ public class UserInfoBean implements BaseBean {
 //            this.parentcounty_id = parentcounty_id;
 //        }
 //
-//        public String getArea() {
-//            return area;
-//        }
-//
-//        public void setArea(String area) {
-//            this.area = area;
-//        }
+        public String getArea() {
+            return area;
+        }
+
+        public void setArea(String area) {
+            this.area = area;
+        }
 //
 //        public String getLiveTime() {
 //            return liveTime;
@@ -717,14 +718,15 @@ public class UserInfoBean implements BaseBean {
 //            this.trades = trades;
 //        }
 //
-//        public String getMarriage() {
-//            return marriage;
-//        }
-//
-//        public void setMarriage(String marriage) {
-//            this.marriage = marriage;
-//        }
-//
+        public String getMarriage() {
+            return marriage;
+        }
+
+        public void setMarriage(String marriage) {
+            this.marriage = marriage;
+        }
+
+        //
         public String getFirstContactName() {
             return firstContactName;
         }

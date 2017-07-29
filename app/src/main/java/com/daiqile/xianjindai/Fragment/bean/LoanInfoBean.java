@@ -42,6 +42,7 @@ public class LoanInfoBean implements BaseBean {
     private int isDay;
     private String loan_expenses;
     private int type;
+    private String describe;
 
     public String getName() {
         return name;
@@ -105,5 +106,13 @@ public class LoanInfoBean implements BaseBean {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 }

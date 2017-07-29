@@ -128,4 +128,28 @@ public interface ApiService {
     Observable<Result> paycallback(@Field("lid") String lid,
                                    @Field("shouldRepayAmount") String shouldRepayAmount);
 
+    //添加个人信息
+    @POST("/xjd/front/user/userInfo")
+    @FormUrlEncoded
+    Observable<Result> userInfo(@FieldMap Map<String, String> map);
+
+    //贷款申请
+    @POST("/xjd/front/loan/apply")
+    @FormUrlEncoded
+    Observable<Result> apply(@FieldMap Map<String, String> map);
+
+
+    //选填信息图片上传
+    @Multipart
+    @POST("xjd/front/loan/optionalForUserInfo")
+    Observable<Result> optionalForUserInfo(@Query("userId") String userId,
+                                           @Query("social_security") String social_security,
+                                           @Query("education") String education,
+                                           @Part() List<MultipartBody.Part> parts);
+
+    @FormUrlEncoded
+    @POST("xjd/front/loan/optionalForUserInfo")
+    Observable<Result> optionalForUserInfo(@Field("userId") String userId,
+                                           @Field("social_security") String social_security,
+                                           @Field("education") String education);
 }

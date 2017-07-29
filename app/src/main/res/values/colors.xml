@@ -6,6 +6,7 @@
 
 
     <color name="white">#ffffff</color>
+    <color name="cccccc_old">#f2f2f2</color>
     <color name="background">#f4f4f4</color>
     <color name="cccccc">#cccccc</color>
     <color name="blue">#00a0f5</color>

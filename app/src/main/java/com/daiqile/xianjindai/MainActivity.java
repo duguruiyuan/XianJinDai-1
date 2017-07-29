@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -18,13 +19,10 @@ import com.daiqile.xianjindai.utils.ToastUtil;
 
 import com.daiqile.xianjindai.view.ViewPagerFix;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import haixianwang.daiqile.com.baiqishi.PermissionUtils;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 
 public class MainActivity extends BaseActivity implements OnBqsDFListener {
@@ -75,27 +73,24 @@ public class MainActivity extends BaseActivity implements OnBqsDFListener {
         )).addItem(new BottomNavigationItem(R.mipmap.icon_nav_user, getString(R.string.account))).
                 setFirstSelectedPosition(0).initialise();
 
-        mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-                                                        @Override
-                                                        public void onTabSelected(int position) {
-//                                                            if (MyApplication.getInstance().isLogin()) {
-                                                            mPager.setCurrentItem(position);
-//                                                            } else {
-//                                                                Log.d("MainActivity", "a");
-//                                                                startActivity(new Intent(mActivity, LoginActivity.class));
-////                                                                mBottomNavigationBar.selectTab(0);
-//                                                                mBottomNavigationBar.setFirstSelectedPosition(0).initialise();
-//                                                            }
-                                                        }
+        mBottomNavigationBar.setTabSelectedListener(
+                new BottomNavigationBar.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(int position) {
+                        mPager.setCurrentItem(position);
+                    }
 
-                                                        @Override
-                                                        public void onTabUnselected(int position) {
-                                                        }
+                    @Override
+                    public void onTabUnselected(int position) {
+                        Log.d("MainActivity", "onTabUnselected:" + position);
+//                        mBottomNavigationBar.setFirstSelectedPosition(0).setActiveColor(R.color.def_reached_color1);//.selectTab(0);
 
-                                                        @Override
-                                                        public void onTabReselected(int position) {
-                                                        }
-                                                    }
+                    }
+
+                    @Override
+                    public void onTabReselected(int position) {
+                    }
+                }
 
         );
 

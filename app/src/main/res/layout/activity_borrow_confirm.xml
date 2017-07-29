@@ -240,30 +240,37 @@
                 android:layout_height="1dp"
                 android:background="@drawable/divider" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/divider"></LinearLayout>
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:background="@drawable/divider"></LinearLayout>-->
 
-            <LinearLayout
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:background="@drawable/divider">-->
+
+            <!--</LinearLayout>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/divider" />
+
+            <TextView
+                android:id="@+id/tv_agreement"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@drawable/divider">
-
-                <TextView
-                    android:id="@+id/tv_agreement"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="《借款与代扣协议》"
-                    android:textColor="@color/material_lightBlue_A200" />
-            </LinearLayout>
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="《借款与代扣协议》"
+                android:textColor="@color/material_lightBlue_A200" />
 
             <Button
                 android:id="@+id/btn_borrow_comfirm"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@drawable/bg_round_blue"
+                android:layout_margin="30dp"
+                android:background="@color/blue"
                 android:text="提交"
                 android:textColor="@color/material_white"
                 android:textSize="16sp" />
