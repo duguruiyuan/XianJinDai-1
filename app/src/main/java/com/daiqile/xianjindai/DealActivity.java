@@ -52,6 +52,12 @@ public class DealActivity extends BaseActivity {
 
     @Override
     protected void loadData() {
-        webView.loadUrl("file:///android_asset/index.html");
+//        http://121.199.54.237:9591/xjd/front/user/loanAgreementPage?loanId=120
+        if (getIntent().hasExtra(Constants.USERID)) {
+            String url = Constants.BASE_URL + "xjd/front/user/loanAgreementPage?loanId=" + getIntent().getStringExtra(Constants.USERID);
+            webView.loadUrl(url);
+        } else {
+            webView.loadUrl("file:///android_asset/index.html");
+        }
     }
 }

@@ -92,6 +92,7 @@ public class RetrofitClient {
                                                         UserPrefs.getInstance().setUid(user.getUid());
                                                         MyApplication.getInstance().initLoginParams(user);
                                                         Log.d("RetrofitClient", "自动登录成功");
+//                                                        httpClient.followRedirects();
                                                     }
                                                 }
                                             });

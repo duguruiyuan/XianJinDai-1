@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.DealActivity;
 import com.daiqile.xianjindai.Fragment.bean.AllBorrowBean;
 import com.daiqile.xianjindai.R;
@@ -52,7 +53,7 @@ public class AllBorrowAdapter extends RecyclerArrayAdapter<AllBorrowBean.ListBea
         }
 
         @Override
-        public void setData(AllBorrowBean.ListBean data) {
+        public void setData(final AllBorrowBean.ListBean data) {
             super.setData(data);
 
             tvBankName.setText(data.getBankName() + " " + RxString.repBank(data.getBankNo()));
@@ -92,7 +93,9 @@ public class AllBorrowAdapter extends RecyclerArrayAdapter<AllBorrowBean.ListBea
             btnProtocol.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getContext().startActivity(new Intent(getContext(), DealActivity.class));
+                    Intent intent = new Intent(getContext(), DealActivity.class);
+                    intent.putExtra(Constants.USERID,data.getId()+"");
+                    getContext().startActivity(intent);
                 }
             });
         }
