@@ -9,6 +9,15 @@ import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.bqs.crawler.cloud.sdk.ChsiAction;
+import com.bqs.crawler.cloud.sdk.MnoAction;
+import com.bqs.crawler.cloud.sdk.OnChsiLoginListener;
+import com.bqs.crawler.cloud.sdk.OnMnoLoginListener;
+import com.bqs.crawler.cloud.sdk.OnSDKInitListener;
+import com.bqs.crawler.cloud.sdk.SDKInitialize;
+import com.bqs.risk.df.android.BqsDF;
+import com.bqs.risk.df.android.BqsParams;
+import com.bqs.risk.df.android.OnBqsDFContactsListener;
 import com.bqs.risk.df.android.OnBqsDFListener;
 import com.daiqile.xianjindai.Fragment.AccountFragment;
 import com.daiqile.xianjindai.Fragment.BorrowingRecordFragment;
@@ -18,11 +27,15 @@ import com.daiqile.xianjindai.activity.LoginActivity;
 import com.daiqile.xianjindai.utils.ToastUtil;
 
 import com.daiqile.xianjindai.view.ViewPagerFix;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import haixianwang.daiqile.com.baiqishi.PermissionUtils;
+import okhttp3.Call;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 
 public class MainActivity extends BaseActivity implements OnBqsDFListener {
@@ -47,6 +60,128 @@ public class MainActivity extends BaseActivity implements OnBqsDFListener {
     @Override
     protected void initConfig() {
         super.initConfig();
+//
+//        OkHttpUtils.post().
+//                url("http://credit.baiqishi.com/clweb/api/mno/getoriginal").
+//                addParams("verifyKey", "0714a66e025d4f999dccab65ff09078c").
+//                addParams("partnerId", "daiqile").
+//                addParams("name", "郭远逵").
+//                addParams("certNo", "362428199301052713").
+//                addParams("mobile", "15949629529")
+//                .build().execute(new StringCallback() {
+//            @Override
+//            public void onError(Call call, Exception e, int id) {
+//                String s = call.toString();
+//                Log.d("MainActivity", s);
+//            }
+//
+//            @Override
+//            public void onResponse(String response, int id) {
+//                Log.d("MainActivity", response);
+//            }
+//        });
+
+//        BqsParams params = new BqsParams();
+//        params.setPartnerId("daiqile");
+//        BqsDF.initialize(this, params);
+//        BqsDF.addOnBqsDFContactsListener(new OnBqsDFContactsListener() {
+//            @Override
+//            public void a(boolean b) {
+//                Log.d("ExampleInstrumentedTest", "b:" + b);
+//            }
+//
+//            @Override
+//            public void onSuccess(String s) {
+//                Log.d("ExampleInstrumentedTest", s);
+//            }
+//
+//            @Override
+//            public void onFailure(String s, String s1) {
+//                Log.d("ExampleInstrumentedTest", s + s1);
+//            }
+//        });
+//        BqsDF.setOnBqsDFListener(new OnBqsDFListener() {
+//            @Override
+//            public void onSuccess(String s) {
+//                Log.d("ExampleInstrumentedTest1","onSuccess:"+ s);
+//            }
+//
+//            @Override
+//            public void onFailure(String s, String s1) {
+//                Log.d("ExampleInstrumentedTest1", "onFailure:"+s + s1);
+//            }
+//        });
+
+//        PermissionUtils.initialize("guo", "362428199301052713", "15949629529", new OnSDKInitListener() {
+//            @Override
+//            public void onSuccess() {
+//                Log.d("MainActivity", "成功");
+//            }
+//
+//            @Override
+//            public void onFailure(String s, String s1) {
+//
+//            }
+//        });
+//        PermissionUtils.service("148880", new OnMnoLoginListener() {
+//            @Override
+//            public void onInputAuthSmsCode() {
+//                Log.d("MainActivity", "onInputAuthSmsCode");
+//            }
+//
+//            @Override
+//            public void onInputLoginSmsCode() {
+//                Log.d("MainActivity", "onInputLoginSmsCode");
+//            }
+//
+//            @Override
+//            public void onLoginSuccess() {
+//                Log.d("MainActivity", "onLoginSuccess");
+//            }
+//
+//            @Override
+//            public void onLoginFailure(String s, String s1) {
+//                Log.d("MainActivity", "onLoginFailure" + s + s1);
+//            }
+//        });
+//        ChsiAction.login("15949629529", "362428199301052713", new OnChsiLoginListener() {
+//            @Override
+//            public void onInputCaptcha(byte[] bytes, String s) {
+//                Log.d("MainActivity", "onInputCaptcha" + s);
+//            }
+//
+//            @Override
+//            public void onLoginSuccess() {
+//                Log.d("MainActivity", "成功");
+//            }
+//
+//            @Override
+//            public void onLoginFailure(String s, String s1) {
+//                Log.d("MainActivity", "onLoginFailure:" + s + s1);
+//            }
+//        });
+//        MnoAction.login("15949629529", "148880", new OnMnoLoginListener() {
+//            @Override
+//            public void onInputAuthSmsCode() {
+//
+//            }
+//
+//            @Override
+//            public void onInputLoginSmsCode() {
+//
+//            }
+//
+//            @Override
+//            public void onLoginSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onLoginFailure(String s, String s1) {
+//                Log.d("MainActivity", "onLoginFailure:" + s + s1);
+//            }
+//        });
+
 
         mPager.setScrollable(false);
         mPager.setOffscreenPageLimit(2);

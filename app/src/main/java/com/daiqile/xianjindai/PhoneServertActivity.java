@@ -2,15 +2,19 @@ package com.daiqile.xianjindai;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.bqs.crawler.cloud.sdk.OnMnoLoginListener;
 import com.daiqile.xianjindai.activity.ThirdPartCertificationActivity;
 import com.daiqile.xianjindai.view.ClearEditText;
 import com.daiqile.xianjindai.view.TopBar;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import haixianwang.daiqile.com.baiqishi.PermissionUtils;
+import okhttp3.Call;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
 import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
 
@@ -54,6 +58,7 @@ public class PhoneServertActivity extends BaseActivity {
             ToastUtils.showMessage("请输入服务号");
             return;
         }
+
         PermissionUtils.service(mEtServertCode, new OnMnoLoginListener() {
             @Override
             public void onInputAuthSmsCode() {

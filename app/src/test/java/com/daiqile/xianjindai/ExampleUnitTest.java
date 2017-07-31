@@ -3,6 +3,9 @@ package com.daiqile.xianjindai;
 import android.content.Context;
 import android.util.Log;
 
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import okhttp3.Call;
 
 import static org.junit.Assert.*;
 
@@ -25,6 +30,25 @@ public class ExampleUnitTest {
 
         int age = getAge("1994.01.06");
         System.out.print(age + "");
+//        ?
+//        verifyKey = 1 & partnerId = daiqile & name = guo & certNo = 362428199301052713 & mobile = 15949629529
+        OkHttpUtils.post().
+                url("https://credit.baiqishi.com/clweb/api/mno/getoriginal").
+                addParams("verifyKey", "ebc860eb9d28438b9e37ff579405591e").
+                addParams("partnerId", "daiqile").
+                addParams("name", "郭").
+                addParams("certNo", "362428199301052713").
+                addParams("mobile", "15949629529")
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                String s = call.toString();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+            }
+        });
     }
 
     private Date parse(String strDate) throws ParseException {

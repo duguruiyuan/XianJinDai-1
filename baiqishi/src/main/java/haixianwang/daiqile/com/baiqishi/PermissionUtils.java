@@ -1,28 +1,21 @@
 package haixianwang.daiqile.com.baiqishi;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.provider.Settings;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.view.View;
 
 
 import com.bqs.crawler.cloud.sdk.BqsParams;
+import com.bqs.crawler.cloud.sdk.ChsiAction;
 import com.bqs.crawler.cloud.sdk.MnoAction;
+import com.bqs.crawler.cloud.sdk.OnChsiLoginListener;
+import com.bqs.crawler.cloud.sdk.OnGetCaptchaListener;
 import com.bqs.crawler.cloud.sdk.OnMnoLoginListener;
 import com.bqs.crawler.cloud.sdk.OnSDKInitListener;
 import com.bqs.crawler.cloud.sdk.SDKInitialize;
+import com.bqs.risk.df.android.BqsDF;
+import com.bqs.risk.df.android.OnBqsDFContactsListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by zkw on 2017/7/13.
@@ -45,6 +38,7 @@ public final class PermissionUtils {
     //验证服务
     public static final void service(String serviceCode, OnMnoLoginListener onMnoLoginListener) {
         MnoAction.login(serviceCode, onMnoLoginListener);
+
     }
 
 

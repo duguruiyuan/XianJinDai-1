@@ -3,6 +3,11 @@ package haixianwang.daiqile.com.baiqishi;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
+
+import com.bqs.risk.df.android.BqsParams;
+import com.bqs.risk.df.android.BqsDF;
+import com.bqs.risk.df.android.OnBqsDFContactsListener;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,5 +27,6 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("haixianwang.daiqile.com.baiqishi.test", appContext.getPackageName());
+
     }
 }

@@ -1,10 +1,15 @@
 package com.daiqile.xianjindai;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.bqs.risk.df.android.BqsDF;
+import com.bqs.risk.df.android.BqsParams;
+import com.bqs.risk.df.android.OnBqsDFContactsListener;
+import com.bqs.risk.df.android.OnBqsDFListener;
 import com.daiqile.xianjindai.utils.ApiRequest;
 
 import org.junit.Test;
@@ -30,9 +35,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
-
-
 
     }
 }
