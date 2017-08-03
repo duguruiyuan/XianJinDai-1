@@ -2,30 +2,23 @@ package com.daiqile.xianjindai;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.bqs.crawler.cloud.sdk.OnMnoLoginListener;
-import com.daiqile.xianjindai.activity.ThirdPartCertificationActivity;
 import com.daiqile.xianjindai.view.ClearEditText;
 import com.daiqile.xianjindai.view.TopBar;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import haixianwang.daiqile.com.baiqishi.PermissionUtils;
-import okhttp3.Call;
+
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
-import suangrenduobao.daiqile.com.mvlib.utils.GsonUtil;
 import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
 
 public class PhoneServertActivity extends BaseActivity {
 
     @BindView(R.id.topbar)
     TopBar topBar;
+
     @BindView(R.id.et_servert_code)
     ClearEditText etServertCode;
 
@@ -64,24 +57,24 @@ public class PhoneServertActivity extends BaseActivity {
         return false;
     }
 
-    class UserInfo {
-        String verifyKey;
-        String partnerId;
-        String name;
-        String certNo;
-        String mobile;
-
-        public UserInfo(String verifyKey, String partnerId, String name, String certNo, String mobile) {
-            this.verifyKey = verifyKey;
-            this.partnerId = partnerId;
-            this.name = name;
-            this.certNo = certNo;
-            this.mobile = mobile;
-        }
-
-        public UserInfo() {
-        }
-    }
+//    class UserInfo {
+//        String verifyKey;
+//        String partnerId;
+//        String name;
+//        String certNo;
+//        String mobile;
+//
+//        public UserInfo(String verifyKey, String partnerId, String name, String certNo, String mobile) {
+//            this.verifyKey = verifyKey;
+//            this.partnerId = partnerId;
+//            this.name = name;
+//            this.certNo = certNo;
+//            this.mobile = mobile;
+//        }
+//
+//        public UserInfo() {
+//        }
+//    }
 
 
     @Override
@@ -111,8 +104,9 @@ public class PhoneServertActivity extends BaseActivity {
             @Override
             public void onLoginSuccess() {
                 //验证成功
-                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
-                finish();
+//                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+                startActivity(new Intent(mActivity, SendSmsCodeActivity.class));
+//                finish();
             }
 
             @Override

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.daiqile.xianjindai.view.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_min_height_56"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        app:leftDrawable="@mipmap/iv_prev"
+        app:title="服务"
+        app:titleTextColor="@color/material_lightBlue_A200"
+        app:titleTextSize="@dimen/appbar_text_size_20" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/divider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.daiqile.xianjindai.view.ClearEditText
+            android:id="@+id/et_servert_code"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/btn_send_sms_code"
+            android:background="@drawable/edit_bg_line_gray"
+            android:hint="请输入验证码"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:textColor="@color/font_black_content"
+            android:textColorHint="@color/text_gray"
+            android:textCursorDrawable="@drawable/button_select_bg"
+            android:textSize="@dimen/main_body_text_size_14" />
+
+        <Button
+            android:id="@+id/btn_send_sms_code"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/blue"
+            android:text="发送验证码"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tip_text_size_12" />
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btn_query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/blue"
+        android:text="登录"
+        android:textColor="@color/white" />
+
+</LinearLayout>

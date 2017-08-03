@@ -16,6 +16,12 @@
         app:titleTextColor="@color/material_lightBlue_A200"
         app:titleTextSize="@dimen/appbar_text_size_20" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/divider" />
+
+
     <com.daiqile.xianjindai.view.ClearEditText
         android:id="@+id/et_servert_code"
         android:layout_width="match_parent"
@@ -37,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@color/blue"
-        android:text="登录"
+        android:text="下一步"
         android:textColor="@color/white" />
 
 </LinearLayout>

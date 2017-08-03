@@ -15,10 +15,8 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
 
     <supports-screensapplication
         android:anyDensity="true"
@@ -103,10 +101,8 @@
         <service android:name="com.yintong.secure.service.PayService" />
 
         <activity android:name=".activity.OtherOptionalActivity" />
-        <activity android:name=".activity.LoanSuggestsActivity"></activity>
-
+        <activity android:name=".activity.LoanSuggestsActivity" />
+        <activity android:name=".SendSmsCodeActivity"></activity>
     </application>
-
-
 
 </manifest>

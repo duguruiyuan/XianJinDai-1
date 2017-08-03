@@ -1,56 +1,25 @@
 package com.daiqile.xianjindai;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.bqs.crawler.cloud.sdk.ChsiAction;
-import com.bqs.crawler.cloud.sdk.MnoAction;
-import com.bqs.crawler.cloud.sdk.OnChsiLoginListener;
-import com.bqs.crawler.cloud.sdk.OnMnoLoginListener;
-import com.bqs.crawler.cloud.sdk.OnSDKInitListener;
-import com.bqs.crawler.cloud.sdk.SDKInitialize;
-import com.bqs.risk.df.android.BqsDF;
-import com.bqs.risk.df.android.BqsParams;
-import com.bqs.risk.df.android.OnBqsDFContactsListener;
-import com.bqs.risk.df.android.OnBqsDFListener;
+
 import com.daiqile.xianjindai.Fragment.AccountFragment;
 import com.daiqile.xianjindai.Fragment.BorrowingRecordFragment;
 import com.daiqile.xianjindai.Fragment.IndexFragment;
 
-import com.daiqile.xianjindai.activity.LoginActivity;
 import com.daiqile.xianjindai.utils.AddressListUtils;
 import com.daiqile.xianjindai.utils.ToastUtil;
 
 import com.daiqile.xianjindai.view.ViewPagerFix;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
-import haixianwang.daiqile.com.baiqishi.PermissionUtils;
-import okhttp3.Call;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
-import suangrenduobao.daiqile.com.mvlib.utils.GsonUtil;
-
-import static com.yintong.secure.e.m.j.s;
 
 public class MainActivity extends BaseActivity {
 
