@@ -11,11 +11,15 @@ import com.daiqile.xianjindai.view.TopBar;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import haixianwang.daiqile.com.baiqishi.PermissionUtils;
 import okhttp3.Call;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
+import suangrenduobao.daiqile.com.mvlib.utils.GsonUtil;
 import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
 
 public class PhoneServertActivity extends BaseActivity {
@@ -39,12 +43,46 @@ public class PhoneServertActivity extends BaseActivity {
 
             }
         });
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                super.run();
+//                try {
+//                    String str = URLEncoder.encode(GsonUtil.GsonString(new UserInfo("ebc860eb9d28438b9e37ff579405591e", "daiqile",
+//                            "郭枫", "362428199301052713", "15949629529")), "UTF-8");
+//                    Log.d("MainActivity", MainActivity.sendPost("https://credit.baiqishi.com/clweb/api/mno/getoriginal", str));
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }.start();
     }
 
     @Override
     protected boolean switchToolbar() {
         return false;
     }
+
+    class UserInfo {
+        String verifyKey;
+        String partnerId;
+        String name;
+        String certNo;
+        String mobile;
+
+        public UserInfo(String verifyKey, String partnerId, String name, String certNo, String mobile) {
+            this.verifyKey = verifyKey;
+            this.partnerId = partnerId;
+            this.name = name;
+            this.certNo = certNo;
+            this.mobile = mobile;
+        }
+
+        public UserInfo() {
+        }
+    }
+
 
     @Override
     protected int initLayout() {

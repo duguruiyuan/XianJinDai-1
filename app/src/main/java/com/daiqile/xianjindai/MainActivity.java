@@ -24,21 +24,35 @@ import com.daiqile.xianjindai.Fragment.BorrowingRecordFragment;
 import com.daiqile.xianjindai.Fragment.IndexFragment;
 
 import com.daiqile.xianjindai.activity.LoginActivity;
+import com.daiqile.xianjindai.utils.AddressListUtils;
 import com.daiqile.xianjindai.utils.ToastUtil;
 
 import com.daiqile.xianjindai.view.ViewPagerFix;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import haixianwang.daiqile.com.baiqishi.PermissionUtils;
 import okhttp3.Call;
 import suangrenduobao.daiqile.com.mvlib.mv.BaseActivity;
+import suangrenduobao.daiqile.com.mvlib.utils.GsonUtil;
 
-public class MainActivity extends BaseActivity implements OnBqsDFListener {
+import static com.yintong.secure.e.m.j.s;
+
+public class MainActivity extends BaseActivity {
 
 
     /* @BindView(R.id.topbar)
@@ -55,132 +69,62 @@ public class MainActivity extends BaseActivity implements OnBqsDFListener {
     // private MyApplication application;
     private MainPagerAdapter adapter;
 
-    private int p = 0;
+//    private int p = 0;
+
+//    public static String sendPost(String url, String param) {
+//        PrintWriter out = null;
+//        BufferedReader in = null;
+//        String result = "";
+//        try {
+//            URL realUrl = new URL(url);
+//            // 打开和URL之间的连接
+//            URLConnection conn = realUrl.openConnection();
+//            // 设置通用的请求属性
+//            conn.setRequestProperty("accept", "*/*");
+//            conn.setRequestProperty("connection", "Keep-Alive");
+//            conn.setRequestProperty("user-agent",
+//                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+//            // 发送POST请求必须设置如下两行
+//            conn.setDoOutput(true);
+//            conn.setDoInput(true);
+//            // 获取URLConnection对象对应的输出流
+//            out = new PrintWriter(conn.getOutputStream());
+//            // 发送请求参数
+//            out.print(param);
+//            // flush输出流的缓冲
+//            out.flush();
+//            // 定义BufferedReader输入流来读取URL的响应
+//            in = new BufferedReader(
+//                    new InputStreamReader(conn.getInputStream()));
+//            String line;
+//            while ((line = in.readLine()) != null) {
+//                result += line;
+//            }
+//        } catch (Exception e) {
+//            System.out.println("发送 POST 请求出现异常！" + e);
+//            e.printStackTrace();
+//        }
+//        //使用finally块来关闭输出流、输入流
+//        finally {
+//            try {
+//                if (out != null) {
+//                    out.close();
+//                }
+//                if (in != null) {
+//                    in.close();
+//                }
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//        return result;
+//    }
 
     @Override
     protected void initConfig() {
         super.initConfig();
-//
-//        OkHttpUtils.post().
-//                url("http://credit.baiqishi.com/clweb/api/mno/getoriginal").
-//                addParams("verifyKey", "0714a66e025d4f999dccab65ff09078c").
-//                addParams("partnerId", "daiqile").
-//                addParams("name", "郭远逵").
-//                addParams("certNo", "362428199301052713").
-//                addParams("mobile", "15949629529")
-//                .build().execute(new StringCallback() {
-//            @Override
-//            public void onError(Call call, Exception e, int id) {
-//                String s = call.toString();
-//                Log.d("MainActivity", s);
-//            }
-//
-//            @Override
-//            public void onResponse(String response, int id) {
-//                Log.d("MainActivity", response);
-//            }
-//        });
 
-//        BqsParams params = new BqsParams();
-//        params.setPartnerId("daiqile");
-//        BqsDF.initialize(this, params);
-//        BqsDF.addOnBqsDFContactsListener(new OnBqsDFContactsListener() {
-//            @Override
-//            public void a(boolean b) {
-//                Log.d("ExampleInstrumentedTest", "b:" + b);
-//            }
-//
-//            @Override
-//            public void onSuccess(String s) {
-//                Log.d("ExampleInstrumentedTest", s);
-//            }
-//
-//            @Override
-//            public void onFailure(String s, String s1) {
-//                Log.d("ExampleInstrumentedTest", s + s1);
-//            }
-//        });
-//        BqsDF.setOnBqsDFListener(new OnBqsDFListener() {
-//            @Override
-//            public void onSuccess(String s) {
-//                Log.d("ExampleInstrumentedTest1","onSuccess:"+ s);
-//            }
-//
-//            @Override
-//            public void onFailure(String s, String s1) {
-//                Log.d("ExampleInstrumentedTest1", "onFailure:"+s + s1);
-//            }
-//        });
-
-//        PermissionUtils.initialize("guo", "362428199301052713", "15949629529", new OnSDKInitListener() {
-//            @Override
-//            public void onSuccess() {
-//                Log.d("MainActivity", "成功");
-//            }
-//
-//            @Override
-//            public void onFailure(String s, String s1) {
-//
-//            }
-//        });
-//        PermissionUtils.service("148880", new OnMnoLoginListener() {
-//            @Override
-//            public void onInputAuthSmsCode() {
-//                Log.d("MainActivity", "onInputAuthSmsCode");
-//            }
-//
-//            @Override
-//            public void onInputLoginSmsCode() {
-//                Log.d("MainActivity", "onInputLoginSmsCode");
-//            }
-//
-//            @Override
-//            public void onLoginSuccess() {
-//                Log.d("MainActivity", "onLoginSuccess");
-//            }
-//
-//            @Override
-//            public void onLoginFailure(String s, String s1) {
-//                Log.d("MainActivity", "onLoginFailure" + s + s1);
-//            }
-//        });
-//        ChsiAction.login("15949629529", "362428199301052713", new OnChsiLoginListener() {
-//            @Override
-//            public void onInputCaptcha(byte[] bytes, String s) {
-//                Log.d("MainActivity", "onInputCaptcha" + s);
-//            }
-//
-//            @Override
-//            public void onLoginSuccess() {
-//                Log.d("MainActivity", "成功");
-//            }
-//
-//            @Override
-//            public void onLoginFailure(String s, String s1) {
-//                Log.d("MainActivity", "onLoginFailure:" + s + s1);
-//            }
-//        });
-//        MnoAction.login("15949629529", "148880", new OnMnoLoginListener() {
-//            @Override
-//            public void onInputAuthSmsCode() {
-//
-//            }
-//
-//            @Override
-//            public void onInputLoginSmsCode() {
-//
-//            }
-//
-//            @Override
-//            public void onLoginSuccess() {
-//
-//            }
-//
-//            @Override
-//            public void onLoginFailure(String s, String s1) {
-//                Log.d("MainActivity", "onLoginFailure:" + s + s1);
-//            }
-//        });
+        AddressListUtils.readAddress(MyApplication.getInstance());
 
 
         mPager.setScrollable(false);
@@ -217,7 +161,7 @@ public class MainActivity extends BaseActivity implements OnBqsDFListener {
 
                     @Override
                     public void onTabUnselected(int position) {
-                        Log.d("MainActivity", "onTabUnselected:" + position);
+//                        Log.d("MainActivity", "onTabUnselected:" + position);
 //                        mBottomNavigationBar.setFirstSelectedPosition(0).setActiveColor(R.color.def_reached_color1);//.selectTab(0);
 
                     }
@@ -230,6 +174,7 @@ public class MainActivity extends BaseActivity implements OnBqsDFListener {
         );
 
     }
+
 
     @Override
     protected boolean switchToolbar() {
@@ -252,16 +197,16 @@ public class MainActivity extends BaseActivity implements OnBqsDFListener {
     protected void loadData() {
 
     }
-
-    @Override
-    public void onSuccess(String s) {
-        Log.d("MainActivity", s + "成");
-    }
-
-    @Override
-    public void onFailure(String s, String s1) {
-        Log.d("MainActivity", s + " " + s1);
-    }
+//
+//    @Override
+//    public void onSuccess(String s) {
+//        Log.d("MainActivity", s + "成");
+//    }
+//
+//    @Override
+//    public void onFailure(String s, String s1) {
+//        Log.d("MainActivity", s + " " + s1);
+//    }
 
     private class MainPagerAdapter extends FragmentPagerAdapter {
 

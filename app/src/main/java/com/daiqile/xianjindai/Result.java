@@ -31,4 +31,12 @@ public class Result implements BaseBean {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "success=" + success +
+                ", msg='" + msg + '\'' +
+                '}';
+    }
 }

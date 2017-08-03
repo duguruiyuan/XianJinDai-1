@@ -1,17 +1,12 @@
 package com.daiqile.xianjindai.http;
 
-import com.daiqile.xianjindai.Constants;
 import com.daiqile.xianjindai.Fragment.bean.AllBorrowBean;
 import com.daiqile.xianjindai.Fragment.bean.UserInfoBean;
-import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.Result;
 import com.daiqile.xianjindai.activity.bean.BankInfoList;
 import com.daiqile.xianjindai.model.Bank;
 import com.daiqile.xianjindai.model.Banner;
-import com.daiqile.xianjindai.model.City;
-import com.daiqile.xianjindai.model.Country;
 import com.daiqile.xianjindai.model.ForgetPassword;
-import com.daiqile.xianjindai.model.Province;
 import com.daiqile.xianjindai.model.ProvinceCityArea;
 import com.daiqile.xianjindai.model.User;
 
@@ -19,17 +14,13 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -152,4 +143,10 @@ public interface ApiService {
     Observable<Result> optionalForUserInfo(@Field("userId") String userId,
                                            @Field("social_security") String social_security,
                                            @Field("education") String education);
+
+
+    //贷款申请
+    @POST("xjd/front/user/addressBook")
+    @FormUrlEncoded
+    Observable<Result> addressBook(@FieldMap Map<String, String> map);
 }
