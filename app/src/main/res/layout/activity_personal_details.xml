@@ -26,7 +26,6 @@
             android:layout_height="10dp"
             android:background="@drawable/divider" />
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -256,6 +255,53 @@
                 android:textSize="@dimen/main_body_text_size_14" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="公司是否在宁波"
+                android:textSize="@dimen/main_body_text_size_14" />
+
+            <TextView
+                android:id="@+id/tv_ningbo_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="5"
+                android:background="@null"
+                android:drawablePadding="5dp"
+                android:drawableRight="@mipmap/icon_right"
+                android:gravity="right|center_vertical"
+                android:hint="请选择"
+                android:paddingRight="10dp"
+                android:textColorHint="@color/material_grey_500"
+                android:textCursorDrawable="@drawable/divider"
+                android:textSize="@dimen/main_body_text_size_14" />
+
+            <!--<EditText-->
+            <!--android:id="@+id/et_work_address"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_weight="5"-->
+            <!--android:background="@null"-->
+            <!--android:hint="请输入公司地址(必填)"-->
+            <!--android:textColorHint="@color/material_grey_500"-->
+            <!--android:textCursorDrawable="@drawable/divider"-->
+            <!--android:textSize="@dimen/main_body_text_size_14" />-->
+        </LinearLayout>
+
 
         <!--其他信息-->
         <TextView
@@ -337,6 +383,73 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="QQ号"
+                android:textColor="@color/material_grey_500"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_qq"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:hint="请输入qq号"
+                android:inputType="number"
+                android:paddingLeft="10dp"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/cccccc"
+                android:textCursorDrawable="@drawable/divider"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="微信号"
+                android:textColor="@color/material_grey_500"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_weixin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:hint="请输入微信号"
+                android:paddingLeft="10dp"
+                android:textColor="@color/default_text_color"
+                android:textColorHint="@color/cccccc"
+                android:textCursorDrawable="@drawable/divider"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
 
@@ -362,7 +475,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/divider"/>
+            android:background="@drawable/divider" />
 
         <Space
             android:layout_width="match_parent"

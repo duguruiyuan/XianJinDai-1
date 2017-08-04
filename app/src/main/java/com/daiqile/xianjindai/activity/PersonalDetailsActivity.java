@@ -2,6 +2,7 @@ package com.daiqile.xianjindai.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -55,13 +56,21 @@ public class PersonalDetailsActivity extends BaseActivity {
     @BindView(R.id.et_marriage_status)
     TextView etMarriageStatus;
 
+
+    @BindView(R.id.tv_ningbo_status)
+    TextView tvNingboStatus;
+    @BindView(R.id.et_qq)
+    EditText etQq;
+    @BindView(R.id.et_weixin)
+    EditText etWeixin;
+
     @Override
     public int initLayout() {
         return R.layout.activity_personal_details;
     }
 
 
-    @OnClick({R.id.btn_bind_card, R.id.et_marriage_status, R.id.tv_other_optional})
+    @OnClick({R.id.btn_bind_card, R.id.et_marriage_status, R.id.tv_other_optional, R.id.tv_ningbo_status})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_bind_card:
@@ -110,6 +119,11 @@ public class PersonalDetailsActivity extends BaseActivity {
                     ToastUtils.showMessage("请输入公司地址");
                     return;
                 }
+                String strNingboStatus = tvNingboStatus.getText().toString().trim();
+                if (TextUtils.isEmpty(strWorkAddress)) {
+                    ToastUtils.showMessage("请输入公司是否在宁波");
+                    return;
+                }
                 String strHousingSituation = etHousingSituation.getText().toString().trim();
                 if (TextUtils.isEmpty(strHousingSituation)) {
                     ToastUtils.showMessage("请输入住房情况");
@@ -120,6 +134,19 @@ public class PersonalDetailsActivity extends BaseActivity {
                     ToastUtils.showMessage("请选择婚姻情况");
                     return;
                 }
+                String strQq = etQq.getText().toString().trim();
+                if (TextUtils.isEmpty(strQq)) {
+                    ToastUtils.showMessage("请填写QQ号");
+                    return;
+                }
+                String strWeixin = etWeixin.getText().toString().trim();
+                if (TextUtils.isEmpty(strWeixin)) {
+                    ToastUtils.showMessage("请填写微信号");
+                    return;
+                }
+
+                Log.d("PersonalDetailsActivity", strNingboStatus);
+
 
                 Map<String, String> map = new HashMap<>();
                 map.put("userId", MyApplication.getInstance().getUid());
@@ -133,6 +160,9 @@ public class PersonalDetailsActivity extends BaseActivity {
                 map.put("house_situation", strHousingSituation);
                 map.put("company_address", strWorkAddress);
                 map.put("marriage", strMarriageStatus);
+                map.put("qq", strQq);
+                map.put("weChat", strWeixin);
+                map.put("company_ningbo", "宁波".equals(strNingboStatus) ? "1" : "2");
                 ApiRequest.request(MyApplication.getInstance().apiService.userInfo(map), new Subscriber<Result>() {
                     @Override
                     public void onCompleted() {
@@ -161,6 +191,13 @@ public class PersonalDetailsActivity extends BaseActivity {
                     SoftInputUtil.closeSoftInput(mContext, etMarriageStatus);
                 }
                 marriageOptions.show();
+                break;
+
+            case R.id.tv_ningbo_status:
+                if (SoftInputUtil.isOpen(mContext)) {
+                    SoftInputUtil.closeSoftInput(mContext, tvNingboStatus);
+                }
+                ningBoOptions.show();
                 break;
 
             case R.id.tv_other_optional:
@@ -231,9 +268,25 @@ public class PersonalDetailsActivity extends BaseActivity {
                 }
             });
         }
+        if (null == ningBoOptions) {
+            ningBoList = new ArrayList<>();
+            ningBoList.add("宁波");
+            ningBoList.add("非宁波");
+            ningBoOptions = new OptionsPickerView(mContext);
+            ningBoOptions.setCancelable(true);
+            ningBoOptions.setPicker(ningBoList);
+            ningBoOptions.setCyclic(false);
+            ningBoOptions.setSelectOptions(0);
+            ningBoOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+                @Override
+                public void onOptionsSelect(int options1, int option2, int options3) {
+                    tvNingboStatus.setText(ningBoList.get(options1));
+                }
+            });
+        }
     }
 
-    ArrayList<String> marriageList;
-    OptionsPickerView marriageOptions;
+    ArrayList<String> marriageList, ningBoList;
+    OptionsPickerView marriageOptions, ningBoOptions;
 
 }
