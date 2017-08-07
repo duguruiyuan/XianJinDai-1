@@ -64,7 +64,7 @@ public class RegistAvtivity extends suangrenduobao.daiqile.com.mvlib.mv.BaseActi
     @BindView(R.id.activity_regist_avtivity)
     LinearLayout activityRegistAvtivity;
     private Activity mActivity;
-    private MyApplication application;
+//    private MyApplication application;
     private static String Tag = "RegistAvtivity";
 
     @Override

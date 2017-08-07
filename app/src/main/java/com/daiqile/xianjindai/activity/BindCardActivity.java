@@ -1,5 +1,6 @@
 package com.daiqile.xianjindai.activity;
 
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,11 +16,17 @@ import com.daiqile.xianjindai.Result;
 import com.daiqile.xianjindai.model.Bank;
 import com.daiqile.xianjindai.model.ProvinceCityArea;
 
+import com.daiqile.xianjindai.utils.ApiRequest;
 import com.daiqile.xianjindai.utils.SoftInputUtil;
 import com.daiqile.xianjindai.utils.ToastUtil;
 import com.daiqile.xianjindai.view.AddressFrameLayout;
 import com.daiqile.xianjindai.view.TopBar;
 import com.hwangjr.rxbus.RxBus;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,6 +35,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -36,6 +44,8 @@ import suangrenduobao.daiqile.com.mvlib.utils.FileUtils;
 
 import suangrenduobao.daiqile.com.mvlib.utils.RegexValidateUtil;
 import suangrenduobao.daiqile.com.mvlib.utils.ToastUtils;
+
+import static com.zhy.http.okhttp.OkHttpUtils.post;
 
 
 //绑定银行卡页面
@@ -46,7 +56,7 @@ public class BindCardActivity extends BaseActivity {
             EditText cardNumber;
     @BindView(R.id.tv_choose_bank)//选择银行卡
             TextView tvChooseBank;
-//    @BindView(R.id.et_province)//选择省
+    //    @BindView(R.id.et_province)//选择省
 //            TextView etProvince;
 //    @BindView(R.id.et_city)//选择市
 //            TextView etCity;
@@ -54,6 +64,10 @@ public class BindCardActivity extends BaseActivity {
 //            TextView etCountry;
     @BindView(R.id.et_phone)//手机号
             EditText etPhone;
+    @BindView(R.id.et_phone_code)//手机号
+            EditText etPhoneCode;
+    @BindView(R.id.tv_send_code)//手机号
+            TextView tvSendCode;
 
     @BindView(R.id.af_address)
     AddressFrameLayout addressFrameLayout;
@@ -396,7 +410,7 @@ public class BindCardActivity extends BaseActivity {
 //        }
 //    }
 
-    @OnClick({R.id.tv_choose_bank})
+    @OnClick({R.id.tv_choose_bank, R.id.tv_send_code})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_choose_bank:
@@ -404,6 +418,10 @@ public class BindCardActivity extends BaseActivity {
                     SoftInputUtil.closeSoftInput(mContext, tvChooseBank);
                 }
                 bankOptions.show();
+                break;
+            case R.id.tv_send_code:
+                Log.d(TAG, "发送验证码");
+                getCode();
                 break;
 //            case R.id.et_province:
 //                if (SoftInputUtil.isOpen(mContext)) {
@@ -425,6 +443,62 @@ public class BindCardActivity extends BaseActivity {
 //                break;
         }
     }
+
+    private void getCode() {
+        String phone = etPhone.getText().toString().trim();
+        if (phone.isEmpty()) {
+            ToastUtil.showToast(mActivity, "请输入手机号");
+            return;
+        }
+        if (phone.length() < 11 || phone.length() > 11) {
+            ToastUtil.showToast(mActivity, "请输入正确的手机号码");
+            return;
+        }
+        ApiRequest.request(MyApplication.getInstance().apiService.bankSendCode(phone), new Subscriber<Result>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Result result) {
+                if (result.isSuccess()) {
+                    ToastUtil.showToast(mActivity, "验证码发送成功");
+                    timer.start();
+                } else {
+                    ToastUtil.showToast(mActivity, result.getMsg());
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (null != timer) {
+            timer.cancel();
+        }
+    }
+
+    private CountDownTimer timer = new CountDownTimer(60000, 1000) {
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            tvSendCode.setText((millisUntilFinished / 1000) + "s");
+            tvSendCode.setEnabled(false);
+        }
+
+        @Override
+        public void onFinish() {
+            tvSendCode.setEnabled(true);
+            tvSendCode.setText("获取验证码");
+        }
+    };
 
     @OnClick(R.id.btn_bind_card)
     public void click(View view) {
@@ -462,6 +536,11 @@ public class BindCardActivity extends BaseActivity {
             ToastUtils.showMessage("台湾，香港，澳门这些地方不能申请");
             return;
         }
+        String strCode = tvSendCode.getText().toString().trim();
+        if (TextUtils.isEmpty(strCode)) {
+            ToastUtils.showMessage("请输入验证码");
+            return;
+        }
         Map<String, String> map = new HashMap<>();
         map.put("userId", MyApplication.getInstance().getUid());
         map.put("bankNo", mCardNumber.replace(" ", ""));
@@ -470,6 +549,7 @@ public class BindCardActivity extends BaseActivity {
         map.put("province_id", addressFrameLayout.getProvinceId());
         map.put("city_id", addressFrameLayout.getCityId());
         map.put("county_id", addressFrameLayout.getCountryId());
+        map.put("mCode", strCode);
 
         MyApplication.getInstance().apiService.addBank(map).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

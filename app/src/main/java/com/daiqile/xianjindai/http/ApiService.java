@@ -149,4 +149,9 @@ public interface ApiService {
     @POST("xjd/front/user/addressBook")
     @FormUrlEncoded
     Observable<Result> addressBook(@FieldMap Map<String, String> map);
+
+
+    @POST("xjd/front/user/bankSendCode")
+    @FormUrlEncoded
+    Observable<Result> bankSendCode(@Field("phone") String phone);
 }

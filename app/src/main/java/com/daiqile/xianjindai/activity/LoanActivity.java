@@ -59,7 +59,7 @@ public class LoanActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.rl_legal_person, R.id.rl_house})
+    @OnClick({R.id.rl_legal_person, R.id.rl_house, R.id.rl_home_liren})
     public void onViewClicked(final View view) {
         if (MyApplication.getInstance().isLogin()) {
             ApiRequest.request(MyApplication.getInstance().apiService.
@@ -104,6 +104,9 @@ public class LoanActivity extends BaseActivity {
                                 startActivity(new Intent(LoanActivity.this, ThirdPartCertificationActivity.class));
                             } else if (!usersBean.getCity().equals("宁波")) {
                                 ToastUtils.showMessage(getString(R.string.str_rule));
+                            } else if (view.getId() == R.id.rl_home_liren && TextUtils.isEmpty(usersBean.getHasPhoto())) {//丽人贷 需要
+                                ToastUtils.showMessage("请先上传银行流水证明");
+                                startActivity(new Intent(LoanActivity.this, ThirdPartCertificationActivity.class));
                             } else {
                                 Intent intent = new Intent();
                                 intent.setClass(LoanActivity.this, LoanSuggestsActivity.class);
@@ -113,6 +116,9 @@ public class LoanActivity extends BaseActivity {
                                         break;
                                     case R.id.rl_house:
                                         intent.putExtra(Constants.LOANTYPE, "3");
+                                        break;
+                                    case R.id.rl_home_liren:
+                                        intent.putExtra(Constants.LOANTYPE, "1");
                                         break;
                                 }
                                 startActivity(intent);

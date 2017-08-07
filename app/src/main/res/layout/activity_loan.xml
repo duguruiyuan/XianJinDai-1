@@ -141,6 +141,82 @@
                 android:text="日息                20%" />
         </LinearLayout>
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_home_liren"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/material_white">
+
+        <ImageView
+            android:id="@+id/iv_index_logo2"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/home_liren" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_index_logo2"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<ImageView-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:background="@mipmap/icon_person" />-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:drawableLeft="@mipmap/icon_person"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="丽人贷" />
+            <!--</LinearLayout>-->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/divider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="最高(元)         50000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="期限                12个月" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:text="费用                3%" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
     <!--<LinearLayout-->
     <!--android:layout_width="match_parent"-->

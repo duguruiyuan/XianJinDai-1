@@ -24,6 +24,7 @@ import com.daiqile.xianjindai.MyApplication;
 import com.daiqile.xianjindai.R;
 import com.daiqile.xianjindai.activity.BorrowActivity;
 import com.daiqile.xianjindai.activity.IdentityCardActivity;
+import com.daiqile.xianjindai.activity.LoanActivity;
 import com.daiqile.xianjindai.activity.LoanSuggestsActivity;
 import com.daiqile.xianjindai.activity.LoginActivity;
 
@@ -169,24 +170,27 @@ public class IndexFragment extends BaseFragment {
     @OnClick({R.id.rl_person, R.id.rl_home_liren/*, R.id.rl_legal_person, R.id.rl_house*/})
     public void onClick(final View view) {
         if (MyApplication.getInstance().isLogin()) {
-            ApiRequest.request(MyApplication.getInstance().apiService.
-                            requestUserMyinfo(MyApplication.getInstance().getUid(),
-                                    SPUtils.get(MyApplication.getInstance(), Constants.PHONE, "").toString(),
-                                    SPUtils.get(MyApplication.getInstance(), Constants.LOGINPASSWORD, "").toString()),
-                    new Subscriber<UserInfoBean>() {
 
-                        @Override
-                        public void onCompleted() {
-                        }
+            switch (view.getId()) {
+                case R.id.rl_person:
+                    ApiRequest.request(MyApplication.getInstance().apiService.
+                                    requestUserMyinfo(MyApplication.getInstance().getUid(),
+                                            SPUtils.get(MyApplication.getInstance(), Constants.PHONE, "").toString(),
+                                            SPUtils.get(MyApplication.getInstance(), Constants.LOGINPASSWORD, "").toString()),
+                            new Subscriber<UserInfoBean>() {
 
-                        @Override
-                        public void onError(Throwable e) {
-                            ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
-                            Log.d("IndexFragment", "e:" + e.toString());
-                        }
+                                @Override
+                                public void onCompleted() {
+                                }
 
-                        @Override
-                        public void onNext(UserInfoBean userInfoBean) {
+                                @Override
+                                public void onError(Throwable e) {
+                                    ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+                                    Log.d("IndexFragment", "e:" + e.toString());
+                                }
+
+                                @Override
+                                public void onNext(UserInfoBean userInfoBean) {
 //                            Intent intent = new Intent();
 //                            intent.setClass(mActivity, LoanSuggestsActivity.class);
 //                            switch (view.getId()) {
@@ -198,36 +202,100 @@ public class IndexFragment extends BaseFragment {
 //                                    break;
 //                            }
 //                            startActivity(intent);
-                            // TODO: 2017/7/29 一定需要印刷
+                                    // TODO: 2017/7/29 一定需要印刷
 
-                            UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
-                            if (0 == usersBean.getHasIdcardInfo()) {
-                                ToastUtils.showMessage("请先完成实名认证");
-                                startActivity(new Intent(mActivity, IdentityCardActivity.class));
-                            } else if (0 == usersBean.getHasBank()) {
-                                ToastUtils.showMessage("请先绑定银行卡");
-                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
-                            } else if (!SPUtils.contains(MyApplication.getInstance().getApplicationContext(), Constants.PHONE_BAIQISHI)) {
-                                ToastUtils.showMessage("请先完成手机运行商认证");
-                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
-                            } else if (view.getId() == R.id.rl_home_liren && TextUtils.isEmpty(usersBean.getHasPhoto())) {//丽人贷 需要
-                                ToastUtils.showMessage("请先上传银行流水证明");
-                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
-                            } else {
-                                Intent intent = new Intent();
-                                intent.setClass(mActivity, LoanSuggestsActivity.class);
-                                switch (view.getId()) {
-                                    case R.id.rl_person:
+                                    UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
+                                    if (0 == usersBean.getHasIdcardInfo()) {
+                                        ToastUtils.showMessage("请先完成实名认证");
+                                        startActivity(new Intent(mActivity, IdentityCardActivity.class));
+                                    } else if (0 == usersBean.getHasBank()) {
+                                        ToastUtils.showMessage("请先绑定银行卡");
+                                        startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+                                    } else if (!SPUtils.contains(MyApplication.getInstance().getApplicationContext(), Constants.PHONE_BAIQISHI)) {
+                                        ToastUtils.showMessage("请先完成手机运行商认证");
+                                        startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+                                    }
+//                                    else if (view.getId() == R.id.rl_home_liren && TextUtils.isEmpty(usersBean.getHasPhoto())) {//丽人贷 需要
+//                                        ToastUtils.showMessage("请先上传银行流水证明");
+//                                        startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+//                                    }
+                                    else {
+                                        Intent intent = new Intent();
+                                        intent.setClass(mActivity, LoanSuggestsActivity.class);
                                         intent.putExtra(Constants.LOANTYPE, "0");
-                                        break;
-                                    case R.id.rl_home_liren:
-                                        intent.putExtra(Constants.LOANTYPE, "1");
-                                        break;
+                                        startActivity(intent);
+                                    }
                                 }
-                                startActivity(intent);
-                            }
-                        }
-                    });
+                            });
+                    break;
+                case R.id.rl_home_liren:
+                    Intent intent = new Intent();
+                    intent.setClass(mActivity, LoanActivity.class);
+                    intent.putExtra(Constants.LOANTYPE, "1");
+                    startActivity(intent);
+                    break;
+            }
+
+//            ApiRequest.request(MyApplication.getInstance().apiService.
+//                            requestUserMyinfo(MyApplication.getInstance().getUid(),
+//                                    SPUtils.get(MyApplication.getInstance(), Constants.PHONE, "").toString(),
+//                                    SPUtils.get(MyApplication.getInstance(), Constants.LOGINPASSWORD, "").toString()),
+//                    new Subscriber<UserInfoBean>() {
+//
+//                        @Override
+//                        public void onCompleted() {
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            ToastUtils.showMessage(getResources().getString(R.string.str_http_network_error));
+//                            Log.d("IndexFragment", "e:" + e.toString());
+//                        }
+//
+//                        @Override
+//                        public void onNext(UserInfoBean userInfoBean) {
+////                            Intent intent = new Intent();
+////                            intent.setClass(mActivity, LoanSuggestsActivity.class);
+////                            switch (view.getId()) {
+////                                case R.id.rl_person:
+////                                    intent.putExtra(Constants.LOANTYPE, "0");
+////                                    break;
+////                                case R.id.rl_home_liren:
+////                                    intent.putExtra(Constants.LOANTYPE, "1");
+////                                    break;
+////                            }
+////                            startActivity(intent);
+//                            // TODO: 2017/7/29 一定需要印刷
+//
+//                            UserInfoBean.UsersBean usersBean = userInfoBean.getUsers().get(0);
+//                            if (0 == usersBean.getHasIdcardInfo()) {
+//                                ToastUtils.showMessage("请先完成实名认证");
+//                                startActivity(new Intent(mActivity, IdentityCardActivity.class));
+//                            } else if (0 == usersBean.getHasBank()) {
+//                                ToastUtils.showMessage("请先绑定银行卡");
+//                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+//                            } else if (!SPUtils.contains(MyApplication.getInstance().getApplicationContext(), Constants.PHONE_BAIQISHI)) {
+//                                ToastUtils.showMessage("请先完成手机运行商认证");
+//                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+//                            } else if (view.getId() == R.id.rl_home_liren && TextUtils.isEmpty(usersBean.getHasPhoto())) {//丽人贷 需要
+//                                ToastUtils.showMessage("请先上传银行流水证明");
+//                                startActivity(new Intent(mActivity, ThirdPartCertificationActivity.class));
+//                            } else {
+//                                Intent intent = new Intent();
+//                                switch (view.getId()) {
+//                                    case R.id.rl_person:
+//                                        intent.setClass(mActivity, LoanSuggestsActivity.class);
+//                                        intent.putExtra(Constants.LOANTYPE, "0");
+//                                        break;
+//                                    case R.id.rl_home_liren:
+//                                        intent.setClass(mActivity, LoanActivity.class);
+//                                        intent.putExtra(Constants.LOANTYPE, "1");
+//                                        break;
+//                                }
+//                                startActivity(intent);
+//                            }
+//                        }
+//                    });
 
         } else {
             startActivity(new Intent(mActivity, LoginActivity.class));
